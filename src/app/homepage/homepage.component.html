@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <app-header></app-header>
+
+        <br>
+        <br>
+        <br>
+
+        <div *ngIf="!tdForm">
+            <!-- Model form and text -->
+            <div class="bg-image">
+
+
+               
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+
+                <h3
+                    style="margin-left: 200px; font-size: larger; font-weight: bolder; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                    I am looking for ...</h3>
+                <br>
+                <form class="form-inline my-2 my-lg-0" style="margin-left: 200px;">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Enter a job description"
+                        aria-label="Search" style="width: 800px;">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <br>
+
+                <!-- search division -->
+                <div style="margin-left: 200px;">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+
+                        <label class="form-check-label" for="inlineCheckbox1">Full time</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                        <label class="form-check-label" for="inlineCheckbox2">Part time/Casual/Freelance</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <form class="form-inline my-2 my-lg-0" style="margin-left: 252px;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                            <select class="form-select" aria-label="Disabled select example">
+                                <option selected>Select your location</option>
+                                <option value="1">Banglore</option>
+                                <option value="2">Mumbai</option>
+                                <option value="3">Hyderabad</option>
+                              </select>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <!-- register form -->
+                <div style="text-align: center;" *ngIf="modalForm">
+
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Register
+                    </button>
+
+                    <!-- template driven form  -->
+                    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitData(f)" novalidate>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header bg-info">
+                                        <h4 class="modal-title">Register</h4>
+                                        <button type="button" class="btn-close btn-outline-danger btn-danform-control"
+                                            data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+
+                                        <div class="row">
+
+                                            <div class="col-xl-4">
+                                                <div> <img [src]="urlFile" style="height:100px; width:100px;"
+                                                        class="thumbnail">
+                                                </div>
+                                                <div>
+
+                                                    <input hidden class="form-control" type="file" #profileUpload
+                                                        name="file" [(ngModel)]="user.file" required #file="ngModel"
+                                                        [ngClass]="{ 'is-invalid': f.submitted && file.errors }"
+                                                        (change)="onChangeFileField($event)" id="formFile" />
+                                                    <button type="button" class="btn btn-default btn-sm"
+                                                        (click)="profileUpload.click()"
+                                                        style="text-align: left; ">Upload
+                                                        your photo</button>
+                                                    <div *ngIf="f.submitted && file.errors " class="invalid-feedback">
+                                                        <div *ngIf="file.errors?.['required']">Please upload you photo
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-8">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="fname" [(ngModel)]="user.fname" required
+                                                                #fname="ngModel" placeholder="First name" maxlength="20"
+                                                                pattern="[a-zA-Z][a-zA-Z ]+"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && fname.errors }" />
+                                                            <div *ngIf="f.submitted && fname.errors "
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="fname.errors?.['required']">Name is required
+                                                                </div>
+                                                                <div *ngIf="fname.errors?.['pattern']">Only alphabets
+                                                                    allowed</div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="lname" [(ngModel)]="user.lname" required
+                                                                #lname="ngModel" placeholder="Last name"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && lname.errors }" />
+                                                            <div *ngIf="f.submitted && lname.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="lname.errors['required']">Last name is
+                                                                    required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control form-control-sm"
+                                                                name="emailId" [(ngModel)]="user.emailId" required email
+                                                                #emailId="ngModel" placeholder="Email"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && emailId.errors }" />
+                                                            <div *ngIf="f.submitted && emailId.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="emailId.errors['required']">Email is
+                                                                    required
+                                                                </div>
+                                                                <div *ngIf="emailId.errors['email']">Email is invalid
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control form-control-sm"
+                                                                name="mno" [(ngModel)]="user.mno" required mno
+                                                                #mno="ngModel" placeholder="(+91)- 7972..."
+                                                                [ngClass]="{ 'is-invalid': f.submitted && mno.errors }" />
+                                                            <div *ngIf="f.submitted && mno.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="mno.errors['required']">Number is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control form-control-sm"
+                                                                name="age" [(ngModel)]="user.age" required age
+                                                                #age="ngModel" placeholder="Age"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && age.errors }" />
+                                                            <div *ngIf="f.submitted && age.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="age.errors['required']">Age is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="state" [(ngModel)]="user.state" required state
+                                                                #state="ngModel" placeholder="State"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && state.errors }" />
+                                                            <div *ngIf="f.submitted && state.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="state.errors['required']">State is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="country" [(ngModel)]="user.country" required state
+                                                                #country="ngModel" placeholder="Country"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && state.errors }" />
+                                                            <div *ngIf="f.submitted && country.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="country.errors['required']">Country is
+                                                                    required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="address" [(ngModel)]="user.address" required
+                                                                address #address="ngModel" placeholder="Address"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && address.errors }" />
+                                                            <div *ngIf="f.submitted && address.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="address.errors['required']">Address is
+                                                                    required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    name="tags" [(ngModel)]="user.tags" required tags
+                                                                    #tags="ngModel" placeholder="Tags"
+                                                                    [ngClass]="{ 'is-invalid': f.submitted && tags.errors }" />
+                                                                <div *ngIf="f.submitted && tags.errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="tags.errors['required']">Tags is required
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <tag-input [(ngModel)]="user.tagsInput"
+                                                                class="form-control form-control-sm" name="tagsInput"
+                                                                [maxItems]="5" id="tagsInput">
+                                                                <tag-input-dropdown [autocompleteItems]="user.tagsInput"
+                                                                    [showDropdownIfEmpty]="true">
+
+                                                                </tag-input-dropdown>
+                                                            </tag-input>
+
+                                                            <!-- <div *ngIf="f.submitted && userTags.errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="userTags.errors['required']">Tags is required
+                                                                    </div>
+                                                                </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <br>
+                                                <div class="row" style="padding-right: 25px; margin-right: 50px;">
+                                                    <div class="col-lg-12" style="margin-right: 20px;">
+
+                                                        <div class="form-group form-check">
+                                                            <input type="checkbox" lass="form-control" name="subscibe"
+                                                                [(ngModel)]="user.subscibe" class="form-check-input"
+                                                                required #subscibe="ngModel"
+                                                                style="padding-right: 15px;"
+                                                                [ngClass]="{ 'is-invalid': f.submitted && subscibe.errors }" />
+                                                            <label for="subscibe" class="form-check-label"
+                                                                style="color: blue;">
+                                                                Subscribe to the newsletter
+                                                            </label>
+                                                            <div *ngIf="f.submitted && subscibe.errors"
+                                                                class="invalid-feedback">
+                                                                Accept Terms is required
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <button type="button" class="btn btn-outline-danger form-control"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <button type="submit" class="btn btn-info form-control"
+                                                        [disabled]="!f.valid" data-bs-dismiss="modal"
+                                                        style="margin-right: 10px;">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <!-- reactive form -->
+                    <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+                            The Modal
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+    
+                                        Modal Header
+                                        <div class="modal-header bg-info">
+                                            <h4 class="modal-title" style="padding-top: 13px; padding-left: 10px;">Register
+                                            </h4>
+                                            <button type="button" class="btn-close btn-outline-danger btn-danform-control"
+                                                data-bs-dismiss="modal"></button>
+                                        </div>
+    
+                                        Modal body
+                                        <div class="modal-body">
+    
+                                            <div class="row">
+    
+                                                <div class="col-xl-4">
+                                                    <div class="form-group">
+                                                        <div> <img [src]="urlFile" class="form-control"
+                                                                style="height:100px; width:100px;" class="thumbnail">
+                                                        </div>
+                                                        <div>
+    
+                                                            <input hidden formControlName="file" class="form-control"
+                                                                type="file" #profileUpload name="file" required=""
+                                                                [ngClass]="{ 'is-invalid': submitted && f['file'].errors }"
+                                                                required (change)="onChangeFileField($event)"
+                                                                id="formFile" />
+                                                            <button type="button" class="btn btn-default btn-sm"
+                                                                (click)="profileUpload.click()"
+                                                                style="text-align: left;">Upload
+                                                                your photo</button>
+                                                            <div *ngIf="submitted && f['file'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['file'].errors['required']">Please upload your
+                                                                    photo
+                                                                </div>
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+                                                <div class="col-sm-8">
+    
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+    
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="fname"
+                                                                    class="form-control form-control-sm"
+                                                                    pattern="[a-zA-Z][a-zA-Z ]+" placeholder="First Name"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['fname'].errors }" />
+                                                                <div *ngIf="submitted && f['fname'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['fname'].errors['required']">First name is
+                                                                        required</div>
+                                                                    <div *ngIf="f['fname'].errors['pattern']">Only alphabets
+                                                                        allowed</div>
+                                                                </div>
+    
+                                                            </div>
+    
+                                                        </div>
+    
+                                                        <div class="col-lg-6">
+    
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="lname"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Last Name"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['lname'].errors }" />
+                                                                <div *ngIf="submitted && f['lname'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['lname'].errors['required']">Last name is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+    
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="form-group">
+                                                                    <input type="email" formControlName="emailId"
+                                                                        class="form-control form-control-sm"
+                                                                        placeholder="Email Id"
+                                                                        [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }" />
+                                                                    <div *ngIf="submitted && f['emailId'].errors"
+                                                                        class="invalid-feedback">
+                                                                        <div *ngIf="f['emailId'].errors['required']">
+                                                                            Email-Id is
+                                                                            required</div>
+                                                                    </div>
+    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input type="number" formControlName="mno"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="(+91) 7972.."
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['mno'].errors }" />
+                                                                <div *ngIf="submitted && f['mno'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['mno'].errors['required']">Number is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <input type="number" formControlName="age"
+                                                                    class="form-control form-control-sm" placeholder="age"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['age'].errors }" />
+                                                                <div *ngIf="submitted && f['age'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['age'].errors['required']">Age is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="state"
+                                                                    class="form-control form-control-sm" placeholder="State"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" />
+                                                                <div *ngIf="submitted && f['state'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['state'].errors['required']">State is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="country"
+                                                                    placeholder="Country"
+                                                                    class="form-control form-control-sm"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" />
+                                                                <div *ngIf="submitted && f['country'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['country'].errors['required']">Country is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="address"
+                                                                    placeholder="Address"
+                                                                    class="form-control form-control-sm"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" />
+                                                                <div *ngIf="submitted && f['address'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['address'].errors['required']">Address is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="tags"
+                                                                    class="form-control form-control-sm" placeholder="Tags"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['tags'].errors }" />
+                                                                <div *ngIf="submitted && f['tags'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['tags'].errors['required']">Tags is
+                                                                        required</div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <br>
+                                                    <div class="row" style="padding-right: 30px; margin-right: 70px;">
+                                                        <div class="col-lg-12" style="margin-right: 25px;">
+                                                            <div class="form-group form-check">
+                                                                <input type="checkbox" formControlName="subscibe"
+                                                                    class="form-check-input" style="padding-right: 15px;"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['subscibe'].errors }" />
+                                                                <label for="acceptTerms" class="form-check-label"
+                                                                    style="color: blue;">Subscribe to newsletter</label>
+                                                                <div *ngIf="submitted && f['subscibe'].errors"
+                                                                    class="invalid-feedback">
+                                                                    Accept Terms is required
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+    
+                                            </div>
+                                        </div>
+    
+                                        Modal footer
+                                        <div class="modal-footer">
+    
+                                            <div class="col-lg-5">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <button type="button" class="btn btn-outline-danger form-control"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <button type="submit" class="btn btn-info form-control"
+                                                            style="margin-right: 10px;"
+                                                            data-bs-dismiss="modal">Submit</button>
+                                                    </div>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </form> -->
+
+                    <br>
+                    <br>
+                </div>
+
+            </div>
+
+            <!-- body data -->
+            <div class="container-fluid" style="background-color: rgb(244, 242, 238);">
+
+                <br>
+
+                <p style="text-align: center;">We are leaders in</p>
+                <h3 style="text-align: center;">Creative Digital Recruitment</h3>
+
+                <hr class="hr"
+                    style="color: rgb(0, 187, 255); font-weight: bolder; font-size: larger; font-size: 50px;  " />
+
+                <br>
+                <br>
+                <br>
+
+                <p class="container-fluid" style="text-align: center;">A navigation bar is a navigation header that is
+                    placed at the top of the page.
+                </p>
+                <p class="container-fluid" style="text-align: center;">The navbar-expand-xl|lg|md|sm class determines
+                    when
+                    the navbar should stack
+                    vertically (on extra large,
+                    large, medium or small screens).</p>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button type="button" class="btn btn-outline-info waves-effect" style="margin-left: 550px;">Find out
+                    more
+                    about
+                    us</button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+
+
+        <!-- User Edit/Add data -->
+        <div *ngIf="edituser">
+
+            <!-- Edit data -->
+            <div>
+
+                <form #f="ngForm">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col">
+                                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                        <ol class="breadcrumb mb-0">
+                                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xl-4">
+
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <div> <img [src]="urlFile"
+                                                    style="height:215px; width:200px; margin-bottom: 10px;"
+                                                    class="thumbnail"></div>
+                                            <div>
+
+                                                <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                                    rippleColor="dark" #profileUpload
+                                                    (change)="onChangeFileField($event)" />
+                                                <!-- [(ngModel)]="urlFile"  name="file" -->
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="profileUpload.click()">Edit photo</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.fname" name="fname"
+                                                            placeholder="First Name" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.lname" name="lname"
+                                                            placeholder="Last Name" required />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.emailId" name="emailId"
+                                                            placeholder="Email-Id" required />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.mno" name="mno"
+                                                            placeholder="Mobile Number" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.age" name="age" placeholder="Age"
+                                                            required />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.address" name="address"
+                                                            placeholder="Address" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.country" name="country"
+                                                            placeholder="Country" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12">
+                                                        <tag-input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.tagsInput" name="tagsInput"
+                                                            placeholder="User tags" required></tag-input>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-lg-12" style="margin-left: 540px;">
+                                                    <button type="submit" class="btn btn-default"
+                                                        (click)="cancel()">Cancel</button>
+                                                    <button type="submit" class="btn btn-info" (click)="updateData()"
+                                                        style="margin-right: 10px;">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- User View data -->
+        <div *ngIf="viewflag">
+
+            <!-- View data -->
+            <section style="background-color: #eee;">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col">
+                            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"
+                                        style="color: black; font-weight: bolder;">{{user.fname}} {{user.lname}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4">
+
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <div> <img [src]="urlFile"
+                                            style="height:195px; width:180px; margin-right: 20px; margin-bottom: 10px;"
+                                            class="thumbnail"></div>
+                                    <div>
+
+                                        <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                            rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+
+                                        <div style="padding-right: 20px;">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="profileUpload.click()">Edit photo</button>
+
+                                            <button #edituser type="button" (click)="editUser()"
+                                                class="btn btn-info btn-sm" style="margin-left: 10px;">Edit
+                                                profile</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <hr>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-6">
+                                                <p class="mb-0">First Name : {{user.fname}}</p>
+                                            </div>
+                                            <!-- <div class="col-sm-6">
+                                                    <p class="text-muted mb-0">{{user.fname}}</p>
+                                                </div> -->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Last Name : {{user.lname}}</p>
+                                            </div>
+                                            <!-- <div class="col-sm-6">
+                                                    <p class="text-muted mb-0">{{user.lname}}</p>
+                                                </div> -->
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Email Id : {{user.emailId}}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-sm-6">
+                                                <p class="text-muted mb-0">{{user.emailId}}</p>
+                                            </div> -->
+                                    </div>
+                                    <br>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Mobile Number: {{user.mno}}</p>
+                                            </div>
+                                            <!-- <div class="col-sm-6">
+                                                    <p class="text-muted mb-0">{{user.mno}}</p>
+                                                </div> -->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Age : {{user.age}}</p>
+                                            </div>
+                                            <!-- <div class="col-sm-6">
+                                                    <p class="text-muted mb-0">{{user.age}}</p>
+                                                </div> -->
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Address: {{user.address}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Country: {{user.country}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-12">
+                                                <p class="mb-0">Tags Input: {{item}}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div *ngIf="viewflag">
+
+            <!-- View data -->
+            <section style="background-color: #eee;">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col">
+                            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"
+                                        style="color: black; font-weight: bolder;">{{user.fname}} {{user.lname}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4">
+
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <div> <img [src]="urlFile"
+                                            style="height:170px; width:160px; margin-right: 20px; margin-bottom: 10px;"
+                                            class="thumbnail"></div>
+                                    <div>
+
+                                        <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                            rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+
+                                        <div style="padding-right: 20px;">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="profileUpload.click()">Edit photo</button>
+
+                                            <button #edituser type="button" (click)="editUser()"
+                                                class="btn btn-info btn-sm" style="margin-left: 10px;">Edit
+                                                profile</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <hr>
+                                    <p>I'm {{user.fname}} and I'm above {{user.age}} years and you can send your emails
+                                        to {{user.emailId}}. I
+                                        live in the state of {{user.state}}. I like to play {{item[0]}}, {{item[1]}} and
+                                        reading books.
+                                        And please send me newsletters. Please reach out to me on my phone number
+                                        {{user.mno}}. </p>
+                                    <hr>
+
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        style="margin-left: 10px;">I Agree
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <app-footer></app-footer>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.bg-image {
+    background-image: url('https://media.istockphoto.com/id/1352650187/photo/human-resource-manager-checks-the-cv-online-to-choose-the-perfect-employee-for-his-business.jpg?s=2048x2048&w=is&k=20&c=9DTebqC41cJUODwJ2YHIeDXeXt9h6ocoHpHoepwmRI0=');
+    height: 600px; 
+    text-decoration-color: aliceblue; color: azure; font-weight: bolder;
+}

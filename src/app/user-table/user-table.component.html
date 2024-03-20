@@ -1,0 +1,495 @@
+<div class="container-fluid">
+    <app-header></app-header>
+
+    <br>
+
+    <div class="bg-light">
+
+        <!-- Add/Edit/View data -->
+        <div *ngIf="flag">
+            <!-- Add/Edit data/ online data -->
+            <!-- <div *ngIf="!detailFlag">
+
+                <form #f="ngForm">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col">
+                                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                        <ol class="breadcrumb mb-0">
+                                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xl-4">
+
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <div> <img [src]="urlFile"
+                                                    style="height:250px; width:200px; margin-right: 20px; margin-bottom: 10px;"
+                                                    class="thumbnail"></div>
+                                            <div>
+                                                <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                                    rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="profileUpload.click()">Edit photo</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Album-Id</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="user.albumId" name="albumId" placeholder="Album Id"
+                                                        required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Title</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="user.title" name="title" placeholder="Title"
+                                                        required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Url</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="user.url" name="url" placeholder="Url" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">ThumbnailURL</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="user.thumbnailUrl" name="thumbnailUrl"
+                                                        placeholder="ThumbnailUrl" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-lg-12" style="margin-left: 540px;">
+                                                    <button type="submit" class="btn btn-default"
+                                                        (click)="cancel()">Cancel</button>
+                                                    <button type="submit" class="btn btn-info" (click)="updateData()"
+                                                        style="margin-right: 10px;">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+
+            </div> -->
+
+            <!-- Add/Edit data/ localhost data -->
+            <div *ngIf="!detailFlag">
+
+                <form #f="ngForm">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col">
+                                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                        <ol class="breadcrumb mb-0">
+                                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{this.id}}</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xl-4">
+
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <div> <img [src]="urlFile"
+                                                    style="height:250px; width:200px; margin-bottom: 10px;"
+                                                    class="thumbnail"></div>
+                                            <div>
+                                                <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                                    rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="profileUpload.click()">Edit photo</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">First Name</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="userInfo.fname" name="fname"
+                                                        placeholder="First name" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Last Name</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="userInfo.lname" name="lname"
+                                                        placeholder="Last Name" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Email Id</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="userInfo.emailId" name="url" placeholder="Email-id"
+                                                        required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Mobile Number</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        [(ngModel)]="userInfo.mno" name="mno"
+                                                        placeholder="Mobile Number" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-lg-12" style="margin-left: 540px;">
+                                                    <button type="submit" class="btn btn-default btn-outline-danger"
+                                                        (click)="cancel()" style="margin-right: 5px;">Cancel</button>
+                                                    <button type="submit" class="btn btn-info" (click)="updateData()"
+                                                        style="margin-right: 10px;">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+
+            </div>
+
+
+            <!-- View data online-->
+            <!-- <div *ngIf="detailFlag">
+                <section style="background-color: #eee;">
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col">
+                                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-4">
+
+                                <div class="card mb-3">
+                                    <div class="card-body text-center">
+                                        <div> <img [src]="urlFile"
+                                                style="height:215px; width:200px; margin-right: 20px; margin-bottom: 10px;"
+                                                class="thumbnail"></div>
+                                        <div>
+                                            <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                                rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="profileUpload.click()">Edit photo</button>
+
+                                            <button [routerLink]="['/updateUsertable',user.id]" type="button"
+                                                class="btn btn-info btn-sm" style="margin-left: 10px;">Edit
+                                                profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">ID</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{user.id}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Album-Id</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{user.albumId}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Title</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{user.title}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Url</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{user.url}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">ThumbnailURL</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{user.thumbnailUrl}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div> -->
+
+            <!-- View data / localhost-->
+            <div *ngIf="detailFlag">
+                <section style="background-color: #eee;">
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col">
+                                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><b
+                                                style="color: black;">{{userInfo.fname}} {{userInfo.lname}}</b></li>
+
+                                        <button [routerLink]="['/manageUsertable']" type="button"
+                                            class="btn btn-info btn-sm" style="margin-left: 782px;">Cancel</button>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-4">
+
+                                <div class="card mb-3">
+                                    <div class="card-body text-center">
+                                        <div> <img [src]="urlFile"
+                                                style="height:136x; width:136px; margin-right: 20px; margin-bottom: 10px;"
+                                                class="thumbnail"></div>
+                                        <div>
+                                            <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
+                                                rippleColor="dark" #profileUpload (change)="onChangeFileField($event)" />
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="profileUpload.click()">Edit photo</button>
+
+                                            <button [routerLink]="['/updateUsertable',userInfo.id]" type="button"
+                                                class="btn btn-info btn-sm" style="margin-left: 10px;">Edit
+                                                profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Name</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{userInfo.fname}} {{userInfo.lname}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Email-Id</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{userInfo.emailId}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Mobile number</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{userInfo.mno}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Country</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{{userInfo.country}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Managed data table/ online -->
+        <!-- <div *ngIf="!flag">
+            <div class="mt-4 p-5 bg-light text-white rounded">
+                <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-info">
+                        <tr>
+                            <th>ID</th>
+                            <th>THUMBNAILURL</th>
+                            <th>ALBUM ID</th>
+                            <th>TTITLE</th>
+                            <th>URL</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of datas;" class="animated flipInX">
+                            <td>{{data.id}}</td>
+                            <td>{{data.thumbnailUrl}}</td>
+                            <td>{{data.albumId}}</td>
+                            <td>{{data.title}} </td>
+                            <td>{{data.url}}</td>
+
+                            <td>
+                                
+                                <a [routerLink]="['/detailUsertable',data.id]" tabindex="-1"
+                                    style="margin-right: 50px; margin-bottom: 10px; padding-bottom: 10px;"><button
+                                        type="button" class="btn btn-primary btn-sm"
+                                        data-mdb-ripple-init>View</button></a>
+
+                                <a [routerLink]="['/updateUsertable',data.id]" tabindex="-1"
+                                    style="margin-right: 5px; margin-top: 10px;"><button type="button"
+                                        class="btn btn-info btn-sm" data-mdb-ripple-init>Edit</button></a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+
+        <!-- Managed data table/ localhost-->
+        <div *ngIf="!flag">
+            <div class="mt-4 pl-4 p-5 bg-light text-white rounded">
+                <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-info">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email-id</th>
+                            <th>Mob No</th>
+                            <th>Image</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of datas;" class="animated flipInX">
+                            <td>{{data.id}}</td>
+                            <td>{{data.fname}} {{data.lname}}</td>
+                            <td>{{data.emailId}}</td>
+                            <td>{{data.mno}} </td>
+                            <td><img [src]="data.file" /></td>
+                            <td>
+
+                                <a [routerLink]="['/detailUsertable',data.id]" tabindex="-1"
+                                    style="margin-right: 10px; margin-bottom: 10px; padding-bottom: 10px;"><button
+                                        type="button" class="btn btn-primary btn-sm"
+                                        data-mdb-ripple-init>View</button></a>
+
+                                <a [routerLink]="['/updateUsertable',data.id]" tabindex="-1"
+                                    style="margin-right: 5px; margin-top: 10px;"><button type="button"
+                                        class="btn btn-info btn-sm" data-mdb-ripple-init>Edit</button></a>
+
+                                <button class="btn btn-danger btn-sm" title="Delete category"
+                                    style="margin-right: 5px;  width: 50px; height: 30px;"
+                                    (click)="deleteRole(data.id)">Delete
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <app-footer></app-footer>
+</div>
