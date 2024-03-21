@@ -10,10 +10,6 @@ export class RestService {
   // public ip = "https://jsonplaceholder.typicode.com";
   public ip = "http://localhost:3000";
 
-  // public server = this.ip + '/NaturalHomeoManager';
-  // public docServer = this.ip + '/naturalhomeodocs';
-  public imgServer = this.ip + '/naturalhomeodocs';
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -82,17 +78,6 @@ export class RestService {
       }));
   }
 
-  // public uploadImage(id:any, file: File){
-  //   const formData = new FormData();
-  //   formData.append('profileUrl', file);
-
-  //   return this.http.post(this.ip + '/imageUpload/'+id, formData, {responseType:'text'});
-  // }
-
-  // public getRelativePath(relativePath:string){
-  //   return '${this.ip}/${relativePath}';
-  // }
-
   public deleteFormData(url:any) {
    
     return this.http.delete(url).pipe(
@@ -127,5 +112,19 @@ export class RestService {
     }
     return url;
 
+  }
+
+  sendWithAttachment(userData:any) {
+
+    this.http.post("http://localhost:3000/uploadfile", userData
+    )
+      .subscribe(
+        data => {
+          console.log("Sent Request is successful ", data);
+        },
+        error => {
+          console.log("Error", error);
+        }
+      );
   }
 }

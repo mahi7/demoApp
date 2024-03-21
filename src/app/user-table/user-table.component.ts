@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -85,6 +85,7 @@ export class UserTableComponent implements OnInit {
       (response: any) => {
         this.datas = response;
 
+
         console.log("getUserLists2:" + JSON.stringify(response));
       },
       error => {
@@ -119,6 +120,7 @@ export class UserTableComponent implements OnInit {
         this.userInfo.subscibe = response.subscibe;
         this.userInfo.file = response.file;
         console.log("UserDetail-" + JSON.stringify(this.userInfo));
+
 
       },
       error => {

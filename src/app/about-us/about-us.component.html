@@ -11,17 +11,52 @@
     <br>
 
     <div class="col-sm-12">
+
+        <div class="container-fluid">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            This is the expansion title
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            This is a summary of the content
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>If you have been looking for access to resources that help immigrants integrate into their new environment properly, and also connect with the right people, you are in the right place. Now, you can get full access to all the important immigrant information that you need right here. Please Help me</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
         <div class="container">
             <!-- <div class="col-lg-4"> -->
-                <p>If you have been looking for access to resources
-                    that help immigrants integrate into their new environment properly, and also connect with the right people, you are in the right place.
-                    
-                    Now, you can get full access to all the important immigrant information that you need right here.
-                    
-                    Please Help me
-                    </p>
+            <p>If you have been looking for access to resources
+                that help immigrants integrate into their new environment properly, and also connect with the right
+                people, you are in the right place.
+
+                Now, you can get full access to all the important immigrant information that you need right here.
+
+                Please Help me
+            </p>
             <!-- </div> -->
-    
+
             <!-- <div class="col-lg-8" style="width: auto;">
 
                 <div class="bg-image" >
@@ -31,7 +66,7 @@
     
             </div> -->
         </div>
-        
+
     </div>
 
     <br>

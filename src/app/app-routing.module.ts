@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormComponent } from './forms/reactive-form/reactive-form.component';
 import { TemplateDrivenComponent } from './forms/template-driven/template-driven.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AngularMatTableComponent } from './angular-mat-table/angular-mat-table.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -20,6 +21,8 @@ const routes: Routes = [
 
 
   { path: 'aboutUs', component: AboutUsComponent },
+
+  { path: 'angularMattable', component: AngularMatTableComponent },
 
 ];
 

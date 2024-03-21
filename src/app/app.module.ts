@@ -18,6 +18,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { TagInputModule } from 'ngx-chips';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AngularMatTableComponent } from './angular-mat-table/angular-mat-table.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     LoginComponent,
     TemplateDrivenComponent,
     ReactiveFormComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AngularMatTableComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     MatPaginatorModule,
     TagInputModule,
     BrowserAnimationsModule,
-
+    MatExpansionModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
