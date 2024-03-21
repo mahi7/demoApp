@@ -3,8 +3,6 @@ import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { EMPTY } from 'rxjs';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-homepage',
