@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #eee;">
 
     <app-header></app-header>
 
@@ -12,60 +12,143 @@
 
     <div class="col-sm-12">
 
-        <div class="container-fluid">
-            <mat-accordion>
-                <mat-expansion-panel hideToggle>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            This is the expansion title
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            This is a summary of the content
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <p>If you have been looking for access to resources that help immigrants integrate into their new environment properly, and also connect with the right people, you are in the right place. Now, you can get full access to all the important immigrant information that you need right here. Please Help me</p>
-                </mat-expansion-panel>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Self aware panel
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <p>I'm visible because I am open</p>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="bg-light">
 
+            <br>
+            <br>
+            <br>
 
-        <div class="container">
-            <!-- <div class="col-lg-4"> -->
-            <p>If you have been looking for access to resources
-                that help immigrants integrate into their new environment properly, and also connect with the right
-                people, you are in the right place.
-
-                Now, you can get full access to all the important immigrant information that you need right here.
-
-                Please Help me
-            </p>
-            <!-- </div> -->
-
-            <!-- <div class="col-lg-8" style="width: auto;">
-
-                <div class="bg-image" >
-
+            <div class="container-fluid">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                This is the expansion title
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                This is a summary of the content
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>If you have been looking for access to resources that help immigrants integrate into their new
+                            environment properly, and also connect with the right people, you are in the right place. Now,
+                            you can get full access to all the important immigrant information that you need right here.
+                            Please Help me</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Self aware panel
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+    
+    
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6" style="border-radius: 30px;">
+                        <section>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">If you have been looking for access to resources
+                                        that help immigrants integrate into their new environment properly, and also connect with the right
+                                        people, you are in the right place.
+                        
+                                        Now, you can get full access to all the important immigrant information that you need right here.
+                        
+                                        Please Help me
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    
+                    </div>
+        
+                    <div class="col-lg-6" style="width: auto;">
+        
+                        <div class="bg-image rounded">
+                            <img [src]="urlFile" 
+                            style="height:300px; width:550px; margin-bottom: 10px; border-radius: 20px;"
+                            class="thumbnail">
+                        </div>
+            
+            
+                    </div>
                 </div>
-    
-    
-            </div> -->
+
+               
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
         </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="bg-light">
+
+            <br>
+            <br>
+            <div class="container">
+
+                <div class="row" style="border-radius: 15px;">
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="card-link">Card link</a>
+                              <a href="#" class="card-link">Another link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="card-link">Card link</a>
+                              <a href="#" class="card-link">Another link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="card-link">Card link</a>
+                              <a href="#" class="card-link">Another link</a>
+                            </div>
+                          </div>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            <br>
+            <br>
+            
+        </div>
+
+       
 
     </div>
 
@@ -83,4 +166,4 @@
     <app-footer></app-footer>
 
 
-</div>>
+</div>

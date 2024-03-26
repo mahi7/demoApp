@@ -2,6 +2,9 @@
     <app-header></app-header>
 
     <br>
+    <br>
+    <br>
+    <br>
 
     <div class="bg-light">
 
@@ -151,9 +154,9 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="card mb-4">
-                                        <div class="card-body">
+                                        <div class="card-body" style="font-weight: bolder;">
 
-                                            <div class="row">
+                                            <div class="row" >
                                                 <div class="col-sm-3">
                                                     <p class="mb-0">First Name</p>
                                                 </div>
@@ -324,7 +327,7 @@
                                                 style="color: black;">{{userInfo.fname}} {{userInfo.lname}}</b></li>
 
                                         <button [routerLink]="['/manageUsertable']" type="button"
-                                            class="btn btn-info btn-sm" style="margin-left: 782px;">Cancel</button>
+                                            class="btn btn-info btn-sm" style="margin-left: 779px;">Cancel</button>
                                     </ol>
                                 </nav>
                             </div>
@@ -336,7 +339,7 @@
                                 <div class="card mb-3">
                                     <div class="card-body text-center">
                                         <div> <img [src]="urlFile"
-                                                style="height:136x; width:136px; margin-right: 20px; margin-bottom: 10px;"
+                                                style="height:136x; width:136px; margin-bottom: 10px;"
                                                 class="thumbnail"></div>
                                         <div>
                                             <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
@@ -356,7 +359,7 @@
 
                             <div class="col-lg-8">
                                 <div class="card mb-4">
-                                    <div class="card-body">
+                                    <div class="card-body" style="font-weight: bolder;">
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Name</p>
@@ -461,7 +464,7 @@
                             <td>{{data.fname}} {{data.lname}}</td>
                             <td>{{data.emailId}}</td>
                             <td>{{data.mno}} </td>
-                            <td><img [src]="data.file" /></td>
+                            <td><img class="thumbnail" style="height: 50px; width: 50px;" [src]="data.file" /></td>
                             <td>
 
                                 <a [routerLink]="['/detailUsertable',data.id]" tabindex="-1"

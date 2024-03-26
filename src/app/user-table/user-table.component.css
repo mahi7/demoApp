@@ -22,8 +22,12 @@
 
 * {
     font-family: "Times New Roman", Times, serif;
-  }
+}
 
-  table {
+table {
     width: 100%;
-  }
+}
+
+.li .a{
+    color: blue;
+}

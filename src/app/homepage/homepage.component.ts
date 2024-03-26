@@ -1,8 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-homepage',
@@ -17,6 +21,9 @@ export class HomepageComponent implements OnInit {
   public viewflag = false;
   public tdForm: any;
   public item: any = [];
+  // public home = false;
+  // public company = false;
+  public Address = ['Home', 'Company'];
 
   @ViewChild('f') public resetForm: NgForm | undefined;
 
@@ -45,13 +52,27 @@ export class HomepageComponent implements OnInit {
     age: '',
     state: '',
     country: '',
-    address: '',
+    address: {
+      home: {
+        address1: '',
+        address2: ''
+      },
+      company: {
+        address3: '',
+        address4: ''
+      }
+    },
     tags: '',
     tagsInput: [],
     subscibe: false,
-    file: ''
+    file: {}
 
   }
+
+  public photo = {
+    id: '',
+    photo: { docname: '', docpath: '', docdesc: '', doctype: '', isprimary: 'NO' },
+  };
 
   form: FormGroup = new FormGroup({
     fname: new FormControl(''),
@@ -81,6 +102,8 @@ export class HomepageComponent implements OnInit {
   id: any;
   public edituser = false;
   public modalForm = true;
+
+  public validModel = '';
 
   constructor(
     public routes: Router,
@@ -124,7 +147,12 @@ export class HomepageComponent implements OnInit {
   }
 
   get f(): { [key: string]: AbstractControl } {
+
+
+    this.validModel = 'data-bs-dismiss="modal"';
     return this.form.controls;
+
+
   }
 
   public getUserById() {
@@ -148,7 +176,10 @@ export class HomepageComponent implements OnInit {
         this.user.age = response.age;
         this.user.state = response.state;
         this.user.country = response.country;
-        this.user.address = response.address;
+        this.user.address.home.address1 = response.address.home.address1;
+        this.user.address.home.address2 = response.address.home.address2;
+        this.user.address.company.address3 = response.address.company.address3;
+        this.user.address.company.address4 = response.address.company.address4;
         this.user.tags = response.tags;
         this.user.tagsInput = response.tagsInput;
         this.user.subscibe = response.subscibe;
@@ -166,18 +197,32 @@ export class HomepageComponent implements OnInit {
   // template driven form submit
   public submitData(f: NgForm) {
 
-    console.log("Typeof", typeof (this.item));
-    console.log("Typeof", typeof (this.user.tagsInput));
-
 
     this.submitted = true;
-    console.log("SubmituserData", JSON.stringify(this.user));
+    console.log("SubmituserData", JSON.stringify(this.user)); // file {} empty
+
+    alert('befoe submit data')
 
     const url = this.restService.userRestURL('add', '');
     this.restService.postFormData(url, this.user).subscribe(
       (response: any) => {
 
         alert('submit data');
+        console.log('after submit response data', response); // file {} empty
+        console.log('after submit user file', this.user.file); // data coming
+
+        if (this.user.file) {
+
+          alert('photo data');
+
+          this.photo.id = response.id;
+          console.log("photo data", this.photo); // data coming in photo {id...}
+          // this.user.file = this.photo;
+
+
+          this.uploadfile();
+          // this.photoAdd();
+        }
 
         Swal.fire({
           title: "Data submitted!",
@@ -191,6 +236,7 @@ export class HomepageComponent implements OnInit {
         this.tdForm = true;
         this.id = response.id;
 
+        $('.modal-backdrop').remove();
 
         console.log("ResponseType", typeof (response));
         console.log("items", this.item);
@@ -200,14 +246,12 @@ export class HomepageComponent implements OnInit {
         }
 
         console.log("Item", this.item);
-
+        console.log('Status on Post API:' + JSON.stringify(response));
+        console.log('Status on Post API:' + JSON.stringify(this.user));
 
         this.getUserById();
 
         console.log('id', this.id)
-
-        console.log('Status on Post API:' + JSON.stringify(response));
-        console.log('Status on Post API:' + JSON.stringify(this.user));
 
       },
       error => {
@@ -218,6 +262,85 @@ export class HomepageComponent implements OnInit {
 
     return 0;
 
+  }
+
+  // private photoAdd() {
+
+  //   this.uploadfile();
+
+  //   this.user.file = this.photo;
+
+  //   console.log("photo", + this.photo);
+  //   console.log("userfile after upload", + this.user.file);
+
+  //   const url = this.restService.userRestURL('edit', '');
+  //   this.restService.postFormData(url, this.user.file).subscribe(
+  //     (response: any) => {
+
+  //       console.log('Status on Post API', response); //only photo response coming
+  //       Swal.fire('Added', '', 'success');
+  //       window.scrollTo(0, 0);
+
+  //     },
+  //     error => {
+
+  //       Swal.fire(
+  //         error.statusText,
+  //         error._body,
+  //         'error'
+  //       );
+
+  //     }
+  //   );
+  //   return 0;
+  // }
+
+  public uploadfile() {
+    if (this.user.file != '') {
+
+      alert('upload file');
+      console.log('userFile', this.user.file);
+
+      const fileExtension = '.' + this.user.file.name.split('.').pop();
+      const rname = Math.random().toString(36).substring(7) + new Date().getTime();
+
+      let objDoc = new Object();
+      this.photo.photo.docname = this.user.file.name;
+      this.photo.photo.doctype = 'IMAGE';
+      this.photo.photo.docpath = '/assets/img/image-upload/' + this.photo.id + '/' + rname + this.user.file.name;
+
+      var docFormData = new FormData();
+      docFormData.append('doc', this.user.file, rname + this.user.file.name);
+      docFormData.append('width', '400');
+      docFormData.append('height', '400');
+      docFormData.append('name', 'Category' + '/' + this.photo.id);
+
+      // var docurl = this.restService.docsRestURL('upload', '');
+      var docurl = this.restService.userRestURL('upload', '');
+      console.log(docurl);
+
+      this.restService.uploadFormData(docurl, this.photo).subscribe(
+        (response: any) => {
+
+          console.log('Status on Upload API');
+          console.log(response);
+
+          return 1;
+        },
+        error => {
+          console.log('Error in doc upload .');
+          return 0;
+        }
+      );
+
+
+    } else {
+
+      console.log("error", error);
+
+      return 1;
+    }
+    return 0
   }
 
   // reactive form submit
@@ -314,21 +437,27 @@ export class HomepageComponent implements OnInit {
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
-      this.user.file = event.target.files[0].name;
+
+      alert('event target file');
+
+      this.user.file = event.target.files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {
+        // image file path
         this.urlFile = event.target.result;
-        console.log('DOCURL' + JSON.stringify(this.urlFile));
-
       }
+
       reader.readAsDataURL(event.target.files[0]);
-      console.log('Inside multiple file select');
+
+      console.log('urlFile' + JSON.stringify(this.urlFile)); //urlFile - "/assets/img/defaultimg.jpg"
+      console.log('OnchangefieldUserfile' + JSON.stringify(this.user.file)); // blank object: {}
+
     }
 
     // this.restService.uploadImage(this.form.id, this.f).subscribe();
 
     console.log("userData", JSON.stringify(this.user));
-    console.log("userData", JSON.stringify(this.form));
+    // console.log("userData", JSON.stringify(this.form));
   }
 
   editUser() {
@@ -369,6 +498,12 @@ export class HomepageComponent implements OnInit {
       }
     );
     return 0;
+  }
+
+  closeModal() {
+
+    console.log('Valid model', this.validModel);
+
   }
 
 }

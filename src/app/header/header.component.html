@@ -8,8 +8,8 @@
         <br>
         <br>
         <br>
-        <div class="container-fluid">
-            <div>
+        <div class="container-fluid" style="display: flex;">
+            <div style="background-color: #0dcaf0;">
                 <a class="navbar-brand" href="#" matTooltip="Info about the action"
                     style="text-align: center; font-family: 'Times New Roman', Times, serif; margin-left: 20px; font-weight: bold;">DemoApp</a>
             </div>
@@ -23,25 +23,25 @@
                 style="float: right; margin-left: 455px; font-family: 'Times New Roman', Times, serif; font-size: 15px;">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} href="#">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" [routerLink]="['/aboutUs']">ABOUT US</a>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/aboutUs']">ABOUT US</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" [routerLink]="['/angularMattable']">JOBS</a>
+                        <a class="nav-link" [routerLink]="['/angularMattable']" routerLinkActive="active">JOBS</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">CLIENTS</a>
+                        <a class="nav-link" href="#" routerLinkActive="active">CLIENTS</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">EMPLOYERS</a>
+                        <a class="nav-link" href="#" routerLinkActive="active">EMPLOYERS</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" [routerLink]="['/login']">CONTACT US</a>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">CONTACT US</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/manageUsertable']">USER TABLE</a>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/manageUsertable']">USER TABLE</a>
                     </li>
                     <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

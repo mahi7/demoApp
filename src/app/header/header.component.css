@@ -23,3 +23,12 @@
 * {
     font-family: "Times New Roman", Times, serif;
 }
+
+/* .navbar{
+    background-color:#0dcaf0 ;
+}  */
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: rgb(8, 11, 90);
+    font-weight: bold;
+}

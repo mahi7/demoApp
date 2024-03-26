@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,34 +36,26 @@ export class RestService {
     );
   }
 
+  public uploadImage(image: File) {
+
+    alert('upload image');
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this.http.post('/assets/img/image-upload/', formData);
+  }
+
   public docsRestURL(restid: any, type: any) {
-    // let url = this.ip;
-    let url = '/assets/img/';
+    let url = this.ip;
+    // let url = '/assets/img/';
     switch (restid) {
-      case 'add':
-        url += '/doc';
-        break;
-      case 'productphotoadd':
-        url += '/product/photos ';
-        break;
-      case 'photoadd':
-        url += '/employee/photo';
-        break;
-      case 'edit':
-        url += '/doc/update';
-        break;
-      case 'delete':
-        url += '/doc/delete';
-        break;
+
+
       case 'upload':
-        url += '';
+        url += '/upload';
         break;
-      case 'details':
-        url += '/doc/getId/' + type;
-        break;
-      default:
-        url += '/doc?type=' + type;
-        break;
+
     }
     return url;
   }
@@ -78,8 +71,8 @@ export class RestService {
       }));
   }
 
-  public deleteFormData(url:any) {
-   
+  public deleteFormData(url: any) {
+
     return this.http.delete(url).pipe(
       map(res => {
         const deleteresponse = res; // .json();
@@ -99,6 +92,9 @@ export class RestService {
       case 'edit':
         url += '/photos'
         break
+      case 'upload':
+        url += '/upload'
+        break
       case 'details':
         url += '/photos/' + userId;
         break
@@ -114,7 +110,7 @@ export class RestService {
 
   }
 
-  sendWithAttachment(userData:any) {
+  sendWithAttachment(userData: any) {
 
     this.http.post("http://localhost:3000/uploadfile", userData
     )

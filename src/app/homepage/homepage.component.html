@@ -12,23 +12,53 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(
+        function() {
+
+            // SUBMIT FORM
+            $("#myForm").submit(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                ajaxPost();
+
+                $('#myForm').modal('hide');
+                $('.modal-backdrop').remove(); // Solution
+            });
+
+            function ajaxPost() {
+                // Some stuff
+            }
+
+        })
+    </script>
+
+
+
 </head>
 
 <body>
 
+
+
+
     <div class="container-fluid">
+
         <app-header></app-header>
 
         <br>
         <br>
         <br>
 
+
         <div *ngIf="!tdForm">
+
             <!-- Model form and text -->
             <div class="bg-image">
 
-
-               
                 <br>
                 <br>
                 <br>
@@ -38,11 +68,12 @@
                 <br>
                 <br>
                 <br>
-
+                <br>
+                <br>
 
 
                 <h3
-                    style="margin-left: 200px; font-size: larger; font-weight: bolder; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                    style="margin-left: 200px; font-size: larger; font-weight: bolder; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;">
                     I am looking for ...</h3>
                 <br>
                 <form class="form-inline my-2 my-lg-0" style="margin-left: 200px;">
@@ -66,13 +97,14 @@
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <form class="form-inline my-2 my-lg-0" style="margin-left: 252px;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                            <select class="form-select" aria-label="Disabled select example">
+                        <form class="form-inline my-2 my-lg-0"
+                            style="margin-left: 260px;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                            <select class="form-select"  style="font-style: italic;" aria-label="Disabled select example">
                                 <option selected>Select your location</option>
                                 <option value="1">Banglore</option>
                                 <option value="2">Mumbai</option>
                                 <option value="3">Hyderabad</option>
-                              </select>
+                            </select>
 
                         </form>
 
@@ -90,10 +122,10 @@
                     </button>
 
                     <!-- template driven form  -->
-                    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitData(f)" novalidate>
+                    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitData(f)" novalidate id="closeModal">
                         <!-- The Modal -->
                         <div class="modal" id="myModal">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog  modal-dialog-scrollable">
                                 <div class="modal-content">
 
                                     <!-- Modal Header -->
@@ -109,7 +141,7 @@
                                         <div class="row">
 
                                             <div class="col-xl-4">
-                                                <div> <img [src]="urlFile" style="height:100px; width:100px;"
+                                                <div> <img [src]="urlFile" style="height:100px; width:100px; border-radius: 10px;"
                                                         class="thumbnail">
                                                 </div>
                                                 <div>
@@ -212,7 +244,7 @@
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <input type="number" class="form-control form-control-sm"
+                                                            <input type="date" class="form-control form-control-sm"
                                                                 name="age" [(ngModel)]="user.age" required age
                                                                 #age="ngModel" placeholder="Age"
                                                                 [ngClass]="{ 'is-invalid': f.submitted && age.errors }" />
@@ -264,17 +296,60 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
+
+                                                            <select class="form-control form-control-sm" name="Address"
+                                                                [(ngModel)]="Address[0]">
+                                                                <option value="Home" [(ngModel)]='Address[0]'
+                                                                    name="Address[0]">Home Address</option>
+                                                                <option value="Company" [(ngModel)]='Address[1]'
+                                                                    name="Address[1]">Company Address</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="form-group" *ngIf="Address[0] ==  'Home'">
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="address" [(ngModel)]="user.address" required
-                                                                address #address="ngModel" placeholder="Address"
-                                                                [ngClass]="{ 'is-invalid': f.submitted && address.errors }" />
-                                                            <div *ngIf="f.submitted && address.errors"
+                                                                name="address1" [(ngModel)]="user.address.home.address1"
+                                                                required address1 #address1="ngModel"
+                                                                placeholder="Address 1 ..."
+                                                                [ngClass]="{ 'is-invalid': f.submitted && address1.errors }" />
+                                                            <br>
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="address2" [(ngModel)]="user.address.home.address2"
+                                                                required address2 #address2="ngModel"
+                                                                placeholder="Address 2 ..."
+                                                                [ngClass]="{ 'is-invalid': f.submitted && address2.errors }" />
+                                                            <div *ngIf="f.submitted && address2.errors"
                                                                 class="invalid-feedback">
-                                                                <div *ngIf="address.errors['required']">Address is
+                                                                <div *ngIf="address2.errors['required']">Address is
                                                                     required
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group"
+                                                            *ngIf="Address[1] ==  'Company' && Address[0] !=  'Home'">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="address1"
+                                                                [(ngModel)]="user.address.company.address3" required
+                                                                address1 #address3="ngModel"
+                                                                placeholder="Comp Address 1 ..."
+                                                                [ngClass]="{ 'is-invalid': f.submitted && address3.errors }" />
+                                                            <br>
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                name="address2"
+                                                                [(ngModel)]="user.address.company.address4" required
+                                                                address #address4="ngModel"
+                                                                placeholder="Comp Address 2 ..."
+                                                                [ngClass]="{ 'is-invalid': f.submitted && address4.errors }" />
+                                                            <div *ngIf="f.submitted && address4.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="address4.errors['required']">Address is
+                                                                    required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
@@ -318,7 +393,7 @@
 
                                                 <br>
                                                 <br>
-                                                <div class="row" style="padding-right: 25px; margin-right: 50px;">
+                                                <div class="row" style="padding-right: 25px; margin-right: 40px;">
                                                     <div class="col-lg-12" style="margin-right: 20px;">
 
                                                         <div class="form-group form-check">
@@ -355,9 +430,10 @@
                                                         data-bs-dismiss="modal">Cancel</button>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <button type="submit" class="btn btn-info form-control"
-                                                        [disabled]="!f.valid" data-bs-dismiss="modal"
+                                                    <button type="submit" class="btn btn-info form-control" 
                                                         style="margin-right: 10px;">Submit</button>
+
+                                                    <!-- [disabled]="!f.valid" data-bs-dismiss="modal"-->
                                                 </div>
                                             </div>
 
@@ -372,279 +448,281 @@
 
                     <!-- reactive form -->
                     <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
-                            The Modal
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-    
-                                        Modal Header
-                                        <div class="modal-header bg-info">
-                                            <h4 class="modal-title" style="padding-top: 13px; padding-left: 10px;">Register
-                                            </h4>
-                                            <button type="button" class="btn-close btn-outline-danger btn-danform-control"
-                                                data-bs-dismiss="modal"></button>
-                                        </div>
-    
-                                        Modal body
-                                        <div class="modal-body">
-    
-                                            <div class="row">
-    
-                                                <div class="col-xl-4">
-                                                    <div class="form-group">
-                                                        <div> <img [src]="urlFile" class="form-control"
-                                                                style="height:100px; width:100px;" class="thumbnail">
-                                                        </div>
-                                                        <div>
-    
-                                                            <input hidden formControlName="file" class="form-control"
-                                                                type="file" #profileUpload name="file" required=""
-                                                                [ngClass]="{ 'is-invalid': submitted && f['file'].errors }"
-                                                                required (change)="onChangeFileField($event)"
-                                                                id="formFile" />
-                                                            <button type="button" class="btn btn-default btn-sm"
-                                                                (click)="profileUpload.click()"
-                                                                style="text-align: left;">Upload
-                                                                your photo</button>
-                                                            <div *ngIf="submitted && f['file'].errors"
-                                                                class="invalid-feedback">
-                                                                <div *ngIf="f['file'].errors['required']">Please upload your
-                                                                    photo
-                                                                </div>
-                                                            </div>
-    
-                                                        </div>
+
+                        The Modal
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    Modal Header
+                                    <div class="modal-header bg-info">
+                                        <h4 class="modal-title" style="padding-top: 13px; padding-left: 10px;">Register
+                                        </h4>
+                                        <button type="button" class="btn-close btn-outline-danger btn-danform-control"
+                                            data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    Modal body
+                                    <div class="modal-body">
+
+                                        <div class="row">
+
+                                            <div class="col-xl-4">
+                                                <div class="form-group">
+                                                    <div> <img [src]="urlFile" class="form-control"
+                                                            style="height:100px; width:100px;" class="thumbnail">
                                                     </div>
-    
+                                                    <div>
+
+                                                        <input hidden formControlName="file" class="form-control"
+                                                            type="file" #profileUpload name="file" required=""
+                                                            [ngClass]="{ 'is-invalid': submitted && f['file'].errors }"
+                                                            required (change)="onChangeFileField($event)"
+                                                            id="formFile" />
+                                                        <button type="button" class="btn btn-default btn-sm"
+                                                            (click)="profileUpload.click()"
+                                                            style="text-align: left;">Upload
+                                                            your photo</button>
+                                                        <div *ngIf="submitted && f['file'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f['file'].errors['required']">Please upload your
+                                                                photo
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-8">
-    
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-    
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="fname"
-                                                                    class="form-control form-control-sm"
-                                                                    pattern="[a-zA-Z][a-zA-Z ]+" placeholder="First Name"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['fname'].errors }" />
-                                                                <div *ngIf="submitted && f['fname'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['fname'].errors['required']">First name is
-                                                                        required</div>
-                                                                    <div *ngIf="f['fname'].errors['pattern']">Only alphabets
-                                                                        allowed</div>
-                                                                </div>
-    
-                                                            </div>
-    
-                                                        </div>
-    
-                                                        <div class="col-lg-6">
-    
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="lname"
-                                                                    class="form-control form-control-sm"
-                                                                    placeholder="Last Name"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['lname'].errors }" />
-                                                                <div *ngIf="submitted && f['lname'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['lname'].errors['required']">Last name is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-    
-                                                        </div>
-    
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-    
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <div class="form-group">
-                                                                    <input type="email" formControlName="emailId"
-                                                                        class="form-control form-control-sm"
-                                                                        placeholder="Email Id"
-                                                                        [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }" />
-                                                                    <div *ngIf="submitted && f['emailId'].errors"
-                                                                        class="invalid-feedback">
-                                                                        <div *ngIf="f['emailId'].errors['required']">
-                                                                            Email-Id is
-                                                                            required</div>
-                                                                    </div>
-    
-                                                                </div>
-                                                            </div>
-                                                        </div>
-    
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <input type="number" formControlName="mno"
-                                                                    class="form-control form-control-sm"
-                                                                    placeholder="(+91) 7972.."
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['mno'].errors }" />
-                                                                <div *ngIf="submitted && f['mno'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['mno'].errors['required']">Number is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-    
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <input type="number" formControlName="age"
-                                                                    class="form-control form-control-sm" placeholder="age"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['age'].errors }" />
-                                                                <div *ngIf="submitted && f['age'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['age'].errors['required']">Age is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="state"
-                                                                    class="form-control form-control-sm" placeholder="State"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" />
-                                                                <div *ngIf="submitted && f['state'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['state'].errors['required']">State is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="country"
-                                                                    placeholder="Country"
-                                                                    class="form-control form-control-sm"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" />
-                                                                <div *ngIf="submitted && f['country'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['country'].errors['required']">Country is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="address"
-                                                                    placeholder="Address"
-                                                                    class="form-control form-control-sm"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" />
-                                                                <div *ngIf="submitted && f['address'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['address'].errors['required']">Address is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <input type="text" formControlName="tags"
-                                                                    class="form-control form-control-sm" placeholder="Tags"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['tags'].errors }" />
-                                                                <div *ngIf="submitted && f['tags'].errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="f['tags'].errors['required']">Tags is
-                                                                        required</div>
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                    <br>
-                                                    <div class="row" style="padding-right: 30px; margin-right: 70px;">
-                                                        <div class="col-lg-12" style="margin-right: 25px;">
-                                                            <div class="form-group form-check">
-                                                                <input type="checkbox" formControlName="subscibe"
-                                                                    class="form-check-input" style="padding-right: 15px;"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['subscibe'].errors }" />
-                                                                <label for="acceptTerms" class="form-check-label"
-                                                                    style="color: blue;">Subscribe to newsletter</label>
-                                                                <div *ngIf="submitted && f['subscibe'].errors"
-                                                                    class="invalid-feedback">
-                                                                    Accept Terms is required
-                                                                </div>
-    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-    
-                                                </div>
-    
+
                                             </div>
-                                        </div>
-    
-                                        Modal footer
-                                        <div class="modal-footer">
-    
-                                            <div class="col-lg-5">
+                                            <div class="col-sm-8">
+
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <button type="button" class="btn btn-outline-danger form-control"
-                                                            data-bs-dismiss="modal">Cancel</button>
+
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="fname"
+                                                                class="form-control form-control-sm"
+                                                                pattern="[a-zA-Z][a-zA-Z ]+" placeholder="First Name"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['fname'].errors }" />
+                                                            <div *ngIf="submitted && f['fname'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['fname'].errors['required']">First name is
+                                                                    required</div>
+                                                                <div *ngIf="f['fname'].errors['pattern']">Only alphabets
+                                                                    allowed</div>
+                                                            </div>
+
+                                                        </div>
+
                                                     </div>
+
                                                     <div class="col-lg-6">
-                                                        <button type="submit" class="btn btn-info form-control"
-                                                            style="margin-right: 10px;"
-                                                            data-bs-dismiss="modal">Submit</button>
+
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="lname"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="Last Name"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['lname'].errors }" />
+                                                            <div *ngIf="submitted && f['lname'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['lname'].errors['required']">Last name is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <input type="email" formControlName="emailId"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Email Id"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }" />
+                                                                <div *ngIf="submitted && f['emailId'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f['emailId'].errors['required']">
+                                                                        Email-Id is
+                                                                        required</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="number" formControlName="mno"
+                                                                class="form-control form-control-sm"
+                                                                placeholder="(+91) 7972.."
+                                                                [ngClass]="{ 'is-invalid': submitted && f['mno'].errors }" />
+                                                            <div *ngIf="submitted && f['mno'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['mno'].errors['required']">Number is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="number" formControlName="age"
+                                                                class="form-control form-control-sm" placeholder="age"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['age'].errors }" />
+                                                            <div *ngIf="submitted && f['age'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['age'].errors['required']">Age is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
-    
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="state"
+                                                                class="form-control form-control-sm" placeholder="State"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" />
+                                                            <div *ngIf="submitted && f['state'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['state'].errors['required']">State is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="country"
+                                                                placeholder="Country"
+                                                                class="form-control form-control-sm"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" />
+                                                            <div *ngIf="submitted && f['country'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['country'].errors['required']">Country is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="address"
+                                                                placeholder="Address"
+                                                                class="form-control form-control-sm"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" />
+                                                            <div *ngIf="submitted && f['address'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['address'].errors['required']">Address is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" formControlName="tags"
+                                                                class="form-control form-control-sm" placeholder="Tags"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['tags'].errors }" />
+                                                            <div *ngIf="submitted && f['tags'].errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f['tags'].errors['required']">Tags is
+                                                                    required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row" style="padding-right: 30px; margin-right: 70px;">
+                                                    <div class="col-lg-12" style="margin-right: 25px;">
+                                                        <div class="form-group form-check">
+                                                            <input type="checkbox" formControlName="subscibe"
+                                                                class="form-check-input" style="padding-right: 15px;"
+                                                                [ngClass]="{ 'is-invalid': submitted && f['subscibe'].errors }" />
+                                                            <label for="acceptTerms" class="form-check-label"
+                                                                style="color: blue;">Subscribe to newsletter</label>
+                                                            <div *ngIf="submitted && f['subscibe'].errors"
+                                                                class="invalid-feedback">
+                                                                Accept Terms is required
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
+
                                         </div>
-    
                                     </div>
+
+                                    Modal footer
+                                    <div class="modal-footer">
+
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <button type="button" class="btn btn-outline-danger form-control"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <button type="submit" class="btn btn-info form-control"
+                                                        style="margin-right: 10px;"
+                                                        data-bs-dismiss="modal">Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-    
-                        </form> -->
+                        </div>
+
+                    </form> -->
 
                     <br>
                     <br>
                 </div>
 
             </div>
+            
 
             <!-- body data -->
             <div class="container-fluid" style="background-color: rgb(244, 242, 238);">
 
                 <br>
+                <br>
 
                 <p style="text-align: center;">We are leaders in</p>
-                <h3 style="text-align: center;">Creative Digital Recruitment</h3>
+                <h2 style="text-align: center;">Creative Digital Recruitment</h2>
 
                 <hr class="hr"
                     style="color: rgb(0, 187, 255); font-weight: bolder; font-size: larger; font-size: 50px;  " />
@@ -711,14 +789,13 @@
                                     <div class="card mb-3">
                                         <div class="card-body text-center">
                                             <div> <img [src]="urlFile"
-                                                    style="height:215px; width:200px; margin-bottom: 10px;"
+                                                    style="height:215px; width:200px; margin-bottom: 10px; border-radius: 10px;"
                                                     class="thumbnail"></div>
                                             <div>
 
                                                 <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
-                                                    rippleColor="dark" #profileUpload
-                                                    (change)="onChangeFileField($event)" />
-                                                <!-- [(ngModel)]="urlFile"  name="file" -->
+                                                    [(ngModel)]="user.file" name="file" rippleColor="dark"
+                                                    #profileUpload (change)="onChangeFileField($event)" />
                                                 <button type="button" class="btn btn-primary btn-sm"
                                                     (click)="profileUpload.click()">Edit photo</button>
 
@@ -754,11 +831,20 @@
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control form-control-sm"
                                                             [(ngModel)]="user.emailId" name="emailId"
                                                             placeholder="Email-Id" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.age" name="age" placeholder="Age"
+                                                            required />
                                                     </div>
                                                 </div>
 
@@ -774,25 +860,7 @@
                                                             placeholder="Mobile Number" required />
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
 
-                                                    <div class="col-sm-12">
-                                                        <input type="text" class="form-control form-control-sm"
-                                                            [(ngModel)]="user.age" name="age" placeholder="Age"
-                                                            required />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="col-sm-12">
-                                                        <input type="text" class="form-control form-control-sm"
-                                                            [(ngModel)]="user.address" name="address"
-                                                            placeholder="Address" required />
-                                                    </div>
-                                                </div>
                                                 <div class="col-sm-6">
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control form-control-sm"
@@ -800,7 +868,53 @@
                                                             placeholder="Country" required />
                                                     </div>
                                                 </div>
+
+
                                             </div>
+                                            <br>
+
+                                            <div class="row"
+                                                *ngIf="user.address.home.address1 != '' && user.address.company.address3 == ''">
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.address.home.address1" name="address1"
+                                                            placeholder="Home address1" required />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.address.home.address2" name="address2"
+                                                            placeholder="Home address2" required />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row"
+                                                *ngIf="user.address.company.address3 != '' && user.address.home.address1 == ''">
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.address.company.address3" name="address3"
+                                                            placeholder="Companya ddress1" required />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            [(ngModel)]="user.address.company.address4" name="address4"
+                                                            placeholder="Company address2" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <br>
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -964,6 +1078,8 @@
 
         <div *ngIf="viewflag">
 
+            <br>
+            <br>
             <!-- View data -->
             <section style="background-color: #eee;">
                 <div class="container py-5">
@@ -986,7 +1102,7 @@
                             <div class="card mb-3">
                                 <div class="card-body text-center">
                                     <div> <img [src]="urlFile"
-                                            style="height:170px; width:160px; margin-right: 20px; margin-bottom: 10px;"
+                                            style="height:170px; width:160px; margin-right: 20px; margin-bottom: 10px; border-radius: 10px;"
                                             class="thumbnail"></div>
                                     <div>
 
@@ -1013,15 +1129,19 @@
                                 <div class="card-body">
                                     <hr>
                                     <p>I'm {{user.fname}} and I'm above {{user.age}} years and you can send your emails
-                                        to {{user.emailId}}. I
+                                        to <span style="color: blue;">{{user.emailId}}</span>. I
                                         live in the state of {{user.state}}. I like to play {{item[0]}}, {{item[1]}} and
                                         reading books.
                                         And please send me newsletters. Please reach out to me on my phone number
                                         {{user.mno}}. </p>
+
+                                    <br>
+
+
                                     <hr>
 
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        style="margin-left: 10px;">I Agree
+                                    <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;">I
+                                        Agree
                                     </button>
 
                                 </div>
@@ -1033,7 +1153,8 @@
 
         </div>
 
-
+        <br>
+        <br>
         <app-footer></app-footer>
     </div>
 

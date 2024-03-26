@@ -21,6 +21,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { AngularMatTableComponent } from './angular-mat-table/angular-mat-table.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     TagInputModule,
     BrowserAnimationsModule,
     MatExpansionModule,
+    MatFormFieldModule, MatSelectModule, TagInputModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],

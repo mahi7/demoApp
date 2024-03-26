@@ -8,4 +8,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 })
 export class AboutUsComponent {
   panelOpenState = false;
+  urlFile = '/assets/img/aboutUs.jpg';
+
 }

@@ -27,19 +27,19 @@ export class UserTableComponent implements OnInit {
     address: '',
     tags: '',
     subscibe: false,
-    file: ''
+    file: {}
 
   }
 
-  public user = {
-    id: '',
-    albumId: '',
-    title: '',
-    url: '',
-    thumbnailUrl: '',
-    photofile: ''
+  // public user = {
+  //   id: '',
+  //   albumId: '',
+  //   title: '',
+  //   url: '',
+  //   thumbnailUrl: '',
+  //   photofile: ''
 
-  };
+  // };
 
   docurll: any;
   file: any;
@@ -100,12 +100,7 @@ export class UserTableComponent implements OnInit {
     this.restService.getJSONFromURL(url).subscribe(
       (response: any) => {
 
-        // this.user.id = response.id;
-        // this.user.albumId = response.albumId;
-        // this.user.title = response.title;
-        // this.user.url = response.url;
-        // this.user.thumbnailUrl = response.thumbnailUrl;
-        // console.log("UserDetail-" + this.user);
+        console.log('getuserbyid', response )
 
         this.userInfo.id = response.id;
         this.userInfo.fname = response.fname;
@@ -131,21 +126,20 @@ export class UserTableComponent implements OnInit {
 
   }
 
-  fileEvent(fileInput: any) {
-    if (fileInput.target.files[0] != '') {
-      this.user.photofile = fileInput.target.files[0].name;
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        // this.docurll = event.target.result;
-        this.urlFile = event.target.result;
+  // fileEvent(fileInput: any) {
+  //   if (fileInput.target.files[0] != '') {
+  //     this.user.photofile = fileInput.target.files[0].name;
+  //     var reader = new FileReader();
+  //     reader.onload = (event: any) => {
+  //       this.urlFile = event.target.result;
 
-        console.log('DOCURL' + this.docurll);
+  //       console.log('DOCURL' + this.docurll);
 
-      }
-      reader.readAsDataURL(fileInput.target.files[0]);
-      console.log('Inside multiple file select');
-    }
-  }
+  //     }
+  //     reader.readAsDataURL(fileInput.target.files[0]);
+  //     console.log('Inside multiple file select');
+  //   }
+  // }
 
   onChangeFileField(event: any) {
 
@@ -170,13 +164,13 @@ export class UserTableComponent implements OnInit {
 
     // this.restService.uploadImage(this.form.id, this.f).subscribe();
 
-    console.log("userData", JSON.stringify(this.user));
+    console.log("userData", JSON.stringify(this.userInfo));
   }
 
   public submitData() {
 
     const url = this.restService.userRestURL('add', '');
-    this.restService.postFormData(url, this.user).subscribe(
+    this.restService.postFormData(url, this.userInfo).subscribe(
       (response: any) => {
         console.log('Status on Post API:' + response);
       },
