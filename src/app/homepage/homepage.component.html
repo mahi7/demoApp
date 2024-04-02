@@ -104,24 +104,24 @@
 
                 <br>
 
-                <button mat-button (click)="openDialog()" style="background-color: aqua; align-items: center;">Open
-                    Modal</button>
+                <!-- <button mat-button (click)="openDialog()" style="background-color: aqua; align-items: center;">Open
+                    Modal</button> -->
 
-                <br>
+                <!-- <br> -->
 
                 <!-- ngbootstrap modal -->
 
                 <!-- <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitData(f)" novalidate> -->
-                    <ng-template #content let-modal>
+                    <!-- <ng-template #content let-modal>
 
-                        <!-- modal header -->
+                        modal header
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
                             <button type="button" class="btn-close" aria-label="Close"
                                 (click)="modal.dismiss('Cross click')"></button>
                         </div>
     
-                        <!-- modal body -->
+                        modal body
                         <div class="modal-body">
                             <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submitData(f)" novalidate>
                                 <div class="mb-3">
@@ -227,20 +227,6 @@
                                                     </div>
                                                 </div>
     
-                                                <!-- <div class="col-lg-6">
-                                                    <div class="form-group">
-    
-                                                        <input type="number" class="form-control form-control-sm"
-                                                            name="age" [(ngModel)]="user.age" required age
-                                                            #age="ngModel" placeholder="Age"
-                                                            [ngClass]="{ 'is-invalid': f.submitted && age.errors }" />
-                                                        <div *ngIf="f.submitted && age.errors"
-                                                            class="invalid-feedback">
-                                                            <div *ngIf="age.errors['required']">Age is required
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
                                             </div>
     
                                             <div class="row">
@@ -358,22 +344,6 @@
                                                 </div>
                                             </div>
     
-                                            <!-- <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                name="tags" [(ngModel)]="user.tags" required tags
-                                                                #tags="ngModel" placeholder="Tags"
-                                                                [ngClass]="{ 'is-invalid': f.submitted && tags.errors }" />
-                                                            <div *ngIf="f.submitted && tags.errors"
-                                                                class="invalid-feedback">
-                                                                <div *ngIf="tags.errors['required']">Tags is required
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-    
                                             <br>
                                             <div class="row">
                                                 <div class="col-lg-12">
@@ -387,11 +357,7 @@
                                                             </tag-input-dropdown>
                                                         </tag-input>
     
-                                                        <!-- <div *ngIf="f.submitted && userTags.errors"
-                                                                class="invalid-feedback">
-                                                                <div *ngIf="userTags.errors['required']">Tags is required
-                                                                </div>
-                                                            </div> -->
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -426,7 +392,7 @@
                             </form>
                         </div>
     
-                        <!-- modal footer -->
+                        modal footer
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-dark"
                                 (click)="modal.close('Save click')">Save</button>
@@ -445,20 +411,19 @@
                                         <button type="submit" class="btn btn-info form-control" (click)="modal.close('Save click')"
                                             style="margin-right: 10px;">Submit</button>
     
-                                        <!-- [disabled]="!f.valid" data-bs-dismiss="modal"-->
                                     </div>
                                 </div>
     
                             </div>
                         </div>
-                    </ng-template>
+                    </ng-template> -->
                 <!-- </form> -->
 
                 
 
-                <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+                <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
 
-                <br>
+                <br> -->
 
                 <!-- register form -->
                 <div style="text-align: center;" *ngIf="modalForm">
