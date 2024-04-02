@@ -1,12 +1,15 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { DemoAppComponent } from '../demo-app/demo-app.component';
+
+
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { error } from 'jquery';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-homepage',
@@ -16,11 +19,22 @@ import { error } from 'jquery';
 export class HomepageComponent implements OnInit {
   [x: string]: any;
 
+  @ViewChild('MyModal') modal: ElementRef;
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
+
   public submitted = false;
   public boolean = false;
   public viewflag = false;
   public tdForm: any;
   public item: any = [];
+  public jQuery: any;
   // public home = false;
   // public company = false;
   public Address = ['Home', 'Company'];
@@ -103,12 +117,15 @@ export class HomepageComponent implements OnInit {
   public edituser = false;
   public modalForm = true;
 
-  public validModel = '';
+  public validModel = true;
+
+  closeModalEvent = new EventEmitter<boolean>();
 
   constructor(
     public routes: Router,
     public restService: RestService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {
   }
 
@@ -142,16 +159,38 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  // new impplementation
+  openDialog() {
+    const dialogRef = this.dialog.open(DemoAppComponent, {
+      width: '550px',
+    });
+
+    dialogRef.componentInstance.dataSubmitted.subscribe((submitted: boolean) => {
+      if (submitted) {
+        dialogRef.close(); // Close the modal after successful submission
+      }
+    });
+  }
+
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(DemoAppComponent);
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+
+
+  // }
+  // new impplementation end  
+
+
   defaultImage() {
     this.user.file = '/assets/img/defaultimg.avif';
   }
 
   get f(): { [key: string]: AbstractControl } {
 
-
-    this.validModel = 'data-bs-dismiss="modal"';
     return this.form.controls;
-
 
   }
 
@@ -186,12 +225,32 @@ export class HomepageComponent implements OnInit {
         this.user.file = response.file;
         // this.urlFile = response.file;
 
+        this.getPhotoById();
+
       },
       error => {
         console.log("Error message:" + error);
       }
     );
 
+  }
+
+  public getPhotoById() {
+
+    const url = this.restService.userRestURL('upload', this.id);
+    console.log("getPhotobyid", url);
+    this.restService.getJSONFromURL(url).subscribe(
+      (response: any) => {
+
+        // alert('working get user by id');
+
+        
+
+      },
+      error => {
+        console.log("Error message:" + error);
+      }
+    );
   }
 
   // template driven form submit
@@ -210,6 +269,10 @@ export class HomepageComponent implements OnInit {
         alert('submit data');
         console.log('after submit response data', response); // file {} empty
         console.log('after submit user file', this.user.file); // data coming
+
+        // $('.modal-backdrop').hide(); // Solution
+        // $('.modal-open').hide; // Solution
+
 
         if (this.user.file) {
 
@@ -236,7 +299,6 @@ export class HomepageComponent implements OnInit {
         this.tdForm = true;
         this.id = response.id;
 
-        $('.modal-backdrop').remove();
 
         console.log("ResponseType", typeof (response));
         console.log("items", this.item);
@@ -253,6 +315,8 @@ export class HomepageComponent implements OnInit {
 
         console.log('id', this.id)
 
+        this.closeModal();
+
       },
       error => {
         console.log(error);
@@ -262,6 +326,18 @@ export class HomepageComponent implements OnInit {
 
     return 0;
 
+  }
+
+  closeModal() {
+    // Check if the modal element exists
+    if (this.modal) {
+      alert('closeModal');
+
+      // Use nativeElement to access the actual DOM element
+      this.modal.nativeElement.dismiss(this.modal);
+      // this.modal.nativeElement.classList.remove(this.modal);
+      this.modal.nativeElement.style.display = 'none';
+    }
   }
 
   // private photoAdd() {
@@ -500,10 +576,49 @@ export class HomepageComponent implements OnInit {
     return 0;
   }
 
-  closeModal() {
+  onCloseModal(event: any) {
+    alert('onclosemodel');
+    if (this.submitted == true) {
 
-    console.log('Valid model', this.validModel);
+      this['event'] = false;
+      this.validModel = true;
+      this.closeModalEvent.emit(false);
 
+    } else {
+      this['event'] = true;
+      this.closeModalEvent.emit(true);
+      this.validModel = true;
+      // $('.modal-backdrop').remove(); 
+      $('.modal-open').closest;
+
+    }
   }
+
+
+  // ng bootstrap modal
+  private modalService = inject(NgbModal);
+	closeResult = '';
+
+	open(content: TemplateRef<any>) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${result}`;
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			},
+		);
+	}
+
+	private getDismissReason(reason: any): string {
+		switch (reason) {
+			case ModalDismissReasons.ESC:
+				return 'by pressing ESC';
+			case ModalDismissReasons.BACKDROP_CLICK:
+				return 'by clicking on a backdrop';
+			default:
+				return `with: ${reason}`;
+		}
+	}
 
 }

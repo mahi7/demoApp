@@ -28,7 +28,23 @@
     background-color:#0dcaf0 ;
 }  */
 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-    color: rgb(8, 11, 90);
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: rgb(90, 22, 8);
     font-weight: bold;
+    opacity: 1;
+    text-decoration-color: white;
+}
+
+.navbar {
+    background-color: var(--navbar-scroll);
+    transition: background-color 1s ease;
+    /* transition: background-color 1s rgb(24, 149, 216); */
+    color: var(--navbar-scroll-text);
+    -webkit-box-shadow: var(--navbar-scroll-shadow);
+    box-shadow: var(--navbar-scroll-shadow);
+}
+
+.nav-link{
+    color: rgb(177, 12, 53);
 }

@@ -95,6 +95,9 @@ export class RestService {
       case 'upload':
         url += '/upload'
         break
+      case 'photoGetbyId':
+        url += '/upload/' + userId;
+        break
       case 'details':
         url += '/photos/' + userId;
         break

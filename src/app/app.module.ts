@@ -23,6 +23,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { DemoAppComponent } from './demo-app/demo-app.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
     TemplateDrivenComponent,
     ReactiveFormComponent,
     AboutUsComponent,
-    AngularMatTableComponent
+    AngularMatTableComponent,
+    DemoAppComponent
   ],
   imports: [
     BrowserModule,
@@ -46,12 +52,15 @@ import { MatSelectModule } from '@angular/material/select';
     BrowserAnimationsModule,
     MatIconModule,
     MatTableModule,
+    MatSliderModule,
     MatPaginatorModule,
+    MatButtonModule,
     TagInputModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatFormFieldModule, MatSelectModule, TagInputModule,
-    MDBBootstrapModule.forRoot()
+    MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,
+    MDBBootstrapModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -85,6 +85,9 @@ export class UserTableComponent implements OnInit {
       (response: any) => {
         this.datas = response;
 
+        this.getPhotoById();
+
+        console.log('userInfo', this.userInfo)
 
         console.log("getUserLists2:" + JSON.stringify(response));
       },
@@ -125,6 +128,25 @@ export class UserTableComponent implements OnInit {
 
 
   }
+
+  public getPhotoById() {
+
+    const url = this.restService.userRestURL('upload', this.id);
+    console.log("getPhotobyid", url);
+    this.restService.getJSONFromURL(url).subscribe(
+      (response: any) => {
+
+        // alert('working get user by id');
+
+        this.userInfo.file = response;
+
+      },
+      error => {
+        console.log("Error message:" + error);
+      }
+    );
+  }
+
 
   // fileEvent(fileInput: any) {
   //   if (fileInput.target.files[0] != '') {

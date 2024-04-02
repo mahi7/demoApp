@@ -138,7 +138,7 @@
                                     <div class="card mb-3">
                                         <div class="card-body text-center">
                                             <div> <img [src]="urlFile"
-                                                    style="height:250px; width:200px; margin-bottom: 10px;"
+                                                    style="height:250px; width:200px; margin-bottom: 10px; border-radius: 10px;"
                                                     class="thumbnail"></div>
                                             <div>
                                                 <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
@@ -327,7 +327,7 @@
                                                 style="color: black;">{{userInfo.fname}} {{userInfo.lname}}</b></li>
 
                                         <button [routerLink]="['/manageUsertable']" type="button"
-                                            class="btn btn-info btn-sm" style="margin-left: 779px;">Cancel</button>
+                                            class="btn btn-info btn-sm" style="margin-left: 820px;">Cancel</button>
                                     </ol>
                                 </nav>
                             </div>
@@ -474,7 +474,7 @@
 
                                 <a [routerLink]="['/updateUsertable',data.id]" tabindex="-1"
                                     style="margin-right: 5px; margin-top: 10px;"><button type="button"
-                                        class="btn btn-info btn-sm" data-mdb-ripple-init>Edit</button></a>
+                                        class="btn btn-info btn-sm" data-mdb-ripple-init><i class="fa fa-edit"></i>Edit</button></a>
 
                                 <button class="btn btn-danger btn-sm" title="Delete category"
                                     style="margin-right: 5px;  width: 50px; height: 30px;"
