@@ -387,8 +387,8 @@ export class HomepageComponent implements OnInit {
 
       var docFormData = new FormData();
       docFormData.append('doc', this.user.file, rname + this.user.file.name);
-      docFormData.append('width', '400');
-      docFormData.append('height', '400');
+      docFormData.append('width', '310');
+      docFormData.append('height', '325');
       docFormData.append('name', 'Category' + '/' + this.photo.id);
 
       // var docurl = this.restService.docsRestURL('upload', '');
