@@ -26,48 +26,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## json server api
+## json server database db.json file
+
 
 {
-  "photos": [
-    {
-      "id": "33bd",
-      "fname": "Manoj",
-      "lname": "Manohar",
-      "emailId": "manoj.mym@gmail.com",
-      "mno": 7972997227,
-      "age": 99,
-      "state": "Maharashtra",
-      "country": "India",
-      "address": {
-        "home": {
-          "address1": "Arihant appartment flat no.308",
-          "address2": "Bokhara"
-        },
-        "company": {
-          "address3": "",
-          "address4": ""
-        }
-      },
-      "tags": "",
-      "tagsInput": [
-       
-      ],
-      "subscibe": true,
-      "file": {}
-    }
-  ],
-  "upload": [
-    {
-      "id": "",
-      "photo": {
-        "docname": "",
-        "docpath": "",
-        "docdesc": "",
-        "doctype": "",
-        "isprimary": ""
-      }
-    }
-    
-  ]
+  "photos": [],
+  "upload": []
 }
