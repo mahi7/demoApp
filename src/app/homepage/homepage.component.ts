@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewC
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+
 import { DemoAppComponent } from '../demo-app/demo-app.component';
 
 

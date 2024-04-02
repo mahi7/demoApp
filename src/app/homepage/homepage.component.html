@@ -579,22 +579,33 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="age"
-                                                                style="color: rgba(50, 42, 42, 0.632); padding-right: 42px;">Age</label>
-                                                            <mat-slider min="0" max="60" showTickMarks discrete
-                                                                aria-label="Age" [displayWith]="formatLabel">
-                                                                <input name="age" form-control form-control-sm
-                                                                    [(ngModel)]="user.age" required age #age="ngModel"
-                                                                    placeholder="Age" aria-label="Age"
+                                                                style="color: rgba(50, 42, 42, 0.632); padding-right: 20px;">Age</label>
+                                                            <mat-slider min="0" max="60" discrete aria-label="Age"
+                                                                [displayWith]="formatLabel">
+                                                                <input name="age" class="form-control form-control-sm"
+                                                                    min="0" max="60" [(ngModel)]="user.age" required
+                                                                    #age="ngModel" placeholder="Age" aria-label="Age"
                                                                     [ngClass]="{ 'is-invalid': age.dirty && age.touched && age.errors }"
                                                                     matSliderThumb>
-                                                                <div *ngIf="age.invalid && (age.dirty || age.touched || age.untouched)"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="age.errors?.['required']">Age is required
-                                                                    </div>
-                                                                </div>
+                                                                <!-- <br>
+
+                                                                <div class="min-max-labels">
+                                                                    <span>0</span>
+                                                                    <span>60</span>
+                                                                </div> -->
+
                                                             </mat-slider>
 
+                                                            <!-- <input type="range" name="age" min="1" max="100" style="width: 240px;" [(ngModel)]="user.age" required aria-labelledby="value"
+                                                            #age="ngModel" placeholder="Age" aria-label="Age"
+                                                            [ngClass]="{ 'is-invalid': age.dirty && age.touched && age.errors }"> -->
 
+                                                            <div *ngIf="age.invalid && (age.dirty || age.touched || age.untouched)"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="age.errors?.['required']">Age is
+                                                                    required
+                                                                </div>
+                                                            </div>
 
                                                         </div>
                                                     </div>
@@ -733,18 +744,21 @@
                                                         <div class="form-group">
                                                             <tag-input [(ngModel)]="user.tagsInput"
                                                                 class="form-control form-control-sm" name="tagsInput"
-                                                                [maxItems]="5" id="tagsInput">
-                                                                <tag-input-dropdown [autocompleteItems]="user.tagsInput"
+                                                                [maxItems]="5" id="tagsInput"
+                                                                [ngClass]="{ 'is-invalid':tagsInput.dirty && tagsInput.touched && tagsInput.errors }"
+                                                                #tagsInput="ngModel">
+                                                                <!-- <tag-input-dropdown [autocompleteItems]="user.tagsInput"
                                                                     [showDropdownIfEmpty]="true">
 
-                                                                </tag-input-dropdown>
+                                                                </tag-input-dropdown> -->
                                                             </tag-input>
 
-                                                            <!-- <div *ngIf="f.submitted && userTags.errors"
-                                                                    class="invalid-feedback">
-                                                                    <div *ngIf="userTags.errors['required']">Tags is required
-                                                                    </div>
-                                                                </div> -->
+                                                            <div *ngIf="tagsInput.invalid && (tagsInput.dirty || tagsInput.touched || tagsInput.untouched)"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="tagsInput.errors?.['required']">Tags is
+                                                                    required
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
