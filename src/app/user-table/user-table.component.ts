@@ -85,7 +85,7 @@ export class UserTableComponent implements OnInit {
       (response: any) => {
         this.datas = response;
 
-        this.getPhotoById();
+        // this.getPhotoById();
 
         console.log('userInfo', this.userInfo)
 
@@ -122,7 +122,7 @@ export class UserTableComponent implements OnInit {
 
         console.log("UserDetail-" + JSON.stringify(this.userInfo));
 
-        this.getPhotoById();
+        this.getPhotoById(response.id);
 
 
       },
@@ -134,7 +134,7 @@ export class UserTableComponent implements OnInit {
 
   }
 
-  public getPhotoById() {
+  public getPhotoById(id:any) {
 
     const url = this.restService.userRestURL('upload', this.id);
     console.log("getPhotobyid", url);
@@ -143,7 +143,10 @@ export class UserTableComponent implements OnInit {
 
         // alert('working get user by id');
 
-        this.userInfo.file = response.id;
+        console.log('getPhotoResponse', response);
+        this.urlFile = response[response.id];
+        console.log('getPhotobyIdResponse', this.urlFile);
+
 
       },
       error => {
@@ -178,7 +181,7 @@ export class UserTableComponent implements OnInit {
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
-      this.userInfo.file = event.target.files[0];
+      this.userInfo.file = event.target.files[0].name;
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.urlFile = event.target.result;
@@ -228,7 +231,9 @@ export class UserTableComponent implements OnInit {
         console.log("updated postform data", response);
         Swal.fire('Updated', '', 'success');
 
-        // this.userInfo.file = response.file;
+        this.urlFile = response.file;
+        console.log('urlfileAfterUpdate', this.urlFile);
+
         this.routes.navigate(['/detailUsertable', response.id]);
         window.scrollTo(0, 0);
 

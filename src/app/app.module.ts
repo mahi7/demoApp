@@ -28,6 +28,7 @@ import { DemoAppComponent } from './demo-app/demo-app.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TagInputModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,
+    MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,MatCardModule, MatButtonModule,
     MDBBootstrapModule.forRoot(),
     NgbModule
   ],

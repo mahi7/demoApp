@@ -45,6 +45,14 @@
     box-shadow: var(--navbar-scroll-shadow);
 }
 
-.nav-link{
+.nav-link {
     color: rgb(177, 12, 53);
 }
+
+a {
+    letter-spacing: 0.2em;
+    color: white;
+    /* text-shadow: 1px 1px 2px #000000; */
+}
+
+
