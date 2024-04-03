@@ -260,13 +260,13 @@ export class HomepageComponent implements OnInit {
     this.submitted = true;
     console.log("SubmituserData", JSON.stringify(this.user)); // file {} empty
 
-    alert('befoe submit data')
+    // alert('befoe submit data')
 
     const url = this.restService.userRestURL('add', '');
     this.restService.postFormData(url, this.user).subscribe(
       (response: any) => {
 
-        alert('submit data');
+        // alert('submit data');
         console.log('after submit response data', response); // file {} empty
         console.log('after submit user file', this.user.file); // data coming
 
@@ -276,7 +276,7 @@ export class HomepageComponent implements OnInit {
 
         if (this.user.file) {
 
-          alert('photo data');
+          // alert('photo data');
 
           this.photo.id = response.id;
           console.log("photo data", this.photo); // data coming in photo {id...}
@@ -331,7 +331,7 @@ export class HomepageComponent implements OnInit {
   closeModal() {
     // Check if the modal element exists
     if (this.modal) {
-      alert('closeModal');
+      // alert('closeModal');
 
       // Use nativeElement to access the actual DOM element
       this.modal.nativeElement.dismiss(this.modal);
@@ -374,7 +374,7 @@ export class HomepageComponent implements OnInit {
   public uploadfile() {
     if (this.user.file != '') {
 
-      alert('upload file');
+      // alert('upload file');
       console.log('userFile', this.user.file);
 
       const fileExtension = '.' + this.user.file.name.split('.').pop();
@@ -508,13 +508,13 @@ export class HomepageComponent implements OnInit {
     console.log("event target file", event.target.files[0]);
     // this.user.file = event.target.files[0].name;
 
-    alert("alert");
+    // alert("alert");
 
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
 
-      alert('event target file');
+      // alert('event target file');
 
       this.user.file = event.target.files[0];
       var reader = new FileReader();
@@ -548,12 +548,13 @@ export class HomepageComponent implements OnInit {
 
   updateData() {
 
+    this.user['id'] = this.id;
     this.item = [];
     console.log("userUpdataData", JSON.stringify(this.user));
 
-    const url = this.restService.userRestURL('edit', '');
+    const url = this.restService.userRestURL('edit', this.id);
 
-    this.restService.postFormData(url, this.user).subscribe(
+    this.restService.postJSONbyId(url, this.user).subscribe(
       (response: any) => {
         console.log(response);
         Swal.fire('Updated', '', 'success');
@@ -577,7 +578,7 @@ export class HomepageComponent implements OnInit {
   }
 
   onCloseModal(event: any) {
-    alert('onclosemodel');
+    // alert('onclosemodel');
     if (this.submitted == true) {
 
       this['event'] = false;

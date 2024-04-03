@@ -24,6 +24,19 @@ export class RestService {
 
   }
 
+  public postJSONbyId(url: any, json:any) {
+    const headers = new Headers();
+
+    return this.http.put(url, json, this.httpOptions).pipe(
+      map(res => {
+        const postresponse = res;
+        console.log("Postresponse:" + postresponse)
+        return postresponse;
+      })
+    );
+
+  }
+
   public postFormData(url: any, json: any) {
     const headers = new Headers();
 
@@ -90,10 +103,10 @@ export class RestService {
         url += '/photos'
         break
       case 'edit':
-        url += '/photos'
+        url += '/photos/' + userId;
         break
       case 'upload':
-        url += '/upload'
+        url += '/upload';
         break
       case 'photoGetbyId':
         url += '/upload/' + userId;

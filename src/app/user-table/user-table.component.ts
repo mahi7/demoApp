@@ -117,7 +117,12 @@ export class UserTableComponent implements OnInit {
         this.userInfo.tags = response.tags;
         this.userInfo.subscibe = response.subscibe;
         this.userInfo.file = response.file;
+
+        // this.urlFile = response.file.name;
+
         console.log("UserDetail-" + JSON.stringify(this.userInfo));
+
+        this.getPhotoById();
 
 
       },
@@ -138,7 +143,7 @@ export class UserTableComponent implements OnInit {
 
         // alert('working get user by id');
 
-        this.userInfo.file = response;
+        this.userInfo.file = response.id;
 
       },
       error => {
@@ -173,7 +178,7 @@ export class UserTableComponent implements OnInit {
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
-      this.userInfo.file = event.target.files[0].name;
+      this.userInfo.file = event.target.files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.urlFile = event.target.result;
@@ -213,17 +218,17 @@ export class UserTableComponent implements OnInit {
 
     console.log('submiti function');
 
-    const url = this.restService.userRestURL('edit', '');
+    const url = this.restService.userRestURL('edit', this.id);
 
     // console.log(this.user);
     console.log("Update user data", this.userInfo);
 
-    this.restService.postFormData(url, this.userInfo).subscribe(
+    this.restService.postJSONbyId(url, this.userInfo).subscribe(
       (response: any) => {
         console.log("updated postform data", response);
         Swal.fire('Updated', '', 'success');
 
-        this.userInfo.file = response.file;
+        // this.userInfo.file = response.file;
         this.routes.navigate(['/detailUsertable', response.id]);
         window.scrollTo(0, 0);
 
