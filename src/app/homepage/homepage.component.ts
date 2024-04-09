@@ -2,14 +2,17 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewC
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { DemoAppComponent } from '../demo-app/demo-app.component';
-
+import { find, get, pull } from 'lodash';
 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { error } from 'jquery';
+import { error, event } from 'jquery';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-homepage',
@@ -18,6 +21,21 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomepageComponent implements OnInit {
   [x: string]: any;
+
+  // input tag html
+
+  @ViewChild('tagInput') tagInputRef: ElementRef;
+  // tags: string[] = ['html', 'Angular'];
+  // form: FormGroup;
+
+  // input tag html end
+
+  // mat chips implementation
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: any[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
+
+  announcer = inject(LiveAnnouncer);
 
   @ViewChild('MyModal') modal: ElementRef;
 
@@ -35,9 +53,8 @@ export class HomepageComponent implements OnInit {
   public tdForm: any;
   public item: any = [];
   public jQuery: any;
-  // public home = false;
-  // public company = false;
-  public Address = ['Home', 'Company'];
+
+  public Address = ['Address', 'Home', 'Company'];
 
   @ViewChild('f') public resetForm: NgForm | undefined;
 
@@ -76,7 +93,6 @@ export class HomepageComponent implements OnInit {
         address4: ''
       }
     },
-    tags: '',
     tagsInput: [],
     subscibe: false,
     file: {}
@@ -102,13 +118,6 @@ export class HomepageComponent implements OnInit {
     file: new FormControl(''),
   });
 
-  // public user = {
-  //     albumId: '',
-  //     title: '',
-  //     url: '',
-  //     thumbnailUrl: 'D:\ionic_Angular_project\UserInfo\src\assets\img\pexels-jessica-lewis-🦋-thepaintedsquare-583848.jpg'
-  // }
-
   file: any;
   urlFile = '/assets/img/defaultimg.jpg';
   userid: any;
@@ -118,8 +127,6 @@ export class HomepageComponent implements OnInit {
   public modalForm = true;
 
   public validModel = true;
-
-  closeModalEvent = new EventEmitter<boolean>();
 
   constructor(
     public routes: Router,
@@ -131,25 +138,26 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form = this.formBuilder.group(
-      {
-        fname: ['', [
-          Validators.required,
-          Validators.pattern,
-        ]],
-        lname: ['', Validators.required],
-        emailId: ['', Validators.required],
-        mno: ['', Validators.required],
-        age: ['', Validators.required],
-        state: ['', Validators.required],
-        country: ['', Validators.required],
-        address: ['', Validators.required],
-        tags: ['', Validators.required],
-        subscibe: [false, Validators.requiredTrue],
-        file: ['', Validators.required],
-        // acceptTerms: [false, Validators.requiredTrue]
-      }
-    );
+    // this.form = this.formBuilder.group(
+    //   {
+    //     fname: ['', [
+    //       Validators.required,
+    //       Validators.pattern,
+    //     ]],
+    //     lname: ['', Validators.required],
+    //     emailId: ['', Validators.required],
+    //     mno: ['', Validators.required],
+    //     age: ['', Validators.required],
+    //     state: ['', Validators.required],
+    //     country: ['', Validators.required],
+    //     address: ['', Validators.required],
+    //     tags: ['', Validators.required],
+    //     subscibe: [false, Validators.requiredTrue],
+    //     file: ['', Validators.required],
+    //     // acceptTerms: [false, Validators.requiredTrue]
+    //   }
+    // );
+
 
     console.log('hello ngoninit');
 
@@ -158,31 +166,6 @@ export class HomepageComponent implements OnInit {
     // this.getUserById();
 
   }
-
-  // new impplementation
-  openDialog() {
-    const dialogRef = this.dialog.open(DemoAppComponent, {
-      width: '550px',
-    });
-
-    dialogRef.componentInstance.dataSubmitted.subscribe((submitted: boolean) => {
-      if (submitted) {
-        dialogRef.close(); // Close the modal after successful submission
-      }
-    });
-  }
-
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(DemoAppComponent);
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log(`Dialog result: ${result}`);
-  //   });
-
-
-  // }
-  // new impplementation end  
-
 
   defaultImage() {
     this.user.file = '/assets/img/defaultimg.avif';
@@ -244,7 +227,7 @@ export class HomepageComponent implements OnInit {
 
         // alert('working get user by id');
 
-        
+
 
       },
       error => {
@@ -315,8 +298,6 @@ export class HomepageComponent implements OnInit {
 
         console.log('id', this.id)
 
-        this.closeModal();
-
       },
       error => {
         console.log(error);
@@ -328,17 +309,6 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  closeModal() {
-    // Check if the modal element exists
-    if (this.modal) {
-      // alert('closeModal');
-
-      // Use nativeElement to access the actual DOM element
-      this.modal.nativeElement.dismiss(this.modal);
-      // this.modal.nativeElement.classList.remove(this.modal);
-      this.modal.nativeElement.style.display = 'none';
-    }
-  }
 
   // private photoAdd() {
 
@@ -577,49 +547,77 @@ export class HomepageComponent implements OnInit {
     return 0;
   }
 
-  onCloseModal(event: any) {
-    // alert('onclosemodel');
-    if (this.submitted == true) {
+  // add tags new method
+  public newTag: string = '';
+  tags: string[] = [];
 
-      this['event'] = false;
-      this.validModel = true;
-      this.closeModalEvent.emit(false);
+  addTag() {
 
-    } else {
-      this['event'] = true;
-      this.closeModalEvent.emit(true);
-      this.validModel = true;
-      // $('.modal-backdrop').remove(); 
-      $('.modal-open').closest;
+    if (this.newTag.trim() !== '' && !this.user.tagsInput.includes(this.newTag)) {
+      // alert('add tag');
+      this.user.tagsInput.push(this.newTag);
+      this.newTag = '';
+      this.newTag.trim();
+
+      console.log('addtag', this.user.tagsInput);
 
     }
   }
 
+  removeTag(tagToRemove: string, f: NgForm) {
 
-  // ng bootstrap modal
-  private modalService = inject(NgbModal);
-	closeResult = '';
+    if (this.user.tagsInput.length == 0) {
+      f.form.invalid;
+    }
 
-	open(content: TemplateRef<any>) {
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
+    this.user.tagsInput = this.user.tagsInput.filter((newTag: any) => newTag !== tagToRemove);
 
-	private getDismissReason(reason: any): string {
-		switch (reason) {
-			case ModalDismissReasons.ESC:
-				return 'by pressing ESC';
-			case ModalDismissReasons.BACKDROP_CLICK:
-				return 'by clicking on a backdrop';
-			default:
-				return `with: ${reason}`;
-		}
-	}
+    console.log('remove tag', this.user.tagsInput);
+  }
+
+  //tag input placeholder
+  inputValue = '';
+  showPlaceholder = true;
+
+  onInputChange(value: string) {
+    this.newTag = value;
+    this.newTag.trim();
+    // this.newTag = '';
+    this.showPlaceholder = value === '';
+  }
+  // end
+
+
+  // toggle div address
+  showDiv = false;
+  remDiv = false;
+  // defaultDiv = false;
+
+  toggleDiv(action: string) {
+    if (action === 'add') {
+      this.showDiv = true;
+      this.remDiv = false;
+      // this.defaultDiv = false;
+
+    } else if (action === 'remove') {
+      this.showDiv = false;
+      this.remDiv = true;
+      // this.defaultDiv = false;
+
+    }else if(action === 'addr'){
+      this.showDiv = false;
+      this.remDiv = false;
+    }
+  }
+
+  getErrorMessage() {
+    if (this.user.age.hasError('required')) {
+      return 'Slider value is required';
+    }
+    if (this.user.age.hasError('min') || this.user.age.hasError('max')) {
+      return 'Slider value must be between 0 and 100';
+    }
+    return '';
+  }
 
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +29,10 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule} from '@angular/material/chips';
+// import { CarouselModule } from 'primeng/carousel';
+// import { GalleriaModule } from 'primeng/galleria';
+// import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -58,11 +62,17 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     TagInputModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    // CarouselModule,
     MatExpansionModule,
-    MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,MatCardModule, MatButtonModule,
+    
+    // GalleriaModule,
+    // ButtonModule,
+    MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,MatCardModule, MatButtonModule,MatChipsModule,
     MDBBootstrapModule.forRoot(),
     NgbModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

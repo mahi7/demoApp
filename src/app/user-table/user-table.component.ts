@@ -85,7 +85,7 @@ export class UserTableComponent implements OnInit {
       (response: any) => {
         this.datas = response;
 
-        // this.getPhotoById();
+        this.getPhotoById(response.id);
 
         console.log('userInfo', this.userInfo)
 
@@ -103,7 +103,7 @@ export class UserTableComponent implements OnInit {
     this.restService.getJSONFromURL(url).subscribe(
       (response: any) => {
 
-        console.log('getuserbyid', response )
+        console.log('getuserbyid', response)
 
         this.userInfo.id = response.id;
         this.userInfo.fname = response.fname;
@@ -134,7 +134,7 @@ export class UserTableComponent implements OnInit {
 
   }
 
-  public getPhotoById(id:any) {
+  public getPhotoById(id: any) {
 
     const url = this.restService.userRestURL('upload', this.id);
     console.log("getPhotobyid", url);
@@ -177,6 +177,9 @@ export class UserTableComponent implements OnInit {
     // this.user.file = event.target.files[0].name;
 
     // alert("alert");
+
+    this.urlFile = '/assets/img/defaultimg.jpg';
+
 
     console.log(event.target.files[0]);
 
@@ -231,7 +234,9 @@ export class UserTableComponent implements OnInit {
         console.log("updated postform data", response);
         Swal.fire('Updated', '', 'success');
 
-        this.urlFile = response.file;
+        // this.urlFile = response.file;
+        this.urlFile = '/assets/img/defaultimg.jpg';
+
         console.log('urlfileAfterUpdate', this.urlFile);
 
         this.routes.navigate(['/detailUsertable', response.id]);

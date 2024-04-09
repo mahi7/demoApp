@@ -3,7 +3,10 @@
 }
 
 .bg-image {
-    background-image: url("https://media.istockphoto.com/id/1352650187/photo/human-resource-manager-checks-the-cv-online-to-choose-the-perfect-employee-for-his-business.jpg?s=2048x2048&w=is&k=20&c=9DTebqC41cJUODwJ2YHIeDXeXt9h6ocoHpHoepwmRI0=");
+    background-image: url("https://cdn.pixabay.com/photo/2023/05/24/17/48/ai-generated-8015423_1280.jpg");
+
+    /* background-image: url("https://cdn.pixabay.com/photo/2021/11/14/18/36/telework-6795505_1280.jpg"); */
+
     text-decoration-color: aliceblue;
     height: 600px;
     color: azure;
@@ -11,38 +14,6 @@
     z-index: -1;
 
 }
-
-/* .modal-open {
-    overflow: hidden;
-    z-index: var(--bs-backdrop-zindex) -1;
-    z-index: -1;
-} */
-
-
-
-/* .modal-backdrop {
-    --bs-backdrop-zindex: 1050;
-    --bs-backdrop-bg: #000;
-    --bs-backdrop-opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: var(--bs-backdrop-zindex);
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--bs-backdrop-bg);
-} */
-
-/* img {
-    
-    position: absolute;
-    height: 600px;
-    width: 1235px;
-    left: 0px;
-    top: 0px;
-    opacity: 50%;
-    z-index: -6;
-} */
 
 mat-slider {
     width: 220px;
@@ -53,17 +24,9 @@ tag-input {
     border-radius: 5px;
 }
 
-/* age-slider.component.css */
-/* .age-slider-container {
-    max-width: 400px;
-    margin: 20px auto;
-  } */
-
 .min-max-labels {
-    /* display: flex; */
     justify-content: space-between;
-    /* position: fixed; */
-    /* margin-top: 2px; */
+
     color: black;
 }
 
@@ -72,10 +35,6 @@ tag-input {
     color: black;
     background-color: black;
 }
-
-/* .mat-slider-thumb {
-    background-color: #007bff;
-  } */
 
 .mdc-slider__input {
     cursor: pointer;
@@ -100,24 +59,116 @@ tag-input {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-  }
-  
-  .slider:hover {
+}
+
+.slider:hover {
     opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
+}
+
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 200px;
     height: 200px;
     background: #04AA6D;
     cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
+}
+
+.slider::-moz-range-thumb {
     width: 200px;
     height: 200px;
     background: #04AA6D;
     cursor: pointer;
-  }
+}
+
+.example-chip-list {
+    width: 100%;
+    border-radius: 0px;
+}
+
+.mat-form-field {
+    background-color: white;
+    border-radius: 0px;
+
+}
+
+.mat-form-field {
+    background-color: white;
+    --mdc-chip-elevated-container-color: #e0e0e0;
+    --mdc-chip-elevated-disabled-container-color: #e0e0e0;
+    --mdc-chip-label-text-color: white;
+    --mdc-chip-disabled-label-text-color: white;
+    --mdc-chip-with-icon-icon-color: white;
+    --mdc-chip-with-icon-disabled-icon-color: white;
+    --mdc-chip-with-trailing-icon-disabled-trailing-icon-color: white;
+    --mdc-chip-with-trailing-icon-trailing-icon-color: white;
+    --mdc-chip-with-icon-selected-icon-color: white;
+    border-radius: 1px;
+}
+
+.material-icons {
+    border-radius: 0px;
+    background-color: white;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    color: black;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.mat-chip-row {
+    background-color: white;
+
+    border-radius: 1px;
+    border-block: 1px;
+}
+
+
+.remove-tag {
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+
+.discrete-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: black;
+    background-color: black;
+}
+
+.label {
+    font-size: 12px;
+    transform: translateY(50%);
+}
+
+
+div.validation-message {
+    color: red;
+    font-size: 12px;
+}
+
+.mat-slider{
+    color: red;
+
+}
+
+.validation-message {
+    color: red;
+    font-size: 12px;
+}
+
+.mat-error {
+    color: red;
+    font-size: 12px;
+}

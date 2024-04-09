@@ -7,18 +7,56 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
+
 
     <div class="col-sm-12">
 
-        <div class="bg-light">
+        <!-- carousel bootstrap slide -->
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://img.freepik.com/free-psd/technology-banner-template_23-2148928991.jpg?w=996&t=st=1712374611~exp=1712375211~hmac=b0595d5f5d648d0247ce1b80e00d544a3e268124b0edc22f8b375c41969bfa46"
+                        alt="Los Angeles" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.freepik.com/free-psd/business-banner-template-design_23-2149188970.jpg?w=996&t=st=1712374944~exp=1712375544~hmac=2f3f0fa38553780c6a2964baed6b530435362d0e7f8f1011f4742032e0329e0c"
+                        alt="Chicago" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.freepik.com/free-vector/flat-airline-social-media-cover-template_23-2149601844.jpg?w=1060&t=st=1712374978~exp=1712375578~hmac=edeb1d223a7441e7fcd77dec52b4ee280cc74a5c0069272449ac3cbad37fc4cc"
+                        alt="New York" width="1100" height="500">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div style="background-color: #a80b8b22;">
 
             <br>
             <br>
             <br>
 
-            <div class="container-fluid">
+            <!-- <div class="container-fluid">
                 <mat-accordion>
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
@@ -29,8 +67,10 @@
                                 This is a summary of the content
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <p>If you have been looking for access to resources that help immigrants integrate into their new
-                            environment properly, and also connect with the right people, you are in the right place. Now,
+                        <p>If you have been looking for access to resources that help immigrants integrate into their
+                            new
+                            environment properly, and also connect with the right people, you are in the right place.
+                            Now,
                             you can get full access to all the important immigrant information that you need right here.
                             Please Help me</p>
                     </mat-expansion-panel>
@@ -51,9 +91,9 @@
             <br>
             <br>
             <br>
-            <br>
-    
-    
+            <br> -->
+
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6" style="border-radius: 30px;">
@@ -61,34 +101,35 @@
                             <div class="card">
                                 <div class="card-body">
                                     <p class="card-text">If you have been looking for access to resources
-                                        that help immigrants integrate into their new environment properly, and also connect with the right
+                                        that help immigrants integrate into their new environment properly, and also
+                                        connect with the right
                                         people, you are in the right place.
-                        
-                                        Now, you can get full access to all the important immigrant information that you need right here.
-                        
+
+                                        Now, you can get full access to all the important immigrant information that you
+                                        need right here.
+
                                         Please Help me
                                     </p>
                                 </div>
                             </div>
                         </section>
-                    
+
                     </div>
-        
+
                     <div class="col-lg-6" style="width: auto;">
-        
+
                         <div class="bg-image rounded">
-                            <img [src]="urlFile" 
-                            style="height:300px; width:540px; margin-bottom: 10px; border-radius: 20px;"
-                            class="thumbnail">
+                            <img [src]="urlFile"
+                                style="height:300px; width:540px; margin-bottom: 10px; border-radius: 20px;"
+                                class="thumbnail">
                         </div>
-            
-            
+
+
                     </div>
                 </div>
 
-               
+
             </div>
-            <br>
             <br>
             <br>
             <br>
@@ -97,58 +138,377 @@
 
         <br>
         <br>
+
+
+
+        <!-- carousel slide -->
+        <div class="container">
+            <!-- <div class="card">
+                <div class="py-2">
+                    <p-button type="button" icon="pi pi-minus" (click)="prev()"
+                        styleClass="p-button-secondary mr-2"></p-button>
+                    <p-button type="button" icon="pi pi-plus" (click)="next()" styleClass="p-button-primary"></p-button>
+                </div>
+                <p-galleria [(ngModel)]="images" [responsiveOptions]="responsiveOptions"
+                    [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" [(activeIndex)]="activeIndex">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item.itemImageSrc" style="width: 100%;" />
+                    </ng-template>
+                    <ng-template pTemplate="thumbnail" let-item>
+                        <div class="grid grid-nogutter justify-content-center">
+                            <img [src]="item.thumbnailImageSrc" />
+                        </div>
+                    </ng-template>
+                </p-galleria>
+            </div> -->
+        </div>
+
+        <br>
+        <br>
         <br>
 
-        <div class="bg-light">
+
+        <div style="padding: 0 ;
+        background: url(../images/header-curl-bg.svg) right / contain no-repeat, url(../images/header-rotate.png) left / contain no-repeat #19398a;
+        box-shadow: 0 4px 8px 0 hsl(0deg 0% 7% / 50%);
+        height: auto;">
 
             <br>
             <br>
             <div class="container">
 
                 <div class="row" style="border-radius: 15px;">
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
+                    <div class="col-lg-3">
+                        <div class="card" style="width: 17rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="card-link">Card link</a>
-                              <a href="#" class="card-link">Another link</a>
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="responsive-iframe" style="border-radius: 10px;"
+                                        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                                </div>
+                                <div>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+
                             </div>
-                          </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
+                    <div class="col-lg-3">
+                        <div class="card" style="width: 17rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="card-link">Card link</a>
-                              <a href="#" class="card-link">Another link</a>
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" style="border-radius: 10px;"
+                                        src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+                                </div>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
                             </div>
-                          </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
+                    <div class="col-lg-3">
+                        <div class="card" style="width: 17rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="card-link">Card link</a>
-                              <a href="#" class="card-link">Another link</a>
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" style="border-radius: 10px;"
+                                        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                                </div>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
                             </div>
-                          </div>
+                        </div>
                     </div>
-                    
+                    <div class="col-lg-3">
+                        <div class="card" style="width: 17rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" style="border-radius: 10px;"
+                                        src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                                </div>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-               
+
             </div>
             <br>
             <br>
-            
+
         </div>
 
-       
+        <br>
+        <br>
+        <br>
+
+        <div style="background-color: #10172b;">
+
+            <br>
+            <br>
+            <div class="container">
+
+                <div class="row" style="margin-bottom: 1.5rem !important;">
+                    <h3 style="float: left; color: white; font-style: italic; font-weight: bold;">Good Evening!
+                    </h3>
+                    <span style="float: left; color: white;">Curated shorts for you</span>
+                </div>
+
+                <div class="row" style="border-radius: 15px; border-width: 5px; border-color: white;">
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom" 
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom"
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711979814_200x200_77679_1711979814.jpg"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom"
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711892206_200x200_12907_1711892205.jpg"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom"
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711880678_200x200_90334_1711880678.jpg"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom"
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711880678_200x200_90334_1711880678.jpg"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+
+                            <img mat-card-image class="zoom"
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711719638_200x200_81383_1711719637.JPG"
+                                alt="Photo of a Shiba Inu">
+
+                            <!-- <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+
+                </div>
+
+            </div>
+            <br>
+            <br>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div style="background-color: #031441;;">
+
+            <br>
+            <br>
+            <div class="container">
+
+                <div class="row" style="margin-bottom: 1.5rem !important;">
+                    <div class="col-lg-6">
+                        <h3 style="float: left; color: white; font-weight: bold;">Top Teams ....
+                        </h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#" style="float: right; color: white; font-weight: bold; ">See more..</a>
+                    </div>
+                    
+                    <!-- <span style="float: left; color: white;">Curated shorts for you</span> -->
+                </div>
+
+                <div class="row" style="border-radius: 15px;">
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>RR</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>CSK</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711979814_200x200_77679_1711979814.jpg"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>MI</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711892206_200x200_12907_1711892205.jpg"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>LS</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711880678_200x200_90334_1711880678.jpg"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>SH</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711880678_200x200_90334_1711880678.jpg"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>KKR</mat-card-title>
+                                <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                            </mat-card-header>
+                            <img mat-card-image
+                                src="https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1711719638_200x200_81383_1711719637.JPG"
+                                alt="Photo of a Shiba Inu">
+                            <mat-card-content>
+                                <p>
+
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button>LIKE</button>
+                                <button mat-button>SHARE</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+
+                </div>
+
+            </div>
+            <br>
+            <br>
+
+        </div>
+
 
     </div>
 

@@ -3,3 +3,30 @@
     height: 200px; width: 200px;
     text-decoration-color: aliceblue; color: azure; font-weight: bolder;
 } */
+
+.example-card {
+    max-width: 200px;
+
+    border-radius: 10px;
+}
+
+.example-header-image {
+    background-image: url('https://www.dinesh.com/images/stories/logo/cricket/indian_premier_league/Rajasthan_Royals_Logo_2012.jpg');
+    background-size: cover;
+    border-radius: 20px;
+}
+
+/* Make the image fully responsive */
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.zoom:hover {
+    -ms-transform: scale(0.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.2);
+    /* Safari 3-8 */
+    transform: scale(1.2);
+}
