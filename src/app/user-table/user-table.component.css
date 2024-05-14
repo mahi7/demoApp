@@ -28,6 +28,17 @@ table {
     width: 100%;
 }
 
-.li .a{
+.li .a {
     color: blue;
+}
+
+
+/* mat table filter Structure */
+table {
+    width: 100%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
 }

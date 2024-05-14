@@ -15,17 +15,37 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <script>
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                document.getElementById("header").classList.add("fixed-top");
+                document.getElementById("sub-header").classList.add("hide-sub-header");
+            } else {
+                document.getElementById("header").classList.remove("fixed-top");
+                document.getElementById("sub-header").classList.remove("hide-sub-header");
+            }
+        }
+    </script>
+
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
+
+        <app-sub-header></app-sub-header>
+
+    </div> -->
+
+    <div class="container-fluid" style="">
+
+        <app-sub-header style="z-index: 10;"></app-sub-header>
+
 
         <div *ngIf="tdForm">
-            <app-header></app-header>
-            <br>
-            <br>
-
+            <app-header style="z-index: 1000;"></app-header>
         </div>
 
 
@@ -34,6 +54,8 @@
             <!-- Model form and text -->
             <div class="bg-image">
 
+                <br>
+                <br>
                 <app-header></app-header>
 
                 <br>
@@ -42,11 +64,8 @@
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
+
+
 
                 <h3
                     style="margin-left: 200px; font-size: larger; font-weight: bolder; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;">
@@ -120,7 +139,7 @@
                                         <div class="row">
 
                                             <div class="col-xl-4">
-                                                <div> <img [src]="urlFile"
+                                                <div> <img [src]="docurll"
                                                         style="height:100px; width:100px; border-radius: 10px;"
                                                         class="thumbnail">
                                                 </div>
@@ -195,15 +214,15 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <input type="email" class="form-control form-control-sm"
-                                                                name="emailId" [(ngModel)]="user.emailId" required email
-                                                                #emailId="ngModel" placeholder="Email"
-                                                                [ngClass]="{ 'is-invalid':emailId.dirty && emailId.touched && emailId.errors }" />
-                                                            <div *ngIf="emailId.invalid && (emailId.dirty || emailId.touched || emailId.untouched)"
+                                                                name="email" [(ngModel)]="user.email" required email
+                                                                #email="ngModel" placeholder="Email"
+                                                                [ngClass]="{ 'is-invalid':email.dirty && email.touched && email.errors }" />
+                                                            <div *ngIf="email.invalid && (email.dirty || email.touched || email.untouched)"
                                                                 class="invalid-feedback">
-                                                                <div *ngIf="emailId.errors?.['required']">Email is
+                                                                <div *ngIf="email.errors?.['required']">Email is
                                                                     required
                                                                 </div>
-                                                                <div *ngIf="emailId.errors?.['email']">Email is invalid
+                                                                <div *ngIf="email.errors?.['email']">Email is invalid
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -230,16 +249,18 @@
                                                 </div>
 
                                                 <!-- age -->
-                                                <div class="row">
+                                                <!-- <div class="row">
 
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="age"
                                                                 style="color: rgba(50, 42, 42, 0.632); padding-right: 20px;">Age</label>
-                                                            <mat-slider type="range"  min="20" max="60" discrete aria-label="Age" matSliderThumb [(ngModel)]="user.age" required #age="ngModel"
-                                                                name="age" [displayWith]="formatLabel">
+                                                            <mat-slider type="range" min="20" max="60" discrete
+                                                                aria-label="Age" matSliderThumb [(ngModel)]="user.age"
+                                                                required #age="ngModel" name="age"
+                                                                [displayWith]="formatLabel">
 
-                                                                <input name="age" type="range"
+                                                                <input name="age" type="range" id="age" name="age"
                                                                     class="form-slider form-control-sm" min="0" max="60"
                                                                     [(ngModel)]="user.age" required #age="ngModel"
                                                                     placeholder="Age"
@@ -255,13 +276,32 @@
 
                                                             </mat-slider>
 
-                                                            <div style="padding-top: 20px;" *ngIf="user.age == 0 && age.invalid && (age.dirty || age.touched || age.untouched)"
+                                                            <div style="padding-top: 20px;"
+                                                                *ngIf="user.age == 0 && age.invalid && (age.dirty || age.touched || age.untouched)"
                                                                 class="invalid-feedback">
                                                                 <div *ngIf="age.errors?.['required']">Age is
                                                                     required
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <!-- age -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control form-control-sm"
+                                                                id="age" name="age" [(ngModel)]="user.age" required age
+                                                                #age="ngModel" placeholder="Enter your age"
+                                                                [ngClass]="{ 'is-invalid':age.dirty && age.touched && age.errors }" />
+                                                            <div *ngIf="age.invalid && (age.dirty || age.touched || age.untouched)"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="age.errors?.['required']">Age is
+                                                                    required
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,8 +353,9 @@
                                                             <select (change)="toggleDiv($any($event.target).value)"
                                                                 class="form-control form-control-sm form-select">
                                                                 <option value="addr" selected>Address</option>
-                                                                <option value="add">Home Address</option>
-                                                                <option value="remove">Company Address</option>
+                                                                <option value="HOME">Home Address</option>
+                                                                <option value="COMPANY">Company Address</option>
+                                                                <!-- user.address.addressType" -->
                                                             </select>
 
                                                         </div>
@@ -323,7 +364,7 @@
                                                         <!-- home address -->
                                                         <div class="form-group" *ngIf="showDiv">
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="address1" [(ngModel)]="user.address.home.address1"
+                                                                name="address1" [(ngModel)]="user.address.address1"
                                                                 required address1 #address1="ngModel"
                                                                 placeholder="Address 1 ..."
                                                                 [ngClass]="{ 'is-invalid': address1.dirty && address1.touched && address1.errors }" />
@@ -335,7 +376,7 @@
                                                             </div>
                                                             <br>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="address2" [(ngModel)]="user.address.home.address2"
+                                                                name="address2" [(ngModel)]="user.address.address2"
                                                                 required address2 #address2="ngModel"
                                                                 placeholder="Address 2 ..."
                                                                 [ngClass]="{ 'is-invalid': address2.dirty && address2.touched && address2.errors  }" />
@@ -352,9 +393,8 @@
                                                         <!-- company address -->
                                                         <div class="form-group" *ngIf="remDiv">
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="address1"
-                                                                [(ngModel)]="user.address.company.address3" required
-                                                                address1 #address3="ngModel"
+                                                                name="address1" [(ngModel)]="user.address.address3"
+                                                                required address1 #address3="ngModel"
                                                                 placeholder="Comp Address 1 ..."
                                                                 [ngClass]="{ 'is-invalid': address3.dirty && address3.touched && address3.errors }" />
                                                             <div *ngIf="address3.invalid && (address3.dirty || address3.touched || address3.untouched)"
@@ -365,9 +405,8 @@
                                                             </div>
                                                             <br>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="address2"
-                                                                [(ngModel)]="user.address.company.address4" required
-                                                                address #address4="ngModel"
+                                                                name="address2" [(ngModel)]="user.address.address4"
+                                                                required address #address4="ngModel"
                                                                 placeholder="Comp Address 2 ..."
                                                                 [ngClass]="{ 'is-invalid': address4.dirty && address4.touched && address4.errors }" />
                                                             <div *ngIf="address4.invalid && (address4.dirty || address4.touched || address4.untouched)"
@@ -417,7 +456,8 @@
 
                                                         <div class="form-group">
                                                             <input type="text" class="form-control form-control-sm"
-                                                                name="tag" [(ngModel)]="newTag" required tag [ngModelOptions]="{ standalone: true }"
+                                                                name="tag" [(ngModel)]="newTag" required tag
+                                                                [ngModelOptions]="{ standalone: true }"
                                                                 [placeholder]="showPlaceholder ? 'Tag' : 'Enter new tag'"
                                                                 (input)="onInputChange($any($event.target).value)"
                                                                 (keydown.enter)="addTag()" #tag="ngModel"
@@ -488,9 +528,10 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <button type="submit" class="btn btn-info form-control"
-                                                        [disabled]="!f.valid" data-bs-dismiss="modal"
+                                                        data-bs-dismiss="modal"
                                                         style="margin-right: 10px;">Submit</button>
 
+                                                    <!-- [disabled]="!f.valid" -->
                                                 </div>
                                             </div>
 
@@ -526,7 +567,7 @@
 
                                             <div class="col-xl-4">
                                                 <div class="form-group">
-                                                    <div> <img [src]="urlFile" class="form-control"
+                                                    <div> <img [src]="docurll" class="form-control"
                                                             style="height:100px; width:100px;" class="thumbnail">
                                                     </div>
                                                     <div>
@@ -598,13 +639,13 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <div class="form-group">
-                                                                <input type="email" formControlName="emailId"
+                                                                <input type="email" formControlName="email"
                                                                     class="form-control form-control-sm"
                                                                     placeholder="Email Id"
-                                                                    [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }" />
-                                                                <div *ngIf="submitted && f['emailId'].errors"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                                                                <div *ngIf="submitted && f['email'].errors"
                                                                     class="invalid-feedback">
-                                                                    <div *ngIf="f['emailId'].errors['required']">
+                                                                    <div *ngIf="f['email'].errors['required']">
                                                                         Email-Id is
                                                                         required</div>
                                                                 </div>
@@ -846,7 +887,7 @@
 
                                     <div class="card mb-3">
                                         <div class="card-body text-center">
-                                            <div> <img [src]="urlFile"
+                                            <div> <img [src]="docurll"
                                                     style="height:215px; width:200px; margin-bottom: 10px; border-radius: 10px;"
                                                     class="thumbnail"></div>
                                             <div>
@@ -893,8 +934,8 @@
                                                 <div class="col-sm-6">
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control form-control-sm"
-                                                            [(ngModel)]="user.emailId" name="emailId"
-                                                            placeholder="Email-Id" required />
+                                                            [(ngModel)]="user.email" name="email" placeholder="Email-Id"
+                                                            required />
                                                     </div>
                                                 </div>
 
@@ -1007,7 +1048,7 @@
                                                 <div class="col-lg-12" style="margin-left: 540px;">
                                                     <button type="submit" class="btn btn-default"
                                                         (click)="cancel()">Cancel</button>
-                                                    <button type="submit" class="btn btn-info" (click)="updateData()" 
+                                                    <button type="submit" class="btn btn-info" (click)="updateData()"
                                                         style="margin-right: 10px;">Update</button>
                                                 </div>
                                             </div>
@@ -1047,7 +1088,7 @@
 
                             <div class="card mb-3">
                                 <div class="card-body text-center">
-                                    <div> <img [src]="urlFile"
+                                    <div> <img [src]="docurll"
                                             style="height:195px; width:180px; margin-right: 20px; margin-bottom: 10px;"
                                             class="thumbnail"></div>
                                     <div>
@@ -1094,7 +1135,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="col-sm-12">
-                                                <p class="mb-0">Email Id : {{user.emailId}}</p>
+                                                <p class="mb-0">Email Id : {{user.email}}</p>
                                             </div>
                                         </div>
 
@@ -1174,9 +1215,17 @@
 
                             <div class="card mb-3">
                                 <div class="card-body text-center">
-                                    <div> <img [src]="urlFile"
+                                    <div>
+                                        <!-- <img [src]="docurll"
                                             style="height:170px; width:160px; margin-right: 20px; margin-bottom: 10px; border-radius: 10px;"
-                                            class="thumbnail"></div>
+                                            class="thumbnail"> -->
+
+                                        <img *ngIf="data?.photo?.docpath" src="{{docServer}}/{{data?.photo?.docpath}}"
+                                            class="img-circle" alt="" style="width:100px; height:100px;">
+                                        <img *ngIf="!data?.photo?.docpath"
+                                            src="https://sainfoinc.com/wp-content/uploads/2018/02/image-not-available.jpg"
+                                            class="img-circle" alt="" style="width:100px; height:100px;">
+                                    </div>
                                     <div>
 
                                         <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
@@ -1202,9 +1251,10 @@
                                 <div class="card-body">
                                     <hr>
                                     <p>I'm {{user.fname}} and I'm above {{user.age}} years and you can send your emails
-                                        to <span style="color: blue;">{{user.emailId}}</span>. I
-                                        live in the state of {{user.state}}. I like to play {{user.tagsInput[0]}},
-                                        {{user.tagsInput[1]}} and
+                                        to <span style="color: blue;">{{user.email}}</span>. I
+                                        live in the state of {{user.state}}. I like to play<span
+                                            *ngFor="let tag of user.tagsInput; let i = index; let last = last;">{{tag}},</span>
+                                        and
                                         reading books.
                                         And please send me newsletters. Please reach out to me on my phone number
                                         {{user.mno}}. </p>
@@ -1230,6 +1280,9 @@
         <br>
         <br>
         <app-footer></app-footer>
+        <div style="position: sticky;">
+            <app-sub-header></app-sub-header>
+        </div>
     </div>
 
 </body>

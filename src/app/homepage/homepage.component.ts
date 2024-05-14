@@ -22,18 +22,10 @@ import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 export class HomepageComponent implements OnInit {
   [x: string]: any;
 
-  // input tag html
+  // docserver images
+  public docServer = this.restService.docServer;
 
   @ViewChild('tagInput') tagInputRef: ElementRef;
-  // tags: string[] = ['html', 'Angular'];
-  // form: FormGroup;
-
-  // input tag html end
-
-  // mat chips implementation
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: any[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
 
   announcer = inject(LiveAnnouncer);
 
@@ -63,7 +55,7 @@ export class HomepageComponent implements OnInit {
   public userInfo = {
     fname: '',
     lname: '',
-    emailId: '',
+    email: '',
     mno: '',
     age: '',
     state: '',
@@ -78,24 +70,29 @@ export class HomepageComponent implements OnInit {
   public user: any = {
     fname: '',
     lname: '',
-    emailId: '',
+    email: '',
     mno: '',
     age: '',
     state: '',
     country: '',
     address: {
-      home: {
-        address1: '',
-        address2: ''
-      },
-      company: {
-        address3: '',
-        address4: ''
-      }
+      addressType: '',
+      address1: '',
+      address2: '',
+      address3: '',
+      address4: ''
+
+      // home: {
+      //   address1: '',
+      //   address2: ''
+      // },
+      // company: {
+      //   address3: '',
+      //   address4: ''
+      // }
     },
     tagsInput: [],
-    subscibe: false,
-    file: {}
+    subscribe: false,
 
   }
 
@@ -107,7 +104,7 @@ export class HomepageComponent implements OnInit {
   form: FormGroup = new FormGroup({
     fname: new FormControl(''),
     lname: new FormControl(''),
-    emailId: new FormControl(''),
+    email: new FormControl(''),
     mno: new FormControl(''),
     age: new FormControl(''),
     state: new FormControl(''),
@@ -119,7 +116,11 @@ export class HomepageComponent implements OnInit {
   });
 
   file: any;
-  urlFile = '/assets/img/defaultimg.jpg';
+
+  // public docurll:any;
+  docurll = '/assets/img/defaultimg.jpg';
+  // docurll = '/assets/img/defaultimg.jpg';
+
   userid: any;
   firmid: any;
   id: any;
@@ -145,7 +146,7 @@ export class HomepageComponent implements OnInit {
     //       Validators.pattern,
     //     ]],
     //     lname: ['', Validators.required],
-    //     emailId: ['', Validators.required],
+    //     email: ['', Validators.required],
     //     mno: ['', Validators.required],
     //     age: ['', Validators.required],
     //     state: ['', Validators.required],
@@ -168,7 +169,7 @@ export class HomepageComponent implements OnInit {
   }
 
   defaultImage() {
-    this.user.file = '/assets/img/defaultimg.avif';
+    this.file = '/assets/img/defaultimg.avif';
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -189,26 +190,31 @@ export class HomepageComponent implements OnInit {
 
         // alert('working get user by id');
         console.log("Get user by id", JSON.stringify(response));
+
+        this.user = response;
         console.log("UserDetail-" + JSON.stringify(this.user));
 
         this.user.fname = response.fname;
         this.user.lname = response.lname;
-        this.user.emailId = response.emailId;
+        this.user.email = response.email;
         this.user.mno = response.mno;
         this.user.age = response.age;
         this.user.state = response.state;
         this.user.country = response.country;
-        this.user.address.home.address1 = response.address.home.address1;
-        this.user.address.home.address2 = response.address.home.address2;
-        this.user.address.company.address3 = response.address.company.address3;
-        this.user.address.company.address4 = response.address.company.address4;
-        this.user.tags = response.tags;
+        this.user.address.address1 = response.address.address1;
+        this.user.address.address2 = response.address.address2;
+        this.user.address.address3 = response.address.address3;
+        this.user.address.address4 = response.address.address4;
         this.user.tagsInput = response.tagsInput;
-        this.user.subscibe = response.subscibe;
-        this.user.file = response.file;
-        // this.urlFile = response.file;
+        this.user.subscribe = response.subscribe;
+        // this.file = response.file;
+        // this.docurll = response.file;
 
-        this.getPhotoById();
+        if (response.photo) {
+          this.docurll = this.docServer + '/' + response.photo.docpath;
+        }
+
+        // this.getPhotoById();
 
       },
       error => {
@@ -251,23 +257,18 @@ export class HomepageComponent implements OnInit {
 
         // alert('submit data');
         console.log('after submit response data', response); // file {} empty
-        console.log('after submit user file', this.user.file); // data coming
+        console.log('after submit user file', this.file); // data coming
 
         // $('.modal-backdrop').hide(); // Solution
         // $('.modal-open').hide; // Solution
 
-
-        if (this.user.file) {
-
-          // alert('photo data');
+        if (this.file) {
 
           this.photo.id = response.id;
           console.log("photo data", this.photo); // data coming in photo {id...}
-          // this.user.file = this.photo;
 
-
-          this.uploadfile();
-          // this.photoAdd();
+          // this.uploadfile();
+          this.photoAdd();
         }
 
         Swal.fire({
@@ -310,62 +311,66 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  // private photoAdd() {
+  private photoAdd() {
 
-  //   this.uploadfile();
+    this.uploadfile();
 
-  //   this.user.file = this.photo;
+    this.file = this.photo;
 
-  //   console.log("photo", + this.photo);
-  //   console.log("userfile after upload", + this.user.file);
+    console.log("photo", + this.photo);
+    console.log("userfile after upload", + this.file);
 
-  //   const url = this.restService.userRestURL('edit', '');
-  //   this.restService.postFormData(url, this.user.file).subscribe(
-  //     (response: any) => {
+    const url = this.restService.userRestURL('edit', '');
+    this.restService.postFormData(url, this.file).subscribe(
+      (response: any) => {
 
-  //       console.log('Status on Post API', response); //only photo response coming
-  //       Swal.fire('Added', '', 'success');
-  //       window.scrollTo(0, 0);
+        console.log('Status on Post API', response); //only photo response coming
+        Swal.fire('Added', '', 'success');
+        window.scrollTo(0, 0);
 
-  //     },
-  //     error => {
+      },
+      error => {
 
-  //       Swal.fire(
-  //         error.statusText,
-  //         error._body,
-  //         'error'
-  //       );
+        Swal.fire(
+          error.statusText,
+          error._body,
+          'error'
+        );
 
-  //     }
-  //   );
-  //   return 0;
-  // }
+      }
+    );
+    return 0;
+  }
 
   public uploadfile() {
-    if (this.user.file != '') {
+    if (this.file != '') {
 
       // alert('upload file');
-      console.log('userFile', this.user.file);
+      console.log('userFile', this.file);
 
-      const fileExtension = '.' + this.user.file.name.split('.').pop();
+      const fileExtension = '.' + this.file.name.split('.').pop();
       const rname = Math.random().toString(36).substring(7) + new Date().getTime();
 
       let objDoc = new Object();
-      this.photo.photo.docname = this.user.file.name;
+      this.photo.photo.docname = this.file.name;
       this.photo.photo.doctype = 'IMAGE';
-      this.photo.photo.docpath = '/assets/img/image-upload/' + this.photo.id + '/' + rname + this.user.file.name;
+      this.photo.photo.docpath = 'webapps/ROOT/images/' + this.photo.id + '/' + rname + this.file.name;
+
+      // this.photo.photo.docname = this.file.name;
+      // this.photo.photo.doctype = 'IMAGE';
+      // this.photo.photo.docpath = 'Category/' + this.prodtypeid + '/' + rname + this.file.name;
 
       var docFormData = new FormData();
-      docFormData.append('doc', this.user.file, rname + this.user.file.name);
+      docFormData.append('doc', this.file, rname + this.file.name);
       docFormData.append('width', '310');
       docFormData.append('height', '325');
-      docFormData.append('name', 'Category' + '/' + this.photo.id);
+      docFormData.append('name', 'webapps/ROOT/images' + '/' + this.photo.id);
 
-      // var docurl = this.restService.docsRestURL('upload', '');
-      var docurl = this.restService.userRestURL('upload', '');
-      console.log(docurl);
+      // var docurll = this.restService.docsRestURL('upload', '');
+      var docurll = this.restService.userRestURL('upload', '');
+      console.log(docurll);
 
-      this.restService.uploadFormData(docurl, this.photo).subscribe(
+      this.restService.uploadFormData(docurll, docFormData).subscribe(
         (response: any) => {
 
           console.log('Status on Upload API');
@@ -415,7 +420,7 @@ export class HomepageComponent implements OnInit {
           icon: "success"
         });
 
-        this.user.file = response.file;
+        this.file = response.file;
         this.submitted = true;
         this.viewflag = true;
         this.tdForm = true;
@@ -444,13 +449,13 @@ export class HomepageComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.form.reset();
-    this.urlFile = '/assets/img/defaultimg.jpg';
+    this.docurll = '/assets/img/defaultimg.jpg';
   }
 
   resetOnSubmit(f: NgForm): void {
     this.submitted = false;
     f.reset();
-    this.urlFile = '/assets/img/defaultimg.jpg';
+    this.docurll = '/assets/img/defaultimg.jpg';
   }
 
   fileEvent(fileInput: any) {
@@ -463,9 +468,9 @@ export class HomepageComponent implements OnInit {
       this.file = fileInput.target.files[0].name;
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.urlFile = event.target.result;
-        // this.urlFile = this.file;
-        console.log('DOCURL' + JSON.stringify(this.urlFile));
+        this.docurll = event.target.result;
+        // this.docurll = this.file;
+        console.log('docurll' + JSON.stringify(this.docurll));
 
       }
       reader.readAsDataURL(fileInput.target.files[0]);
@@ -476,7 +481,7 @@ export class HomepageComponent implements OnInit {
   onChangeFileField(event: any) {
 
     console.log("event target file", event.target.files[0]);
-    // this.user.file = event.target.files[0].name;
+    // this.file = event.target.files[0].name;
 
     // alert("alert");
 
@@ -486,17 +491,19 @@ export class HomepageComponent implements OnInit {
 
       // alert('event target file');
 
-      this.user.file = event.target.files[0];
+      this.photo.photo = event.target.files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {
         // image file path
-        this.urlFile = event.target.result;
+        // this.docurll = event.target.result;
+        this.docurll = event.target.result;
+
       }
 
       reader.readAsDataURL(event.target.files[0]);
 
-      console.log('urlFile' + JSON.stringify(this.urlFile)); //urlFile - "/assets/img/defaultimg.jpg"
-      console.log('OnchangefieldUserfile' + JSON.stringify(this.user.file)); // blank object: {}
+      console.log('docurll' + JSON.stringify(this.docurll)); //docurll - "/assets/img/defaultimg.jpg"
+      console.log('OnchangefieldUserfile' + JSON.stringify(this.file)); // blank object: {}
 
     }
 
@@ -522,7 +529,7 @@ export class HomepageComponent implements OnInit {
     this.item = [];
     console.log("userUpdataData", JSON.stringify(this.user));
 
-    const url = this.restService.userRestURL('edit', this.id);
+    const url = this.restService.userRestURL('edit', '');
 
     this.restService.postJSONbyId(url, this.user).subscribe(
       (response: any) => {
@@ -594,17 +601,26 @@ export class HomepageComponent implements OnInit {
   // defaultDiv = false;
 
   toggleDiv(action: string) {
-    if (action === 'add') {
+    if (action === 'HOME') {
+
+      this.user.address.addressType = 'HOME';
+
       this.showDiv = true;
       this.remDiv = false;
       // this.defaultDiv = false;
 
-    } else if (action === 'remove') {
+    } else if (action === 'COMPANY') {
+
+      this.user.address.addressType = 'COMPANY';
+
       this.showDiv = false;
       this.remDiv = true;
       // this.defaultDiv = false;
 
-    }else if(action === 'addr'){
+    } else if (action === 'addr') {
+
+      this.user.address.addressType = '';
+
       this.showDiv = false;
       this.remDiv = false;
     }

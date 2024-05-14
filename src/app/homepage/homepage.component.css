@@ -1,3 +1,14 @@
+.fixed-top {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.hide-sub-header {
+    display: none;
+}
+
 * {
     font-family: 'Times New Roman', Times, serif;
 }

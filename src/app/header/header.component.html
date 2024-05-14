@@ -2,29 +2,33 @@
 <div class="container-fluid">
     <!-- Navigation list -->
 
-    <nav class="navbar fixed-top navbar-expand-sm  ">
+    <nav class="navbar navbar-expand-sm">
 
         <!-- bg-light -->
         <br>
         <br>
         <br>
         <br>
+        <br>
+        <br>
+
         <div class="container-fluid" style="display: flex;">
-            <div style="background-color: rgb(16, 149, 206); margin-left: 10px;">
+            <div style="background-color: rgb(16, 149, 206); margin-left: 0px;">
                 <a class="navbar-brand" href="#" matTooltip="Info about the action"
-                    style="text-align: center; font-family: 'Times New Roman', Times, serif; padding-left: 20px; font-weight: bolder; color: aliceblue; text-shadow: 2px 2px 4px #000000; transition: width 2s, height 4s; transform: rotateZ(10deg); ">DemoApp</a>
+                    style="text-align: center; font-family: 'Times New Roman', Times, serif; padding-left: 10px; font-weight: bolder; color: aliceblue; text-shadow: 2px 2px 4px #000000; transition: width 2s, height 4s; transform: rotateZ(-10deg); ">DemoApp</a>
             </div>
-    
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent"
-                style="float: right; margin-left: 270px; font-family: 'Times New Roman', Times, serif; font-size: 15px;">
+                style="float: right; margin-left: 300px; font-family: 'Times New Roman', Times, serif; font-size: 15px;">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} href="#">HOME <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}
+                            href="#">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/aboutUs']">ABOUT US</a>
@@ -35,15 +39,43 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#" routerLinkActive="active">CLIENTS</a>
                     </li>
-                    <li class="nav-item active">
+                    <!-- <li class="nav-item active">
                         <a class="nav-link" href="#" routerLinkActive="active">EMPLOYERS</a>
+                    </li> -->
+                    <li class="nav-item active">
+
+                        <div class="dropdown">
+                            <a class="nav-link" href="#" routerLinkActive="active">MORE<span class="arrow-icon">&#9660;</span></a>
+                            <div class="dropdown-content" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <ul >
+                                    <li class="dropdown">
+                                        <a class="nav-link" [routerLink]="['/aboutUs']" routerLinkActive="active">ABOUT</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="nav-link" href="#" routerLinkActive="active">MOBILE PRODUCTS</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="nav-link" href="#" routerLinkActive="active">PHOTOS</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="nav-link" href="#" routerLinkActive="active">VENUES</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="nav-link" href="#" routerLinkActive="active">FANTASY</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </li>
+
                     <li class="nav-item active">
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">CONTACT US</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/manageUsertable']">USER TABLE</a>
                     </li>
+                    
                     <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +104,7 @@
                                     data-mdb-ripple-init>Login/Signup</button></a>
                         </li> -->
                 </ul>
-    
+
             </div>
         </div>
         <br>

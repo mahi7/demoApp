@@ -22,6 +22,7 @@ import { AngularMatTableComponent } from './angular-mat-table/angular-mat-table.
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { DemoAppComponent } from './demo-app/demo-app.component';
@@ -30,9 +31,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule} from '@angular/material/chips';
-// import { CarouselModule } from 'primeng/carousel';
-// import { GalleriaModule } from 'primeng/galleria';
-// import { ButtonModule } from 'primeng/button';
+import { SubHeaderComponent } from './header/sub-header/sub-header.component';
+
+// import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { API_BASE_URL, ConfigFactory, ConfigService } from './services/config';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,8 @@ import { MatChipsModule} from '@angular/material/chips';
     ReactiveFormComponent,
     AboutUsComponent,
     AngularMatTableComponent,
-    DemoAppComponent
+    DemoAppComponent,
+    SubHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -63,17 +68,28 @@ import { MatChipsModule} from '@angular/material/chips';
     TagInputModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    // CarouselModule,
+    MatInputModule,
     MatExpansionModule,
-    
-    // GalleriaModule,
-    // ButtonModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireModule.initializeApp({
+    //   apiKey: environment.firebaseConfig.apiKey,
+    //   authDomain: environment.firebaseConfig.authDomain,
+    // }),
+
     MatFormFieldModule, MatSelectModule, TagInputModule, MatDialogModule,MatCardModule, MatButtonModule,MatChipsModule,
     MDBBootstrapModule.forRoot(),
     NgbModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [
+    ConfigService,{ provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: 'CONFIGPATH', useValue: './assets/config.json' },
+    { provide: 'APIURL-VAR', useValue: 'API_BASE_URL' },
+    {
+      provide: API_BASE_URL, useFactory: ConfigFactory,
+      deps: [ConfigService, 'CONFIGPATH', 'APIURL-VAR']
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

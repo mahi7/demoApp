@@ -1,9 +1,3 @@
-/* .bg-image {
-    background-image: url('https://media.istockphoto.com/id/1298405314/vector/job-interview.jpg?s=1024x1024&w=is&k=20&c=pAYwMUs1T3L4hGXluPbmaZq2LgkXw2mUy7xVHVwxO8Y=');
-    height: 200px; width: 200px;
-    text-decoration-color: aliceblue; color: azure; font-weight: bolder;
-} */
-
 .example-card {
     max-width: 200px;
 
@@ -29,4 +23,37 @@
     -webkit-transform: scale(1.2);
     /* Safari 3-8 */
     transform: scale(1.2);
+}
+
+img {
+    border: 1px solid #fff;
+}
+
+.transition {
+    transition-behavior: normal;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transition-property: all;
+}
+
+
+/* text over image */
+
+.carousel-content {
+    position: absolute;
+    top: 470px;
+    /* Adjust this value as needed to position the text */
+    left: 400px;
+    /* Adjust this value as needed to position the text */
+    z-index: 1;
+    color: white;
+    font-weight: bolder;
+    box-shadow: 20px;
+    /* Text color */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
 }

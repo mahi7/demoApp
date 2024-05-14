@@ -21,15 +21,15 @@ export class HeaderComponent {
     let scrollHeigth;
  
     if(window.innerWidth < 350){
-     scrollHeigth = 70;
+     scrollHeigth = 50;
     }else if(window.innerWidth < 500 && window.innerWidth > 350){
-     scrollHeigth = 70;
+     scrollHeigth = 50;
     }else if(window.innerWidth < 700 && window.innerWidth > 500){
-     scrollHeigth = 70;
+     scrollHeigth = 50;
     }else if(window.innerWidth < 1000 && window.innerWidth > 700){
-     scrollHeigth = 70;
+     scrollHeigth = 50;
     }else{
-      scrollHeigth = 70;
+      scrollHeigth = 50;
     }
  
      if(window.scrollY >= scrollHeigth){

@@ -6,53 +6,48 @@ import { RestService } from '../services/rest.service';
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css']
 })
-export class AboutUsComponent implements OnInit{
+export class AboutUsComponent implements OnInit {
 
   panelOpenState = false;
   urlFile = '/assets/img/aboutUs.jpg';
 
-  // value: any[] | undefined;
-  // images: any[];
+  constructor(private photoService: RestService) { }
 
-  //   get activeIndex(): number {
-  //       return this._activeIndex;
-  //   }
+  ngOnInit() {
+  }
 
-  //   set activeIndex(newValue) {
-  //       if (this.images && 0 <= newValue && newValue <= this.images.length - 1) {
-  //           this._activeIndex = newValue;
-  //       }
-  //   }
-
-  //   _activeIndex: number = 2;
-
-  //   responsiveOptions: any[] = [
-  //       {
-  //           breakpoint: '1024px',
-  //           numVisible: 5
-  //       },
-  //       {
-  //           breakpoint: '768px',
-  //           numVisible: 3
-  //       },
-  //       {
-  //           breakpoint: '560px',
-  //           numVisible: 1
-  //       }
-  //   ];
-
-    constructor(private photoService: RestService) {}
-
-    ngOnInit() {
-        // this.photoService.getImages().then((images) => (this.images = images));
+  // image see more
+  images: { url: string }[] = [
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
+    },
+    {
+      url:'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/bcci/story/1712065673_200x200_97348_1712065672.JPG'
     }
+  ]; // Assuming this is your array of images
+  showRemainingImages: boolean = false;
 
-    // next() {
-    //     this.activeIndex++;
-    // }
+  toggleRemainingImages() {
+    this.showRemainingImages = !this.showRemainingImages;
+  }
 
-    // prev() {
-    //     this.activeIndex--;
-    // }
 
 }

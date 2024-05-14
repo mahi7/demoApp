@@ -1,0 +1,56 @@
+.ap-bcciLogo a {
+
+    display: inline-block;
+    margin-right: 5px;
+
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    width: 79px;
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.ap-bcciLogo {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+
+
+.ap-socialDiv a{
+    width: 33%;
+    display: flex;
+    text-align: right;
+    position: relative;
+    justify-content: flex-end;
+    /* align-items: center; */
+}
+
+.ap-socialDiv{
+    /* display: flex; */
+    float: right;
+    align-items: center;
+    width: 20%;
+}
+
+.ap-socialDiv span {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .3);
+    margin-right: 10px;
+    margin-top: 1px;
+    display: block !important;
+}
+
+/* .ap-stripWht {
+    background: #061e59;
+    padding: 1px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    height: 41px;
+    align-items: center;
+} */
