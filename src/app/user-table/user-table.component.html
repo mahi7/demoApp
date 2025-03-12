@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #15191e">
     <app-header></app-header>
 
     <br>
@@ -8,7 +8,7 @@
     <br>
     <br>
     <!-- image table upload -->
-    <div class="bg-light">
+    <div style="background-color: #343a40">
 
         &nbsp;
         <div class="container-fluid">
@@ -16,7 +16,7 @@
             <button class="btn-info" (click)="onUpload()">Upload</button>
         </div>
 
-
+        <!-- image -->
         <div class="col-lg-12">
             <br>
 
@@ -30,6 +30,46 @@
 
             </div>
         </div>
+
+        <!-- slider  -->
+        <div class="col-lg-12">
+            <br>
+            <!-- carousel bootstrap slide -->
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <div class="row">
+                            <br>
+                            <br>
+                            <div class="col-lg-2" *ngFor="let image of images; let i = index; let last = last;">
+                                <img [src]="image.url" style="width: 190px; height: 190px; border-radius: 5px; margin-bottom: 5px;"
+                                    alt="Image">
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+
+        </div>
+
         &nbsp;
 
     </div>
@@ -174,8 +214,8 @@
                                                     class="thumbnail"></div>
                                             <div>
                                                 <input hidden type="file" name="file" style="font-size: 0.75rem;"
-                                                    [(ngModel)]="file" mdbRipple rippleColor="dark"
-                                                    #profileUpload (change)="onChangeFileField($event)" />
+                                                    [(ngModel)]="file" mdbRipple rippleColor="dark" #profileUpload
+                                                    (change)="onChangeFileField($event)" />
                                                 <button type="button" class="btn btn-primary btn-sm"
                                                     (click)="profileUpload.click()">Edit photo</button>
 
@@ -348,7 +388,8 @@
 
             <!-- View data / localhost-->
             <div *ngIf="detailFlag">
-                <section style="background-color: #eee;">
+                <section>
+                    <!-- style="background-color: #eee;" -->
                     <div class="container py-5">
                         <div class="row">
                             <div class="col">
@@ -373,8 +414,8 @@
                                 </div>
                                 <div>
 
-                                    <input hidden type="file" style="font-size: 0.75rem;" mdbRipple
-                                        [(ngModel)]="file" name="file" rippleColor="dark" #profileUpload
+                                    <input hidden type="file" style="font-size: 0.75rem;" mdbRipple [(ngModel)]="file"
+                                        name="file" rippleColor="dark" #profileUpload
                                         (change)="onChangeFileField($event)" />
                                     <button type="button" class="btn btn-primary btn-sm"
                                         (click)="profileUpload.click()">Edit photo</button>

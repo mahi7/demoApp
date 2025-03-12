@@ -524,6 +524,7 @@ export class HomepageComponent implements OnInit {
   }
 
   updateData() {
+    alert('update data');
 
     this.user['id'] = this.id;
     this.item = [];

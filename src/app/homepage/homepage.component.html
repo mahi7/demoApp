@@ -43,11 +43,9 @@
 
         <app-sub-header style="z-index: 10;"></app-sub-header>
 
-
         <div *ngIf="tdForm">
             <app-header style="z-index: 1000;"></app-header>
         </div>
-
 
         <div *ngIf="!tdForm">
 
@@ -857,7 +855,6 @@
             </div>
         </div>
 
-
         <!-- User Edit/Add data -->
         <div *ngIf="edituser">
 
@@ -889,7 +886,8 @@
                                         <div class="card-body text-center">
                                             <div> <img [src]="docurll"
                                                     style="height:215px; width:200px; margin-bottom: 10px; border-radius: 10px;"
-                                                    class="thumbnail"></div>
+                                                    class="thumbnail">
+                                            </div>
                                             <div>
 
                                                 <input hidden type="file" style="font-size: 0.75rem;" mdbRipple

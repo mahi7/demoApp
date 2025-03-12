@@ -10,11 +10,11 @@ import { API_BASE_URL } from './config';
 export class RestService {
 
   // public ip = "https://jsonplaceholder.typicode.com";
-  // public ip = "http://localhost:3000";
+  public ip = "http://localhost:3000";
   // public ip = "http://localhost:9090/NaturalHomeoManager";
   // public ip = this.baseUrl;
 
-  public ip = this.baseUrl;
+  // public ip = this.baseUrl;
 
   public server = this.ip + '/NaturalHomeoManager';
   public docServer = this.ip + '/naturalhomeodocs';
@@ -115,8 +115,8 @@ export class RestService {
   }
 
   public userRestURL(restId: any, userId: any) {
-    // var url = this.ip;
-    var url = this.server;
+    var url = this.ip;
+    // var url = this.server;
 
     switch (restId) {
       case 'add':
