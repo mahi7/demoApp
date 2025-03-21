@@ -1,0 +1,59 @@
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    <!-- Match Title -->
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            {{ match?.team1 }} vs {{ match?.team2 }}
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Detailed live score and match information.
+        </p>
+    </div>
+
+    <!-- Live Score Table -->
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header text-center" style="background-color: #007bff; color: white;">
+                    <h3>Live Score Table</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Team</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Overs</th>
+                                <th scope="col">Last Wicket</th>
+                                <th scope="col">Current Partnership</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ match?.team1 }}</td>
+                                <td>{{ match?.team1Score }}</td>
+                                <td>{{ match?.team1Overs }}</td>
+                                <td>{{ match?.team1LastWicket }}</td>
+                                <td>{{ match?.team1Partnership }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ match?.team2 }}</td>
+                                <td>{{ match?.team2Score }}</td>
+                                <td>{{ match?.team2Overs }}</td>
+                                <td>{{ match?.team2LastWicket }}</td>
+                                <td>{{ match?.team2Partnership }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary btn-lg" (click)="goBack()">Back to Live Scores</button>
+    </div>
+</div>

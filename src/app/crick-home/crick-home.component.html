@@ -1,0 +1,68 @@
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    <!-- Page Title -->
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Cricket Updates
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Stay updated with the latest cricket news, scores, and highlights!
+        </p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="mt-4 text-center">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for cricket news"
+                aria-label="Search" [(ngModel)]="searchText" name="searchText" style="width: 800px;">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button">Search</button>
+        </form>
+    </div>
+
+    <!-- News Section -->
+    <div class="mt-5 text-center">
+        <h2 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Top Cricket News
+        </h2>
+        <p style="font-size: 1rem; color: #6c757d;">
+            Catch up on the latest cricket news from around the world.
+        </p>
+    </div>
+
+    <!-- Filtered News Cards -->
+    <div class="row mt-4">
+        <div class="col-md-4" *ngFor="let item of filteredNews">
+            <div class="card">
+                <img [src]="item.image" class="card-img-top" alt="News Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a [href]="item.link" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cricketer Images Section -->
+    <!-- Cricketer Images Section -->
+<div class="mt-5">
+    <h2 class="text-center" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+        Famous Cricketers
+    </h2>
+    <div class="row mt-4">
+        <div class="col-md-3 mb-4" *ngFor="let cricketer of cricketers">
+            <div class="card shadow">
+                <img [src]="cricketer.image" class="card-img-top zoom-on-hover" alt="{{ cricketer.name }}" 
+                     style="width: 250px; height: 150px; object-fit: cover; margin: 0 auto; padding: 10px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ cricketer.name }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <app-crick-foot></app-crick-foot>
+</div>

@@ -1,0 +1,8 @@
+/* Zoom effect on hover */
+.zoom-on-hover {
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.zoom-on-hover:hover {
+    transform: scale(1.2); /* Zoom in by 20% */
+}

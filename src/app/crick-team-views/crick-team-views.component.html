@@ -1,0 +1,82 @@
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    <!-- Main Card -->
+    <div class="card shadow mt-4">
+        <div class="card-body">
+            <!-- Back Button -->
+            <div class="row">
+                <div class="col-12 text-start mb-3">
+                    <button class="btn btn-secondary btn-sm" (click)="goBack()">← Back</button>
+                </div>
+            </div>
+
+            <!-- Team Name and Description -->
+            <div class="row text-center">
+                <div class="col-12">
+                    <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+                        {{ team?.name }}
+                    </h1>
+                    <p style="font-size: 1.2rem; color: #6c757d;">
+                        Explore detailed information about the team and its players.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Team Details Section -->
+            <div class="row mt-5">
+                <!-- Team Logo -->
+                <div class="col-md-4 text-center">
+                    <div class="card shadow">
+                        <img [src]="team?.logo" class="img-fluid rounded" alt="{{ team?.name }} Logo" 
+                             style="max-width: 100%; border: 2px solid #007bff; padding: 10px;">
+                    </div>
+                </div>
+
+                <!-- Team Information -->
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
+                            <h3>Team Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Captain:</strong> {{ team?.captain }}</p>
+                                    <p><strong>Coach:</strong> {{ team?.coach }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Home Ground:</strong> {{ team?.homeGround }}</p>
+                                    <p><strong>Founded:</strong> {{ team?.founded }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Players Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
+                            <h3>Players</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-3" *ngFor="let player of team?.players">
+                                    <div class="card shadow">
+                                        <div class="card-body text-center">
+                                            {{ player }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

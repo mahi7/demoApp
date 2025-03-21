@@ -15,6 +15,7 @@ import { ReactiveFormComponent } from './forms/reactive-form/reactive-form.compo
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { TagInputModule } from 'ngx-chips';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -37,6 +38,21 @@ import { SubHeaderComponent } from './header/sub-header/sub-header.component';
 import { environment } from '../environments/environment';
 import { API_BASE_URL, ConfigFactory, ConfigService } from './services/config';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MatchscheTableComponent } from './matchsche-table/matchsche-table.component';
+import { MatchViewDialogComponent } from './match-view-dialog/match-view-dialog.component';
+import { CrickHomeComponent } from './crick-home/crick-home.component';
+import { CrickheadComponent } from './crickhead/crickhead.component';
+import { CrickContactUSComponent } from './crick-contact-us/crick-contact-us.component';
+import { CrickFantasyComponent } from './crick-fantasy/crick-fantasy.component';
+import { CrickTeamsComponent } from './crick-teams/crick-teams.component';
+import { CrickLivescoreComponent } from './crick-livescore/crick-livescore.component';
+import { CrickNewsComponent } from './crick-news/crick-news.component';
+import { CrickFootComponent } from './crick-foot/crick-foot.component';
+import { CrickUpcMatchComponent } from './crick-upc-match/crick-upc-match.component';
+import { CrickTeamViewsComponent } from './crick-team-views/crick-team-views.component';
+import { LiveScoreViewsComponent } from './live-score-views/live-score-views.component';
+import { CrickHighComponent } from './crick-high/crick-high.component';
+import { CrickHighDetailsComponent } from './crick-high-details/crick-high-details.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +67,22 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AboutUsComponent,
     AngularMatTableComponent,
     DemoAppComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    MatchscheTableComponent,
+    MatchViewDialogComponent,
+    CrickHomeComponent,
+    CrickheadComponent,
+    CrickContactUSComponent,
+    CrickFantasyComponent,
+    CrickTeamsComponent,
+    CrickLivescoreComponent,
+    CrickNewsComponent,
+    CrickFootComponent,
+    CrickUpcMatchComponent,
+    CrickTeamViewsComponent,
+    LiveScoreViewsComponent,
+    CrickHighComponent,
+    CrickHighDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,12 +95,15 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatTableModule,
     MatSliderModule,
     MatPaginatorModule,
+    MatSortModule,
     MatButtonModule,
     TagInputModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
+    MatButtonModule,
+    MatDialogModule,
     // AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireModule.initializeApp({
     //   apiKey: environment.firebaseConfig.apiKey,

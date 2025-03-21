@@ -37,6 +37,7 @@
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.show {
     color: rgb(90, 22, 8);
+    /* color: var(--rh-cta-background-color,var(--rh-color-brand-red)); */
     font-weight: bold;
     opacity: 1;
     text-decoration-color: white;
@@ -66,7 +67,9 @@
 }
 
 .nav-link {
-    color: rgb(177, 12, 53);
+    /* color: rgb(177, 12, 53); */
+    color: red;
+    font-weight: bold;
 }
 
 a {

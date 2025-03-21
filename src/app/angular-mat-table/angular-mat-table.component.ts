@@ -13,6 +13,11 @@ export class AngularMatTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
+
+  // displayediplColumns: string[] = ['Sr. No', 'Date', 'Time','Team', 'Venue'];
+  // dataSourceipl = new MatTableDataSource<PeriodicElementipl>(ELEMENT_DATAipl);
+
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(){
@@ -54,3 +59,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
   { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
 ];
+
+// export interface PeriodicElementipl {
+//   srno : number;
+//   date: number;
+//   time: number;
+//   team: string;
+//   venue: string;
+// }
+
+// const ELEMENT_DATAipl: PeriodicElementipl[] = [
+//   { srno: 1, date: 22/3/2025, time: 1.0079, team: 'H', venue: 'kolkata' },
+//   { srno: 2, date: 22-3-2025, time: 4.0026, team: 'H', venue: 'kolkata' },
+//   { srno: 3, date: 22-3-2025, time: 6.941, team: 'H', venue: 'kolkata' },
+//   { srno: 4, date: 22-3-2025, time: 9.0122, team: 'H', venue: 'kolkata' },
+//   { srno: 5, date: 22-3-2025, time: 10.811, team: 'H', venue: 'kolkata' },
+//   { srno: 6, date: 22-3-2025, time: 12.0107, team: 'H', venue: 'kolkata' },
+  
+// ];

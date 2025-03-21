@@ -1,0 +1,71 @@
+/* Rotating animation for the logo */
+.rotating-logo {
+    display: inline-block;
+    animation: rotate360 5s linear infinite; /* 5 seconds for a full rotation */
+    font-size: 1.5rem; /* Adjust size as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Keyframes for rotation */
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+    font-size: 1.5 rem;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Navbar Links Styling */
+.navbar-nav .nav-link {
+    color: #ffffff;
+    margin: 0 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+/* Hover Effect for Links */
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+    background-color: #ffffff;
+    text-decoration: none;
+}
+
+/* Active Link Styling */
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #007bff;
+    border-radius: 5px;
+}
+
+/* Mobile View Adjustments */
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+/* Zoom effect on navigation links */
+.nav-link {
+    transition: transform 0.3s ease-in-out; /* Smooth transition for zoom effect */
+}
+
+.nav-link:hover {
+    transform: scale(1.2); /* Zoom in by 20% */
+}
+

@@ -518,6 +518,8 @@
             </div>
         </div> -->
 
+       
+
         <!-- Managed data table/ localhost-->
         <div *ngIf="!flag">
             <div class="mt-4 pl-4 p-5 bg-light text-white rounded">
@@ -568,6 +570,71 @@
         <br>
 
         <!--Manage data mat table -->
+        <div *ngIf="!flag">
+            <div class="mt-4 pl-1 p-5 bg-light text-white rounded">
+                <mat-form-field>
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Id, Name, Email-Id" #input>
+                </mat-form-field>
+                <table class="table align-middle mb-0 bg-white" mat-table [dataSource]="dataSource">
+
+                    <!-- Table columns -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>ID</th>
+                        <td mat-cell *matCellDef="let data">{{ data.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let data">{{data.fname}} {{data.lname}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef>Email-Id</th>
+                        <td mat-cell *matCellDef="let data">{{data.email}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="mno">
+                        <th mat-header-cell *matHeaderCellDef>Mobile No.</th>
+                        <td mat-cell *matCellDef="let data">{{ data.mno }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="image">
+                        <th mat-header-cell *matHeaderCellDef>Image</th>
+                        <td mat-cell *matCellDef="let data"><img class="thumbnail" style="height: 50px; width: 50px;"
+                                [src]="data.file" /></td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let data">
+                            <a [routerLink]="['/detailUsertable',data.id]" tabindex="-1"
+                                style="margin-right: 10px; margin-bottom: 10px; padding-bottom: 10px;"><button
+                                    type="button" class="btn btn-primary btn-sm" data-mdb-ripple-init>View</button></a>
+
+                            <a [routerLink]="['/updateUsertable',data.id]" tabindex="-1"
+                                style="margin-right: 5px; margin-top: 10px;"><button type="button"
+                                    class="btn btn-info btn-sm" data-mdb-ripple-init><i
+                                        class="fa fa-edit"></i>Edit</button></a>
+
+                            <button class="btn btn-danger btn-sm" title="Delete category"
+                                style="margin-right: 5px;  width: 50px; height: 30px;"
+                                (click)="deleteRole(data.id)">Delete
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <!-- Define other columns similarly -->
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+
+
+        <!-- ipl schedule ttime table -->
+        <!--Manage data mat table -->
+        <div class="m-4">
+            <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; "><b>IPL Schedule Time table</b></h1>
+        </div>
         <div *ngIf="!flag">
             <div class="mt-4 pl-1 p-5 bg-light text-white rounded">
                 <mat-form-field>
