@@ -7,26 +7,26 @@ import { Component } from '@angular/core';
 })
 export class CrickHomeComponent {
   searchText: string = '';
-  news = [
-    {
-      title: 'Match Highlights',
-      description: 'India vs Australia: A thrilling match with unexpected twists.',
-      image: 'https://via.placeholder.com/150',
-      link: '#'
-    },
-    {
-      title: 'Player Spotlight',
-      description: 'Virat Kohli\'s incredible century leads India to victory.',
-      image: 'https://via.placeholder.com/150',
-      link: '#'
-    },
-    {
-      title: 'Upcoming Tournaments',
-      description: 'ICC World Cup 2025: Teams to watch out for.',
-      image: 'https://via.placeholder.com/150',
-      link: '#'
-    }
-  ];
+  // news = [
+  //   {
+  //     title: 'Match Highlights',
+  //     description: 'India vs Australia: A thrilling match with unexpected twists.',
+  //     image: 'https://via.placeholder.com/150',
+  //     link: '#'
+  //   },
+  //   {
+  //     title: 'Player Spotlight',
+  //     description: 'Virat Kohli\'s incredible century leads India to victory.',
+  //     image: 'https://via.placeholder.com/150',
+  //     link: '#'
+  //   },
+  //   {
+  //     title: 'Upcoming Tournaments',
+  //     description: 'ICC World Cup 2025: Teams to watch out for.',
+  //     image: 'https://via.placeholder.com/150',
+  //     link: '#'
+  //   }
+  // ];
 
   cricketers = [
     { name: 'Virat Kohli', image: 'assets/logos/vk.jpg' },
@@ -41,6 +41,30 @@ export class CrickHomeComponent {
     { name: 'AB de Villiers', image: 'assets/logos/dw.jpg' },
     { name: 'Chris Gayle', image: 'assets/logos/dw.jpg' },
     { name: 'Shakib Al Hasan', image: 'assets/logos/dw.jpg' }
+  ];
+
+  news = [
+    {
+      id: 1,
+      title: "Virat Kohli's incredible century leads India to victory",
+      description: 'Virat Kohli scored a stunning century to lead India to a thrilling victory.',
+      image: 'assets/images/virat-kohli-century.jpg',
+      link: '',
+    },
+    {
+      id: 2,
+      title: 'Rohit Sharma smashes double century in ODI',
+      description: 'Rohit Sharma smashed a double century in a historic ODI match.',
+      image: 'assets/images/rohit-sharma-double-century.jpg',
+      link: '',
+    },
+    {
+      id: 2,
+      title: 'Rohit Sharma smashes double century in ODI',
+      description: 'Rohit Sharma smashed a double century in a historic ODI match.',
+      image: 'assets/images/rohit-sharma-double-century.jpg',
+      link: '',
+    },
   ];
 
   get filteredNews() {

@@ -53,6 +53,8 @@ import { CrickTeamViewsComponent } from './crick-team-views/crick-team-views.com
 import { LiveScoreViewsComponent } from './live-score-views/live-score-views.component';
 import { CrickHighComponent } from './crick-high/crick-high.component';
 import { CrickHighDetailsComponent } from './crick-high-details/crick-high-details.component';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { CrickHomenewsarticleComponent } from './crick-homenewsarticle/crick-homenewsarticle.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { CrickHighDetailsComponent } from './crick-high-details/crick-high-detai
     LiveScoreViewsComponent,
     CrickHighComponent,
     CrickHighDetailsComponent,
+    ArticleDetailsComponent,
+    CrickHomenewsarticleComponent,
   ],
   imports: [
     BrowserModule,

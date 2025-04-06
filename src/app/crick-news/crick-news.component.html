@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ article.title }}</h5>
                     <p class="card-text">{{ article.summary }}</p>
-                    <a [href]="article.link" target="_blank" class="btn btn-primary">Read More</a>
+                    <a [routerLink]="['/article-details', article.id]" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
@@ -38,6 +38,13 @@
     
         <div class="mt-5">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!-- Sr. No Column -->
+                <ng-container matColumnDef="srno">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr. No. </th>
+                    <td mat-cell *matCellDef="let match"> {{ match.srno }}</td>
+                </ng-container>
+
                 <!-- Match Column -->
                 <ng-container matColumnDef="match">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Match </th>

@@ -1,8 +1,12 @@
+/* element.style {
+    font-family: 'Lucida Sans', sans-serif;
+    font-weight: bold;
+} */
+
 /* Rotating animation for the logo */
 .rotating-logo {
     display: inline-block;
     animation: rotate360 5s linear infinite; /* 5 seconds for a full rotation */
-    font-size: 1.5rem; /* Adjust size as needed */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -16,9 +20,21 @@
     }
 }
 
+
+
+/* Glow effect for "Up2date" */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+    }
+    to {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+    }
+}
+
 /* Navbar Brand Styling */
 .navbar-brand {
-    font-size: 1.5 rem;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -67,5 +83,5 @@
 
 .nav-link:hover {
     transform: scale(1.2); /* Zoom in by 20% */
-}
+}   
 

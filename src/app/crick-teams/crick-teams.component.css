@@ -1,0 +1,30 @@
+/* Team logo styling */
+.team-logo {
+    width: 150px; /* Set a consistent width */
+    height: 150px; /* Set a consistent height */
+    object-fit: contain; /* Ensure the logo fits within the dimensions without distortion */
+    margin: 10px auto; /* Center the logo horizontally */
+    display: block; /* Ensure the image is treated as a block element */
+}
+
+.transparent-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.team-logo {
+    height: 150px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.card-title {
+    font-family: 'Lucida Sans', sans-serif;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}

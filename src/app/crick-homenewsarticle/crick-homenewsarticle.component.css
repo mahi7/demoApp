@@ -1,0 +1,37 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+  /* Sidebar Styling */
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  font-size: 1.2rem;
+}
+
+.list-group-item {
+  font-size: 1rem;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}

@@ -18,6 +18,8 @@ import { CrickTeamViewsComponent } from './crick-team-views/crick-team-views.com
 import { LiveScoreViewsComponent } from './live-score-views/live-score-views.component';
 import { CrickHighComponent } from './crick-high/crick-high.component';
 import { CrickHighDetailsComponent } from './crick-high-details/crick-high-details.component';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { CrickHomenewsarticleComponent } from './crick-homenewsarticle/crick-homenewsarticle.component';
 
 const routes: Routes = [
   // { path: '', component: HomepageComponent },
@@ -32,6 +34,9 @@ const routes: Routes = [
   { path: 'match-details/:id', component: LiveScoreViewsComponent },
   { path: 'highlights', component: CrickHighComponent },
   { path: 'highlight-details/:id', component: CrickHighDetailsComponent },
+  { path: 'article-details/:id', component: ArticleDetailsComponent }, // Route with dynamic ID
+  { path: '', redirectTo: '/news', pathMatch: 'full' },
+  { path: 'article-homenewsdetails/:id', component: CrickHomenewsarticleComponent }, 
 
 
   { path: 'login', component: LoginComponent },

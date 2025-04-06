@@ -1,24 +1,28 @@
-<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+<div class="container-fluid" style="background-image: url('assets/images/cricket-bg.jpg'); background-size: cover; background-position: center; padding: 20px;">
     <!-- Header -->
     <app-crickhead></app-crickhead>
 
-    <!-- Page Title -->
-    <div class="text-center mt-5">
-        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
-            Cricket Updates
-        </h1>
-        <p style="font-size: 1.2rem; color: #6c757d;">
-            Stay updated with the latest cricket news, scores, and highlights!
-        </p>
-    </div>
+    <!-- Page Title and Search Bar in a Card -->
+    <div class="card shadow mt-5 mx-auto" style="max-width: 900px; padding: 20px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9);">
+        <div class="text-center">
+            <!-- Page Title -->
+            <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+                Cricket Updates
+            </h1>
+            <p style="font-size: 1.2rem; color: #6c757d;">
+                Stay updated with the latest cricket news, scores, and highlights!
+            </p>
+        </div>
 
-    <!-- Search Bar -->
-    <div class="mt-4 text-center">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search for cricket news"
-                aria-label="Search" [(ngModel)]="searchText" name="searchText" style="width: 800px;">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="button">Search</button>
-        </form>
+        <!-- Search Bar -->
+        <div class="mt-4 text-center">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for cricket news"
+                    aria-label="Search" [(ngModel)]="searchText" name="searchText"
+                    style="width: 100%; max-width: 700px; margin: 0 auto;">
+                <button class="btn btn-outline-primary my-2 my-sm-0 mt-3" type="button">Search</button>
+            </form>
+        </div>
     </div>
 
     <!-- News Section -->
@@ -39,30 +43,29 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
                     <p class="card-text">{{ item.description }}</p>
-                    <a [href]="item.link" class="btn btn-primary">Read More</a>
+                    <a [routerLink]="['/article-homenewsdetails', item.id]" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Cricketer Images Section -->
-    <!-- Cricketer Images Section -->
-<div class="mt-5">
-    <h2 class="text-center" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
-        Famous Cricketers
-    </h2>
-    <div class="row mt-4">
-        <div class="col-md-3 mb-4" *ngFor="let cricketer of cricketers">
-            <div class="card shadow">
-                <img [src]="cricketer.image" class="card-img-top zoom-on-hover" alt="{{ cricketer.name }}" 
-                     style="width: 250px; height: 150px; object-fit: cover; margin: 0 auto; padding: 10px;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ cricketer.name }}</h5>
+    <div class="mt-5">
+        <h2 class="text-center" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Famous Cricketers
+        </h2>
+        <div class="row mt-4">
+            <div class="col-md-3 mb-4" *ngFor="let cricketer of cricketers">
+                <div class="card shadow">
+                    <img [src]="cricketer.image" class="card-img-top zoom-on-hover" alt="{{ cricketer.name }}"
+                        style="width: 250px; height: 150px; object-fit: cover; margin: 0 auto; padding: 10px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ cricketer.name }}</h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <app-crick-foot></app-crick-foot>
 </div>
