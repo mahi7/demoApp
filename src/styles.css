@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 50%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Light Theme */
+.light-theme {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --card-background: #f8f9fa;
+}
+
+/* Dark Theme */
+.dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --card-background: #1e1e1e;
+}
+
+/* Apply Theme Variables */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--card-background);
+  color: var(--text-color);
+}

@@ -20,6 +20,8 @@ import { CrickHighComponent } from './crick-high/crick-high.component';
 import { CrickHighDetailsComponent } from './crick-high-details/crick-high-details.component';
 import { ArticleDetailsComponent } from './article-details/article-details.component';
 import { CrickHomenewsarticleComponent } from './crick-homenewsarticle/crick-homenewsarticle.component';
+import { CrickloginComponent } from './cricklogin/cricklogin.component';
+import { CrickreguserComponent } from './crickreguser/crickreguser.component';
 
 const routes: Routes = [
   // { path: '', component: HomepageComponent },
@@ -37,9 +39,11 @@ const routes: Routes = [
   { path: 'article-details/:id', component: ArticleDetailsComponent }, // Route with dynamic ID
   { path: '', redirectTo: '/news', pathMatch: 'full' },
   { path: 'article-homenewsdetails/:id', component: CrickHomenewsarticleComponent }, 
+  { path: 'login', component: CrickloginComponent }, 
+  { path: 'register', component: CrickreguserComponent },
 
 
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
 
   { path: 'reactiveForm', component: ReactiveFormComponent },
   { path: 'templatedrivenForm', component: TemplateDrivenComponent },

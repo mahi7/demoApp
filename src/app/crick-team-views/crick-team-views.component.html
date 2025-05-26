@@ -28,53 +28,57 @@
             <div class="row mt-5">
                 <!-- Team Logo -->
                 <div class="col-md-4 text-center">
-                    <div class="card shadow">
-                        <img [src]="team?.logo" class="img-fluid rounded" alt="{{ team?.name }} Logo" 
-                             style="max-width: 100%; border: 2px solid #007bff; padding: 10px;">
-                    </div>
+                    <img [src]="team?.logo" class="img-fluid rounded shadow" alt="{{ team?.name }} Logo" 
+                         style="max-width: 100%; border: 2px solid #007bff; padding: 10px;">
                 </div>
 
-                <!-- Team Information -->
-                <div class="col-md-8">
-                    <div class="card shadow">
-                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
-                            <h3>Team Information</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><strong>Captain:</strong> {{ team?.captain }}</p>
-                                    <p><strong>Coach:</strong> {{ team?.coach }}</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><strong>Home Ground:</strong> {{ team?.homeGround }}</p>
-                                    <p><strong>Founded:</strong> {{ team?.founded }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Team Information Table -->
+                <div class="col-md-6" style="padding-left: 20px;">
+                    <table class="table table-bordered table-hover shadow">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th colspan="2" class="text-center" style="background-color: #007bff; color: white;">
+                                    Team Information
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Captain</strong></td>
+                                <td>{{ team?.captain }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coach</strong></td>
+                                <td>{{ team?.coach }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Home Ground</strong></td>
+                                <td>{{ team?.homeGround }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Founded</strong></td>
+                                <td>{{ team?.founded }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <!-- Players Section -->
             <div class="row mt-5">
-                <div class="col-12">
-                    <div class="card shadow">
-                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
-                            <h3>Players</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4 mb-3" *ngFor="let player of team?.players">
-                                    <div class="card shadow">
-                                        <div class="card-body text-center">
-                                            {{ player }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-8 offset-md-4">
+                    <table class="table table-bordered table-hover shadow">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center" style="background-color: #007bff; color: white;">Players</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let player of team?.players">
+                                <td class="text-center">{{ player }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

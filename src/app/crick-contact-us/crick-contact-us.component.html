@@ -1,83 +1,89 @@
-<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 10px;">
     <!-- Header -->
     <app-crickhead></app-crickhead>
 
     <!-- Page Title and Description -->
-    <div class="text-center mt-5">
-        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+    <div class="text-center mt-3">
+        <h2 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; font-size: 1.5rem;">
             Contact Us
-        </h1>
-        <p style="font-size: 1.2rem; color: #6c757d;">
+        </h2>
+        <p style="font-size: 0.9rem; color: #6c757d;">
             We'd love to hear from you! Reach out to us for any queries, feedback, or support.
         </p>
     </div>
 
     <!-- Card Layout -->
-    <div class="row mt-5 justify-content-center">
-        <div class="col-md-10">
-            <div class="card shadow">
-                <div class="card-header text-center" style="background-color: #007bff; color: white;">
-                    <h3>Get in Touch</h3>
+    <div class="row mt-3 justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <!-- Updated Background for "Get in Touch" -->
+                <div class="card-header text-center" style="background: linear-gradient(135deg, #f8f9fa, #e0e0e0); color: #333; padding: 10px;">
+                    <h4 style="font-size: 1.2rem; font-family: 'Lucida Sans', sans-serif; font-weight: bold;">Get in Touch</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="padding: 15px;">
                     <div class="row">
                         <!-- Contact Form Section -->
-                        <div class="col-md-6">
-                            <h4 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">Send Us a Message</h4>
-                            <form (ngSubmit)="sendMessage()" class="mt-4">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label" style="font-weight: bold;">Your Name</label>
-                                    <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" placeholder="Enter your name" required>
+                        <div class="col-md-5">
+                            <h5 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; font-size: 1rem;">Send Us a Message</h5>
+                            <form (ngSubmit)="sendMessage()" class="mt-3">
+                                <div class="mb-2">
+                                    <label for="name" class="form-label" style="font-weight: bold; font-size: 0.9rem;">Your Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="name" [(ngModel)]="name" name="name" placeholder="Enter your name" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label" style="font-weight: bold;">Your Email</label>
-                                    <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required>
+                                <div class="mb-2">
+                                    <label for="email" class="form-label" style="font-weight: bold; font-size: 0.9rem;">Your Email</label>
+                                    <input type="email" class="form-control form-control-sm" id="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="message" class="form-label" style="font-weight: bold;">Your Message</label>
-                                    <textarea class="form-control" id="message" rows="5" [(ngModel)]="message" name="message" placeholder="Write your message here" required></textarea>
+                                <div class="mb-2">
+                                    <label for="message" class="form-label" style="font-weight: bold; font-size: 0.9rem;">Your Message</label>
+                                    <textarea class="form-control form-control-sm" id="message" rows="3" [(ngModel)]="message" name="message" placeholder="Write your message here" required></textarea>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">Send Message</button>
                                 </div>
                             </form>
 
                             <!-- Success and Error Messages -->
-                            <div *ngIf="isSuccess" class="alert alert-success mt-3" role="alert">
+                            <div *ngIf="isSuccess" class="alert alert-success mt-2" role="alert" style="font-size: 0.8rem;">
                                 Your message has been sent successfully!
                             </div>
-                            <div *ngIf="isError" class="alert alert-danger mt-3" role="alert">
+                            <div *ngIf="isError" class="alert alert-danger mt-2" role="alert" style="font-size: 0.8rem;">
                                 Failed to send your message. Please try again later.
                             </div>
                         </div>
 
+                        <!-- Divider -->
+                        <div class="col-md-1 d-flex justify-content-center align-items-center">
+                            <div style="width: 1px; height: 100%; background-color: #ddd;"></div>
+                        </div>
+
                         <!-- Contact Information Section -->
                         <div class="col-md-6">
-                            <h4 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">Contact Information</h4>
-                            <div class="mt-4">
-                                <p style="font-size: 1rem; color: #6c757d;">
+                            <h5 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; font-size: 1rem;">Contact Information</h5>
+                            <div class="mt-3">
+                                <p style="font-size: 0.9rem; color: #6c757d;">
                                     <strong>Email:</strong> 24hr@crickup2date.com
                                 </p>
-                                <p style="font-size: 1rem; color: #6c757d;">
+                                <p style="font-size: 0.9rem; color: #6c757d;">
                                     <strong>Phone:</strong> +91-7972-99-7227
                                 </p>
-                                <p style="font-size: 1rem; color: #6c757d;">
+                                <p style="font-size: 0.9rem; color: #6c757d;">
                                     <strong>Address:</strong> 123 Cricket Lane, Sports City, World
                                 </p>
                             </div>
-                            <div class="mt-4">
-                                <h5 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">Follow Us</h5>
-                                <div class="d-flex justify-content-start mt-3">
-                                    <a href="#" class="me-3" style="color: #007bff; font-size: 1.5rem;">
+                            <div class="mt-3">
+                                <h6 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; font-size: 0.9rem;">Follow Us</h6>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <a href="#" class="me-2" style="color: #007bff; font-size: 1.2rem;">
                                         <i class="fab fa-facebook"></i>
                                     </a>
-                                    <a href="#" class="me-3" style="color: #007bff; font-size: 1.5rem;">
+                                    <a href="#" class="me-2" style="color: #007bff; font-size: 1.2rem;">
                                         <i class="fab fa-twitter"></i>
                                     </a>
-                                    <a href="#" class="me-3" style="color: #007bff; font-size: 1.5rem;">
+                                    <a href="#" class="me-2" style="color: #007bff; font-size: 1.2rem;">
                                         <i class="fab fa-instagram"></i>
                                     </a>
-                                    <a href="#" style="color: #007bff; font-size: 1.5rem;">
+                                    <a href="#" style="color: #007bff; font-size: 1.2rem;">
                                         <i class="fab fa-youtube"></i>
                                     </a>
                                 </div>
@@ -85,10 +91,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-center" style="background-color: #f8f9fa;">
-                    <p style="font-size: 0.9rem; color: #6c757d;">We value your feedback and will get back to you as soon as possible.</p>
+                <div class="card-footer text-center" style="background-color: #f8f9fa; padding: 10px;">
+                    <p style="font-size: 0.8rem; color: #6c757d;">We value your feedback and will get back to you as soon as possible.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>  
+</div>

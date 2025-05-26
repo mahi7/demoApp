@@ -65,6 +65,27 @@ export class CrickHomeComponent {
       image: 'assets/images/rohit-sharma-double-century.jpg',
       link: '',
     },
+    {
+      id: 2,
+      title: 'Rohit Sharma smashes double century in ODI',
+      description: 'Rohit Sharma smashed a double century in a historic ODI match.',
+      image: 'assets/images/rohit-sharma-double-century.jpg',
+      link: '',
+    },
+    {
+      id: 2,
+      title: 'Rohit Sharma smashes double century in ODI',
+      description: 'Rohit Sharma smashed a double century in a historic ODI match.',
+      image: 'assets/images/rohit-sharma-double-century.jpg',
+      link: '',
+    },
+    {
+      id: 2,
+      title: 'Rohit Sharma smashes double century in ODI',
+      description: 'Rohit Sharma smashed a double century in a historic ODI match.',
+      image: 'assets/images/rohit-sharma-double-century.jpg',
+      link: '',
+    }
   ];
 
   get filteredNews() {

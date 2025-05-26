@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class CrickheadComponent {
 
+  isDarkTheme = false;
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    const theme = this.isDarkTheme ? 'dark-theme' : 'light-theme';
+    document.body.className = theme;
+  }
+
 }

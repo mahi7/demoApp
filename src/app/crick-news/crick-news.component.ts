@@ -13,6 +13,9 @@ export class CrickNewsComponent implements OnInit{
     { id: 1, title: 'Chennai Super Kings vs Gujarat Titans', summary: 'CSK won against GT...', image: 'path-to-image', link: '', content: 'Detailed content for Article 1...' },
     { id: 2, title: 'Article 2', summary: 'Summary of Article 2...', image: 'path-to-image', link: '', content: 'Detailed content for Article 2...' },
     { id: 3, title: 'Article 3', summary: 'Summary of Article 3...', image: 'path-to-image', link: '', content: 'Detailed content for Article 3...' },
+    { id: 3, title: 'Article 3', summary: 'Summary of Article 3...', image: 'path-to-image', link: '', content: 'Detailed content for Article 3...' },
+    { id: 3, title: 'Article 3', summary: 'Summary of Article 3...', image: 'path-to-image', link: '', content: 'Detailed content for Article 3...' },
+    { id: 3, title: 'Article 3', summary: 'Summary of Article 3...', image: 'path-to-image', link: '', content: 'Detailed content for Article 3...' }
   ];
 
   displayedColumns: string[] = ['srno', 'match', 'date', 'time', 'venue'];
