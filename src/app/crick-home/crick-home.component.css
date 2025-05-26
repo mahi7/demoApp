@@ -1,0 +1,71 @@
+/* Zoom effect on hover */
+.zoom-on-hover {
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.zoom-on-hover:hover {
+    transform: scale(1.2); /* Zoom in by 20% */
+}
+
+
+/* Slider Container */
+.slider-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+/* Slider */
+.slider {
+    display: flex;
+    animation: slide 20s linear infinite;
+}
+
+/* Individual Cards */
+.slider .col-md-3 {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+/* Animation Keyframes */
+@keyframes slide {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Slider Container */
+.slider-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+/* Slider */
+.slider {
+    display: flex;
+    animation: slide-right-to-left 20s linear infinite alternate;
+}
+
+/* Individual Cards */
+.slider .card {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+/* Animation Keyframes */
+@keyframes slide-right-to-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.slider-container:hover .slider {
+    animation-play-state: paused;
+}

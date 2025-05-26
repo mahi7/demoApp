@@ -1,0 +1,109 @@
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    <!-- Match Title -->
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            {{ match?.team1 }} vs {{ match?.team2 }}
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Detailed live score and match information.
+        </p>
+    </div>
+
+    <!-- Tabs for Team Scores -->
+    <ul class="nav nav-tabs mt-4 justify-content-end" id="scoreTabs" role="tablist" style="margin-right: 10%;">
+        <li class="nav-item">
+            <a class="nav-link active" id="team1-tab" data-bs-toggle="tab" href="#team1" role="tab" aria-controls="team1" aria-selected="true">
+                {{ match?.team1 }} Scorecard
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="team2-tab" data-bs-toggle="tab" href="#team2" role="tab" aria-controls="team2" aria-selected="false">
+                {{ match?.team2 }} Scorecard
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4" id="scoreTabContent">
+        <!-- Team 1 Scorecard -->
+        <div class="tab-pane fade show active" id="team1" role="tabpanel" aria-labelledby="team1-tab">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card shadow">
+                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
+                            <h3>{{ match?.team1 }} Player Scores</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Player</th>
+                                        <th scope="col">Runs</th>
+                                        <th scope="col">Balls</th>
+                                        <th scope="col">Fours</th>
+                                        <th scope="col">Sixes</th>
+                                        <th scope="col">Strike Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let player of match?.team1Players">
+                                        <td>{{ player.name }}</td>
+                                        <td>{{ player.runs }}</td>
+                                        <td>{{ player.balls }}</td>
+                                        <td>{{ player.fours }}</td>
+                                        <td>{{ player.sixes }}</td>
+                                        <td>{{ player.strikeRate }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team 2 Scorecard -->
+        <div class="tab-pane fade" id="team2" role="tabpanel" aria-labelledby="team2-tab">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card shadow">
+                        <div class="card-header text-center" style="background-color: #007bff; color: white;">
+                            <h3>{{ match?.team2 }} Player Scores</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Player</th>
+                                        <th scope="col">Runs</th>
+                                        <th scope="col">Balls</th>
+                                        <th scope="col">Fours</th>
+                                        <th scope="col">Sixes</th>
+                                        <th scope="col">Strike Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let player of match?.team2Players">
+                                        <td>{{ player.name }}</td>
+                                        <td>{{ player.runs }}</td>
+                                        <td>{{ player.balls }}</td>
+                                        <td>{{ player.fours }}</td>
+                                        <td>{{ player.sixes }}</td>
+                                        <td>{{ player.strikeRate }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary btn-lg" (click)="goBack()">Back to Live Scores</button>
+    </div>
+</div>

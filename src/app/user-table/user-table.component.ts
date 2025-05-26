@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-user-table',
@@ -9,6 +12,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-table.component.css']
 })
 export class UserTableComponent implements OnInit {
+
+  // mat table paginator
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['id', 'name', 'email', 'mno', 'image', 'action'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator; // Add this line
 
   public datas: any = [];
   public flag = false;
@@ -19,7 +28,7 @@ export class UserTableComponent implements OnInit {
     id: '',
     fname: '',
     lname: '',
-    emailId: '',
+    email: '',
     mno: '',
     age: '',
     state: '',
@@ -27,9 +36,13 @@ export class UserTableComponent implements OnInit {
     address: '',
     tags: '',
     subscibe: false,
-    file: {}
 
   }
+
+  public photo = {
+    id: '',
+    photo: { docname: '', docpath: '', docdesc: '', doctype: '', isprimary: 'NO' },
+  };
 
   // public user = {
   //   id: '',
@@ -41,9 +54,11 @@ export class UserTableComponent implements OnInit {
 
   // };
 
-  docurll: any;
+  // docserver images
+  public docServer = this.restService.docServer;
+
   file: any;
-  urlFile = '/assets/img/defaultimg.jpg';
+  docurll = '/assets/img/defaultimg.jpg';
 
   constructor(private restService: RestService,
     private routes: Router,
@@ -53,6 +68,10 @@ export class UserTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
+    this.fetchImages();
 
     if (this.routeprms.snapshot.params['uid']) {
       this.id = this.routeprms.snapshot.params['uid'];
@@ -85,6 +104,13 @@ export class UserTableComponent implements OnInit {
       (response: any) => {
         this.datas = response;
 
+        // Assuming datas is your array of data
+        this.dataSource = new MatTableDataSource<any>(this.datas);
+        this.dataSource.paginator = this.paginator;
+
+        this.getPhotoById(response.id);
+
+        console.log('userInfo', this.userInfo)
 
         console.log("getUserLists2:" + JSON.stringify(response));
       },
@@ -100,12 +126,12 @@ export class UserTableComponent implements OnInit {
     this.restService.getJSONFromURL(url).subscribe(
       (response: any) => {
 
-        console.log('getuserbyid', response )
+        console.log('getuserbyid', response)
 
         this.userInfo.id = response.id;
         this.userInfo.fname = response.fname;
         this.userInfo.lname = response.lname;
-        this.userInfo.emailId = response.emailId;
+        this.userInfo.email = response.email;
         this.userInfo.mno = response.mno;
         this.userInfo.age = response.age;
         this.userInfo.state = response.state;
@@ -113,8 +139,13 @@ export class UserTableComponent implements OnInit {
         this.userInfo.address = response.address;
         this.userInfo.tags = response.tags;
         this.userInfo.subscibe = response.subscibe;
-        this.userInfo.file = response.file;
+        // this.userInfo.file = response.file;
+
+        // this.docurll = response.file.name;
+
         console.log("UserDetail-" + JSON.stringify(this.userInfo));
+
+        this.getPhotoById(response.id);
 
 
       },
@@ -126,12 +157,34 @@ export class UserTableComponent implements OnInit {
 
   }
 
+  public getPhotoById(id: any) {
+
+    const url = this.restService.userRestURL('upload', this.id);
+    console.log("getPhotobyid", url);
+    this.restService.getJSONFromURL(url).subscribe(
+      (response: any) => {
+
+        // alert('working get user by id');
+
+        console.log('getPhotoResponse', response);
+        this.docurll = response[response.id];
+        console.log('getPhotobyIdResponse', this.docurll);
+
+
+      },
+      error => {
+        console.log("Error message:" + error);
+      }
+    );
+  }
+
+
   // fileEvent(fileInput: any) {
   //   if (fileInput.target.files[0] != '') {
   //     this.user.photofile = fileInput.target.files[0].name;
   //     var reader = new FileReader();
   //     reader.onload = (event: any) => {
-  //       this.urlFile = event.target.result;
+  //       this.docurll = event.target.result;
 
   //       console.log('DOCURL' + this.docurll);
 
@@ -148,14 +201,17 @@ export class UserTableComponent implements OnInit {
 
     // alert("alert");
 
+    this.docurll = '/assets/img/defaultimg.jpg';
+
+
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
-      this.userInfo.file = event.target.files[0].name;
+      this.file = event.target.files[0].name;
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.urlFile = event.target.result;
-        console.log('DOCURL' + JSON.stringify(this.urlFile));
+        this.docurll = event.target.result;
+        console.log('DOCURL' + JSON.stringify(this.docurll));
 
       }
       reader.readAsDataURL(event.target.files[0]);
@@ -167,22 +223,22 @@ export class UserTableComponent implements OnInit {
     console.log("userData", JSON.stringify(this.userInfo));
   }
 
-  public submitData() {
+  // public submitData() {
 
-    const url = this.restService.userRestURL('add', '');
-    this.restService.postFormData(url, this.userInfo).subscribe(
-      (response: any) => {
-        console.log('Status on Post API:' + response);
-      },
-      error => {
-        console.log(error);
+  //   const url = this.restService.userRestURL('add', '');
+  //   this.restService.postFormData(url, this.userInfo).subscribe(
+  //     (response: any) => {
+  //       console.log('Status on Post API:' + response);
+  //     },
+  //     error => {
+  //       console.log(error);
 
-      }
-    );
+  //     }
+  //   );
 
-    return 0;
+  //   return 0;
 
-  }
+  // }
 
   updateData() {
 
@@ -196,12 +252,16 @@ export class UserTableComponent implements OnInit {
     // console.log(this.user);
     console.log("Update user data", this.userInfo);
 
-    this.restService.postFormData(url, this.userInfo).subscribe(
+    this.restService.postJSONbyId(url, this.userInfo).subscribe(
       (response: any) => {
         console.log("updated postform data", response);
         Swal.fire('Updated', '', 'success');
 
-        this.userInfo.file = response.file;
+        // this.docurll = response.file;
+        this.docurll = '/assets/img/defaultimg.jpg';
+
+        console.log('docurllAfterUpdate', this.docurll);
+
         this.routes.navigate(['/detailUsertable', response.id]);
         window.scrollTo(0, 0);
 
@@ -263,5 +323,42 @@ export class UserTableComponent implements OnInit {
     this.routes.navigate(['/manageUsertable']);
   }
 
+
+  // image upload
+  images: { url: string }[] = [];
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      this.selectedFile = files[0]; // Assuming you want to upload only the first selected file
+    }
+  }
+
+  onUpload() {
+    alert('upload');
+    if (this.selectedFile) {
+      this.restService.uploadImage(this.selectedFile).subscribe(() => {
+        this.fetchImages(); // Refresh image list after upload
+      });
+    }
+  }
+
+  fetchImages() {
+    // alert('fetch images');
+    this.restService.getImages().subscribe((dataaa: any) => {
+      this.images = dataaa.photos.map((item: any) => ({ url: item.url })); // Assuming each item in dataaa has a photos array with at least one URL
+      console.log('images', JSON.stringify(this.images));
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 }

@@ -2,7 +2,7 @@
 import { Injectable, InjectionToken } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export const API_BASE_URL = new InjectionToken<string>('http://localhost:3000');
+export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 export function ConfigFactory(configService: ConfigService, file: string, property: string) {
     return configService.loadJSON(file)[property];

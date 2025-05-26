@@ -1,12 +1,18 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+
+import { DemoAppComponent } from '../demo-app/demo-app.component';
+import { find, get, pull } from 'lodash';
+
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { error } from 'jquery';
+import { error, event } from 'jquery';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-homepage',
@@ -16,14 +22,31 @@ import { error } from 'jquery';
 export class HomepageComponent implements OnInit {
   [x: string]: any;
 
+  // docserver images
+  public docServer = this.restService.docServer;
+
+  @ViewChild('tagInput') tagInputRef: ElementRef;
+
+  announcer = inject(LiveAnnouncer);
+
+  @ViewChild('MyModal') modal: ElementRef;
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
+
   public submitted = false;
   public boolean = false;
   public viewflag = false;
   public tdForm: any;
   public item: any = [];
-  // public home = false;
-  // public company = false;
-  public Address = ['Home', 'Company'];
+  public jQuery: any;
+
+  public Address = ['Address', 'Home', 'Company'];
 
   @ViewChild('f') public resetForm: NgForm | undefined;
 
@@ -32,7 +55,7 @@ export class HomepageComponent implements OnInit {
   public userInfo = {
     fname: '',
     lname: '',
-    emailId: '',
+    email: '',
     mno: '',
     age: '',
     state: '',
@@ -47,25 +70,29 @@ export class HomepageComponent implements OnInit {
   public user: any = {
     fname: '',
     lname: '',
-    emailId: '',
+    email: '',
     mno: '',
     age: '',
     state: '',
     country: '',
     address: {
-      home: {
-        address1: '',
-        address2: ''
-      },
-      company: {
-        address3: '',
-        address4: ''
-      }
+      addressType: '',
+      address1: '',
+      address2: '',
+      address3: '',
+      address4: ''
+
+      // home: {
+      //   address1: '',
+      //   address2: ''
+      // },
+      // company: {
+      //   address3: '',
+      //   address4: ''
+      // }
     },
-    tags: '',
     tagsInput: [],
-    subscibe: false,
-    file: {}
+    subscribe: false,
 
   }
 
@@ -77,7 +104,7 @@ export class HomepageComponent implements OnInit {
   form: FormGroup = new FormGroup({
     fname: new FormControl(''),
     lname: new FormControl(''),
-    emailId: new FormControl(''),
+    email: new FormControl(''),
     mno: new FormControl(''),
     age: new FormControl(''),
     state: new FormControl(''),
@@ -88,51 +115,50 @@ export class HomepageComponent implements OnInit {
     file: new FormControl(''),
   });
 
-  // public user = {
-  //     albumId: '',
-  //     title: '',
-  //     url: '',
-  //     thumbnailUrl: 'D:\ionic_Angular_project\UserInfo\src\assets\img\pexels-jessica-lewis-🦋-thepaintedsquare-583848.jpg'
-  // }
-
   file: any;
-  urlFile = '/assets/img/defaultimg.jpg';
+
+  // public docurll:any;
+  docurll = '/assets/img/defaultimg.jpg';
+  // docurll = '/assets/img/defaultimg.jpg';
+
   userid: any;
   firmid: any;
   id: any;
   public edituser = false;
   public modalForm = true;
 
-  public validModel = '';
+  public validModel = true;
 
   constructor(
     public routes: Router,
     public restService: RestService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {
   }
 
   ngOnInit(): void {
 
-    this.form = this.formBuilder.group(
-      {
-        fname: ['', [
-          Validators.required,
-          Validators.pattern,
-        ]],
-        lname: ['', Validators.required],
-        emailId: ['', Validators.required],
-        mno: ['', Validators.required],
-        age: ['', Validators.required],
-        state: ['', Validators.required],
-        country: ['', Validators.required],
-        address: ['', Validators.required],
-        tags: ['', Validators.required],
-        subscibe: [false, Validators.requiredTrue],
-        file: ['', Validators.required],
-        // acceptTerms: [false, Validators.requiredTrue]
-      }
-    );
+    // this.form = this.formBuilder.group(
+    //   {
+    //     fname: ['', [
+    //       Validators.required,
+    //       Validators.pattern,
+    //     ]],
+    //     lname: ['', Validators.required],
+    //     email: ['', Validators.required],
+    //     mno: ['', Validators.required],
+    //     age: ['', Validators.required],
+    //     state: ['', Validators.required],
+    //     country: ['', Validators.required],
+    //     address: ['', Validators.required],
+    //     tags: ['', Validators.required],
+    //     subscibe: [false, Validators.requiredTrue],
+    //     file: ['', Validators.required],
+    //     // acceptTerms: [false, Validators.requiredTrue]
+    //   }
+    // );
+
 
     console.log('hello ngoninit');
 
@@ -143,15 +169,12 @@ export class HomepageComponent implements OnInit {
   }
 
   defaultImage() {
-    this.user.file = '/assets/img/defaultimg.avif';
+    this.file = '/assets/img/defaultimg.avif';
   }
 
   get f(): { [key: string]: AbstractControl } {
 
-
-    this.validModel = 'data-bs-dismiss="modal"';
     return this.form.controls;
-
 
   }
 
@@ -167,24 +190,31 @@ export class HomepageComponent implements OnInit {
 
         // alert('working get user by id');
         console.log("Get user by id", JSON.stringify(response));
+
+        this.user = response;
         console.log("UserDetail-" + JSON.stringify(this.user));
 
         this.user.fname = response.fname;
         this.user.lname = response.lname;
-        this.user.emailId = response.emailId;
+        this.user.email = response.email;
         this.user.mno = response.mno;
         this.user.age = response.age;
         this.user.state = response.state;
         this.user.country = response.country;
-        this.user.address.home.address1 = response.address.home.address1;
-        this.user.address.home.address2 = response.address.home.address2;
-        this.user.address.company.address3 = response.address.company.address3;
-        this.user.address.company.address4 = response.address.company.address4;
-        this.user.tags = response.tags;
+        this.user.address.address1 = response.address.address1;
+        this.user.address.address2 = response.address.address2;
+        this.user.address.address3 = response.address.address3;
+        this.user.address.address4 = response.address.address4;
         this.user.tagsInput = response.tagsInput;
-        this.user.subscibe = response.subscibe;
-        this.user.file = response.file;
-        // this.urlFile = response.file;
+        this.user.subscribe = response.subscribe;
+        // this.file = response.file;
+        // this.docurll = response.file;
+
+        if (response.photo) {
+          this.docurll = this.docServer + '/' + response.photo.docpath;
+        }
+
+        // this.getPhotoById();
 
       },
       error => {
@@ -194,6 +224,24 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  public getPhotoById() {
+
+    const url = this.restService.userRestURL('upload', this.id);
+    console.log("getPhotobyid", url);
+    this.restService.getJSONFromURL(url).subscribe(
+      (response: any) => {
+
+        // alert('working get user by id');
+
+
+
+      },
+      error => {
+        console.log("Error message:" + error);
+      }
+    );
+  }
+
   // template driven form submit
   public submitData(f: NgForm) {
 
@@ -201,27 +249,26 @@ export class HomepageComponent implements OnInit {
     this.submitted = true;
     console.log("SubmituserData", JSON.stringify(this.user)); // file {} empty
 
-    alert('befoe submit data')
+    // alert('befoe submit data')
 
     const url = this.restService.userRestURL('add', '');
     this.restService.postFormData(url, this.user).subscribe(
       (response: any) => {
 
-        alert('submit data');
+        // alert('submit data');
         console.log('after submit response data', response); // file {} empty
-        console.log('after submit user file', this.user.file); // data coming
+        console.log('after submit user file', this.file); // data coming
 
-        if (this.user.file) {
+        // $('.modal-backdrop').hide(); // Solution
+        // $('.modal-open').hide; // Solution
 
-          alert('photo data');
+        if (this.file) {
 
           this.photo.id = response.id;
           console.log("photo data", this.photo); // data coming in photo {id...}
-          // this.user.file = this.photo;
 
-
-          this.uploadfile();
-          // this.photoAdd();
+          // this.uploadfile();
+          this.photoAdd();
         }
 
         Swal.fire({
@@ -236,7 +283,6 @@ export class HomepageComponent implements OnInit {
         this.tdForm = true;
         this.id = response.id;
 
-        $('.modal-backdrop').remove();
 
         console.log("ResponseType", typeof (response));
         console.log("items", this.item);
@@ -264,62 +310,67 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  // private photoAdd() {
 
-  //   this.uploadfile();
+  private photoAdd() {
 
-  //   this.user.file = this.photo;
+    this.uploadfile();
 
-  //   console.log("photo", + this.photo);
-  //   console.log("userfile after upload", + this.user.file);
+    this.file = this.photo;
 
-  //   const url = this.restService.userRestURL('edit', '');
-  //   this.restService.postFormData(url, this.user.file).subscribe(
-  //     (response: any) => {
+    console.log("photo", + this.photo);
+    console.log("userfile after upload", + this.file);
 
-  //       console.log('Status on Post API', response); //only photo response coming
-  //       Swal.fire('Added', '', 'success');
-  //       window.scrollTo(0, 0);
+    const url = this.restService.userRestURL('edit', '');
+    this.restService.postFormData(url, this.file).subscribe(
+      (response: any) => {
 
-  //     },
-  //     error => {
+        console.log('Status on Post API', response); //only photo response coming
+        Swal.fire('Added', '', 'success');
+        window.scrollTo(0, 0);
 
-  //       Swal.fire(
-  //         error.statusText,
-  //         error._body,
-  //         'error'
-  //       );
+      },
+      error => {
 
-  //     }
-  //   );
-  //   return 0;
-  // }
+        Swal.fire(
+          error.statusText,
+          error._body,
+          'error'
+        );
+
+      }
+    );
+    return 0;
+  }
 
   public uploadfile() {
-    if (this.user.file != '') {
+    if (this.file != '') {
 
-      alert('upload file');
-      console.log('userFile', this.user.file);
+      // alert('upload file');
+      console.log('userFile', this.file);
 
-      const fileExtension = '.' + this.user.file.name.split('.').pop();
+      const fileExtension = '.' + this.file.name.split('.').pop();
       const rname = Math.random().toString(36).substring(7) + new Date().getTime();
 
       let objDoc = new Object();
-      this.photo.photo.docname = this.user.file.name;
+      this.photo.photo.docname = this.file.name;
       this.photo.photo.doctype = 'IMAGE';
-      this.photo.photo.docpath = '/assets/img/image-upload/' + this.photo.id + '/' + rname + this.user.file.name;
+      this.photo.photo.docpath = 'webapps/ROOT/images/' + this.photo.id + '/' + rname + this.file.name;
+
+      // this.photo.photo.docname = this.file.name;
+      // this.photo.photo.doctype = 'IMAGE';
+      // this.photo.photo.docpath = 'Category/' + this.prodtypeid + '/' + rname + this.file.name;
 
       var docFormData = new FormData();
-      docFormData.append('doc', this.user.file, rname + this.user.file.name);
-      docFormData.append('width', '400');
-      docFormData.append('height', '400');
-      docFormData.append('name', 'Category' + '/' + this.photo.id);
+      docFormData.append('doc', this.file, rname + this.file.name);
+      docFormData.append('width', '310');
+      docFormData.append('height', '325');
+      docFormData.append('name', 'webapps/ROOT/images' + '/' + this.photo.id);
 
-      // var docurl = this.restService.docsRestURL('upload', '');
-      var docurl = this.restService.userRestURL('upload', '');
-      console.log(docurl);
+      // var docurll = this.restService.docsRestURL('upload', '');
+      var docurll = this.restService.userRestURL('upload', '');
+      console.log(docurll);
 
-      this.restService.uploadFormData(docurl, this.photo).subscribe(
+      this.restService.uploadFormData(docurll, docFormData).subscribe(
         (response: any) => {
 
           console.log('Status on Upload API');
@@ -369,7 +420,7 @@ export class HomepageComponent implements OnInit {
           icon: "success"
         });
 
-        this.user.file = response.file;
+        this.file = response.file;
         this.submitted = true;
         this.viewflag = true;
         this.tdForm = true;
@@ -398,13 +449,13 @@ export class HomepageComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.form.reset();
-    this.urlFile = '/assets/img/defaultimg.jpg';
+    this.docurll = '/assets/img/defaultimg.jpg';
   }
 
   resetOnSubmit(f: NgForm): void {
     this.submitted = false;
     f.reset();
-    this.urlFile = '/assets/img/defaultimg.jpg';
+    this.docurll = '/assets/img/defaultimg.jpg';
   }
 
   fileEvent(fileInput: any) {
@@ -417,9 +468,9 @@ export class HomepageComponent implements OnInit {
       this.file = fileInput.target.files[0].name;
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.urlFile = event.target.result;
-        // this.urlFile = this.file;
-        console.log('DOCURL' + JSON.stringify(this.urlFile));
+        this.docurll = event.target.result;
+        // this.docurll = this.file;
+        console.log('docurll' + JSON.stringify(this.docurll));
 
       }
       reader.readAsDataURL(fileInput.target.files[0]);
@@ -430,27 +481,29 @@ export class HomepageComponent implements OnInit {
   onChangeFileField(event: any) {
 
     console.log("event target file", event.target.files[0]);
-    // this.user.file = event.target.files[0].name;
+    // this.file = event.target.files[0].name;
 
-    alert("alert");
+    // alert("alert");
 
     console.log(event.target.files[0]);
 
     if (event.target.files[0] != '') {
 
-      alert('event target file');
+      // alert('event target file');
 
-      this.user.file = event.target.files[0];
+      this.photo.photo = event.target.files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {
         // image file path
-        this.urlFile = event.target.result;
+        // this.docurll = event.target.result;
+        this.docurll = event.target.result;
+
       }
 
       reader.readAsDataURL(event.target.files[0]);
 
-      console.log('urlFile' + JSON.stringify(this.urlFile)); //urlFile - "/assets/img/defaultimg.jpg"
-      console.log('OnchangefieldUserfile' + JSON.stringify(this.user.file)); // blank object: {}
+      console.log('docurll' + JSON.stringify(this.docurll)); //docurll - "/assets/img/defaultimg.jpg"
+      console.log('OnchangefieldUserfile' + JSON.stringify(this.file)); // blank object: {}
 
     }
 
@@ -471,13 +524,15 @@ export class HomepageComponent implements OnInit {
   }
 
   updateData() {
+    alert('update data');
 
+    this.user['id'] = this.id;
     this.item = [];
     console.log("userUpdataData", JSON.stringify(this.user));
 
     const url = this.restService.userRestURL('edit', '');
 
-    this.restService.postFormData(url, this.user).subscribe(
+    this.restService.postJSONbyId(url, this.user).subscribe(
       (response: any) => {
         console.log(response);
         Swal.fire('Updated', '', 'success');
@@ -500,10 +555,86 @@ export class HomepageComponent implements OnInit {
     return 0;
   }
 
-  closeModal() {
+  // add tags new method
+  public newTag: string = '';
+  tags: string[] = [];
 
-    console.log('Valid model', this.validModel);
+  addTag() {
 
+    if (this.newTag.trim() !== '' && !this.user.tagsInput.includes(this.newTag)) {
+      // alert('add tag');
+      this.user.tagsInput.push(this.newTag);
+      this.newTag = '';
+      this.newTag.trim();
+
+      console.log('addtag', this.user.tagsInput);
+
+    }
+  }
+
+  removeTag(tagToRemove: string, f: NgForm) {
+
+    if (this.user.tagsInput.length == 0) {
+      f.form.invalid;
+    }
+
+    this.user.tagsInput = this.user.tagsInput.filter((newTag: any) => newTag !== tagToRemove);
+
+    console.log('remove tag', this.user.tagsInput);
+  }
+
+  //tag input placeholder
+  inputValue = '';
+  showPlaceholder = true;
+
+  onInputChange(value: string) {
+    this.newTag = value;
+    this.newTag.trim();
+    // this.newTag = '';
+    this.showPlaceholder = value === '';
+  }
+  // end
+
+
+  // toggle div address
+  showDiv = false;
+  remDiv = false;
+  // defaultDiv = false;
+
+  toggleDiv(action: string) {
+    if (action === 'HOME') {
+
+      this.user.address.addressType = 'HOME';
+
+      this.showDiv = true;
+      this.remDiv = false;
+      // this.defaultDiv = false;
+
+    } else if (action === 'COMPANY') {
+
+      this.user.address.addressType = 'COMPANY';
+
+      this.showDiv = false;
+      this.remDiv = true;
+      // this.defaultDiv = false;
+
+    } else if (action === 'addr') {
+
+      this.user.address.addressType = '';
+
+      this.showDiv = false;
+      this.remDiv = false;
+    }
+  }
+
+  getErrorMessage() {
+    if (this.user.age.hasError('required')) {
+      return 'Slider value is required';
+    }
+    if (this.user.age.hasError('min') || this.user.age.hasError('max')) {
+      return 'Slider value must be between 0 and 100';
+    }
+    return '';
   }
 
 }

@@ -1,0 +1,154 @@
+<div class="container-fluid"
+    style="background-image: url('assets/images/cricket-bg.jpg'); background-size: cover; background-position: center; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    &nbsp;
+    <!-- Page Title and Search Bar in a Card -->
+    <div class="container-fluid" style="background-color: #f8f9fa; padding: 20px; position: relative;">
+        <!-- Slider Section -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
+            style="position: absolute; top: 0; left: 0; width: 100%; z-index: 1;">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/logos/vk.jpg" class="d-block w-100" alt="Slider Image 1"
+                        style="height: 400px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/logos/MSD.jpg" class="d-block w-100" alt="Slider Image 2"
+                        style="height: 400px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/logos/ss.jpg" class="d-block w-100" alt="Slider Image 3"
+                        style="height: 400px; object-fit: cover;">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- Page Title and Search Bar in a Card -->
+        <div class="card shadow mt-5 mx-auto"
+            style="max-width: 900px; padding: 20px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); position: relative; z-index: 1;">
+            <div class="text-center">
+                <!-- Page Title -->
+                <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+                    Cricket Updates
+                </h1>
+                <p style="font-size: 1.2rem; color: #6c757d;">
+                    Stay updated with the latest cricket news, scores, and highlights!
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="mt-4 text-center">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search for cricket news"
+                        aria-label="Search" [(ngModel)]="searchText" name="searchText"
+                        style="width: 100%; max-width: 700px; margin: 0 auto;">
+                    <button class="btn btn-outline-primary my-2 my-sm-0 mt-3" type="button">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- News Section -->
+    <div class="mt-5 text-center">
+        <h2 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Top Cricket News
+        </h2>
+        <p style="font-size: 1rem; color: #6c757d;">
+            Catch up on the latest cricket news from around the world.
+        </p>
+    </div>
+
+    <!-- Filtered News Cards -->
+    <div class="row mt-4 mb-4">
+        <div class="col-md-4" *ngFor="let item of filteredNews">
+            <div class="card">
+                <img [src]="item.image" class="card-img-top" alt="News Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a [routerLink]="['/article-homenewsdetails', item.id]" class="btn btn-primary btn-sm">Read More</a>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <!-- Cricketer Images Section -->
+    <div class="mt-5 position-relative">
+        <!-- Shadow Container -->
+        <div class="shadow-lg"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.05); border-radius: 10px; z-index: 0;">
+        </div>
+
+        <!-- Content Section -->
+        <h2 class="text-center"
+            style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; text-align: left; position: relative; z-index: 1;">
+            Famous Cricketers
+        </h2>
+        <div class="slider-container mt-4 position-relative" style="z-index: 1; overflow: hidden;">
+            <div class="slider">
+                <div class="card shadow" *ngFor="let cricketer of cricketers" style="margin: 10px; flex: 0 0 auto;">
+                    <img [src]="cricketer.image" class="card-img-top zoom-on-hover" alt="{{ cricketer.name }}"
+                        style="width: 250px; height: 150px; object-fit: cover; margin: 0 auto; padding: 10px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ cricketer.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cricketer Images all times great Section -->
+    <div class="mt-5 position-relative">
+        <!-- Shadow Card Behind -->
+        <div class="shadow-lg"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.05); border-radius: 10px; z-index: 0;">
+        </div>
+
+        <!-- Content Section -->
+        <h2 class="text-center"
+            style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff; text-align: left; position: relative; z-index: 1;">
+            All Time Famous Cricketers
+        </h2>
+        <div class="row mt-4 position-relative" style="z-index: 1;">
+            <div class="col-md-3 mb-4" *ngFor="let cricketer of cricketers">
+                <div class="card shadow">
+                    <img [src]="cricketer.image" class="card-img-top zoom-on-hover" alt="{{ cricketer.name }}"
+                        style="width: 250px; height: 150px; object-fit: cover; margin: 0 auto; padding: 10px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ cricketer.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-crick-foot></app-crick-foot>
+</div>

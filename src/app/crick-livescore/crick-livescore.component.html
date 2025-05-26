@@ -1,0 +1,41 @@
+<!-- <p>crick-livescore works!</p> -->
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <app-crickhead></app-crickhead>
+
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Live Cricket Scores
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Stay updated with real-time scores of ongoing matches!
+        </p>
+    </div>
+
+    <div class="row mt-5">
+        <!-- Live Match Cards -->
+        <div class="col-md-4 mb-5" *ngFor="let match of liveMatches">
+            <div class="card">
+                <div class="card-header text-center" style="font-weight: bold; color: #007bff;">
+                    {{ match.series }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ match.team1 }} vs {{ match.team2 }}</h5>
+                    <p class="card-text text-center">
+                        <strong>Score:</strong> {{ match.score }} <br>
+                        <strong>Overs:</strong> {{ match.overs }}
+                    </p>
+                    <p class="card-text text-center" style="color: #6c757d;">
+                        {{ match.status }}
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary btn-sm" [routerLink]="['/match-details', match.id]">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <app-crick-foot></app-crick-foot>
+    </div>
+</div>

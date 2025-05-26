@@ -1,0 +1,60 @@
+<div class="container-fluid"
+    style="background-color: #007bff; font-family: 'Lucida Sans', sans-serif; padding: 10px 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 1000;">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand d-flex align-items-center" href="/"
+            style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight: bold; color: white;">
+            <img src="assets/logos/crickup2date.jpeg" alt="Crick Up2date Logo"
+                style="width: 50px; height: 50px; margin-right: 12px; border-radius: 100%; border: 2px solid white;">
+            <span
+                style="font-size: 1rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); letter-spacing: 1px; font-style:inherit; font-display:unset; font-variant: small-caps; font-stretch:semi-condensed; font-variant-numeric: lining-nums; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                Crick <span
+                    style="color: #ffcc00; width: 20rem; font-style: italic; font-family: fantasy;">Up2date</span>
+            </span>
+        </a>
+
+        <!-- Toggler for Mobile View -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav" style="font-family: 'Lucida Sans', sans-serif; font-size: 12px; font-weight: 500;">
+                <li class="theme-toggle-container" style="text-align: right; padding: 10px;">
+                    <button (click)="toggleTheme()" class="btn btn-primary d-flex align-items-center">
+                        <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'" style="margin-right: 5px;"></i>
+                        {{ isDarkTheme ? '' : '' }}
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/live-scores" routerLinkActive="active">Live Scores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/news" routerLinkActive="active">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/team" routerLinkActive="active">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" routerLink="/contact" routerLinkActive="active">
+                        <i class="fas fa-envelope me-2"></i> Contact Us
+                    </a>
+                </li>
+                <!-- Login Button with Icon -->
+                <li class="nav-item">
+                    <a class="btn btn-warning btn-sm text-dark d-flex align-items-center" routerLink="/login"
+                        style="margin-left: 10px;">
+                        <i class="fas fa-sign-in-alt me-2"></i> Login
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+</div>

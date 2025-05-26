@@ -1,0 +1,30 @@
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <!-- Header -->
+    <app-crickhead></app-crickhead>
+
+    <!-- Page Title -->
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Cricket Highlights
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Watch the best moments from recent matches!
+        </p>
+    </div>
+
+    <!-- Highlights Section -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-5" *ngFor="let highlight of highlights">
+            <div class="card shadow">
+                <img [src]="highlight.image" class="card-img-top" alt="Highlight Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ highlight.title }}</h5>
+                    <p class="card-text">{{ highlight.description }}</p>
+                    <!-- Watch Now Button -->
+                    <a [href]="highlight.link" class="btn btn-primary" target="_blank" *ngIf="highlight.link.startsWith('http')">Watch Now</a>
+                    <a [routerLink]="highlight.link" class="btn btn-primary" *ngIf="!highlight.link.startsWith('http')">Watch Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

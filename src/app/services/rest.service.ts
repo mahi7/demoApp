@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from './config';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,14 @@ export class RestService {
 
   // public ip = "https://jsonplaceholder.typicode.com";
   public ip = "http://localhost:3000";
+  // public ip = "http://localhost:9090/NaturalHomeoManager";
+  // public ip = this.baseUrl;
+
+  // public ip = this.baseUrl;
+
+  public server = this.ip + '/NaturalHomeoManager';
+  public docServer = this.ip + '/naturalhomeodocs';
+  public imgServer = this.ip + '/naturalhomeodocs';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -17,10 +26,23 @@ export class RestService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(API_BASE_URL) public baseUrl?: string) { }
 
   public getJSONFromURL(url: any) {
     return this.http.get(url);
+
+  }
+
+  public postJSONbyId(url: any, json: any) {
+    const headers = new Headers();
+
+    return this.http.post(url, json, this.httpOptions).pipe(
+      map(res => {
+        const postresponse = res;
+        console.log("Postresponse:" + postresponse)
+        return postresponse;
+      })
+    );
 
   }
 
@@ -36,14 +58,24 @@ export class RestService {
     );
   }
 
-  public uploadImage(image: File) {
+  // public uploadImage(image: File) {
 
-    alert('upload image');
-    const formData = new FormData();
+  //   alert('upload image');
+  //   const formData = new FormData();
 
-    formData.append('image', image);
+  //   formData.append('image', image);
 
-    return this.http.post('/assets/img/image-upload/', formData);
+  //   return this.http.post('/assets/img/image-upload/', formData);
+  // }
+
+  uploadImage(image: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('image', image, image.name);
+    return this.http.post<any>('https://api.slingacademy.com/v1/sample-data/photos', formData);
+  }
+
+  getImages(): Observable<any[]> {
+    return this.http.get<any[]>('https://api.slingacademy.com/v1/sample-data/photos');
   }
 
   public docsRestURL(restid: any, type: any) {
@@ -84,25 +116,30 @@ export class RestService {
 
   public userRestURL(restId: any, userId: any) {
     var url = this.ip;
+    // var url = this.server;
 
     switch (restId) {
       case 'add':
-        url += '/photos'
+        url += '/user'
         break
       case 'edit':
-        url += '/photos'
+        url += '/user/update';
+        // url += '/user/' + userId;
         break
       case 'upload':
-        url += '/upload'
+        url += 'document/doc/upload';
+        break
+      case 'photoGetbyId':
+        url += '/upload/' + userId;
         break
       case 'details':
-        url += '/photos/' + userId;
+        url += '/user/' + userId;
         break
       case 'delete':
-        url += '/photos/' + userId;
+        url += '/user/' + userId;
         break;
       default:
-        url += '/photos'
+        url += '/user'
         break;
 
     }
@@ -110,17 +147,4 @@ export class RestService {
 
   }
 
-  sendWithAttachment(userData: any) {
-
-    this.http.post("http://localhost:3000/uploadfile", userData
-    )
-      .subscribe(
-        data => {
-          console.log("Sent Request is successful ", data);
-        },
-        error => {
-          console.log("Error", error);
-        }
-      );
-  }
 }

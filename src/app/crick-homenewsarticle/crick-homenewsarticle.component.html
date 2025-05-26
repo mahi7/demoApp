@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <app-crickhead></app-crickhead>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <!-- Sidebar Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header" style="background-color: #007bff; color: white; font-weight: bold;">
+                    Related Articles
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let related of relatedArticles">
+                        <a [routerLink]="['/article-homenewsdetails', related.id]"
+                            style="text-decoration: none; color: #007bff;">
+                            {{ related.title }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header" style="background-color: #007bff; color: white; font-weight: bold;">
+                    Categories
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let category of categories">
+                        <a href="#" style="text-decoration: none; color: #007bff;">
+                            {{ category }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Article Section -->
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <img [src]="article?.image" alt="{{ article?.title }}" class="card-img-top"
+                    style="max-height: 400px; object-fit: cover;">
+                <div class="card-body">
+                    <h1 class="card-title text-center"
+                        style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+                        {{ article?.title }}
+                    </h1>
+                    <p class="card-text"
+                        style="font-size: 1.2rem; color: #6c757d; margin-top: 20px; text-align: justify;">
+                        {{ article?.content }}
+                    </p>
+                    <div class="text-center mt-4">
+                        <a routerLink="/" class="btn btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+</div>

@@ -1,0 +1,60 @@
+<!-- <p>crick-upc-match works!</p> -->
+<div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
+    <app-crickhead></app-crickhead>
+
+    <div class="text-center mt-5">
+        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Upcoming Matches
+        </h1>
+        <p style="font-size: 1.2rem; color: #6c757d;">
+            Stay updated with the schedule of upcoming cricket matches.
+        </p>
+    </div>
+
+    <div class="mt-5">
+        <table class="table table-striped table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <div class="container-fluid" style="background-color: #f8f9fa;">
+                        <input type="text" class="form-control container-fluid" placeholder="Search by team or series" [(ngModel)]="searchText">
+                    </div>
+                </tr>
+                <tr>
+                    <th>Match</th>
+                    <th>Series</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Venue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="filteredMatches.length === 0">
+                    <td colspan="6" class="text-center">No matches found</td>
+                </tr>
+                <tr *ngFor="let match of filteredMatches">
+                    <td>
+                        <img [src]="match.team1Logo" alt="{{ match.team1 }}" style="width: 30px; height: 30px;"> 
+                        {{ match.team1 }} vs 
+                        <img [src]="match.team2Logo" alt="{{ match.team2 }}" style="width: 30px; height: 30px;"> 
+                        {{ match.team2 }}
+                    </td>
+                    <td>{{ match.series }}</td>
+                    <td>{{ match.type }}</td>
+                    <td>{{ match.date }}</td>
+                    <td>{{ match.time }}</td>
+                    <td>{{ match.venue }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <h3 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+            Next Match Starts In:
+        </h3>
+        <h4 style="font-size: 1.5rem; color: #dc3545;">
+            {{ countdown }}
+        </h4>
+    </div>
+</div>
