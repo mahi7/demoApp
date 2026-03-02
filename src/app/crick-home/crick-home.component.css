@@ -1,3 +1,40 @@
+/* ...existing code... */
+
+.whatsapp-chat {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25D366; /* WhatsApp green */
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.whatsapp-chat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+}
+.whatsapp-chat i {
+  font-size: 18px;
+  margin-left: 2px;
+}
+.whatsapp-text {
+  display: inline-block;
+  font-size: 14px;
+}
+/* hide text on small screens to save space */
+@media (max-width: 480px) {
+  .whatsapp-text { display: none; padding-left: 0; }
+  .whatsapp-chat { padding: 10px; border-radius: 50%; width: 48px; height: 48px; justify-content: center; }
+}
+
 /* Zoom effect on hover */
 .zoom-on-hover {
     transition: transform 0.3s ease-in-out; /* Smooth transition */

@@ -1,0 +1,24 @@
+<p>crick-admin works!</p>
+<!-- ...existing code... -->
+<div class="container py-3">
+  <h3>Contact Messages</h3>
+
+  <div *ngIf="loading" class="text-center">Loading...</div>
+  <div *ngIf="!loading && messages.length === 0" class="text-muted">No messages</div>
+
+  <div *ngFor="let m of messages" class="card mb-2">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5 class="mb-1">{{ m.name }} <small class="text-muted">({{ m.email }})</small></h5>
+          <p class="mb-1">{{ m.message }}</p>
+          <p class="mb-0 text-muted small">Received: {{ m.createdAt | date:'short' }}</p>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-sm btn-success mb-2" (click)="markRead(m.id)" [disabled]="m.readFlag">Mark read</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteMsg(m.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

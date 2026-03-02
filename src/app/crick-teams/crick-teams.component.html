@@ -1,58 +1,106 @@
 <div class="container-fluid" style="background-color: #f8f9fa; padding: 20px;">
-    <app-crickhead></app-crickhead>
+  <app-crickhead></app-crickhead>
 
-    <!-- Explore Teams Section -->
-    <div class="text-center mt-5" style="background-color: #e3f2fd; padding: 20px; border-radius: 10px;">
-        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
-            Teams
-        </h1>
-        <p style="font-size: 1.2rem; color: #6c757d;">
-            Explore your favorite cricket teams and their players.
-        </p>
-    </div>
+  <!-- TeamDetail Section -->
+  <div class="text-center mt-5" style="background-color: white; padding: 20px; border-radius: 10px;">
+    <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #512da8;">
+      Team Details from API
+    </h1>
+    <p style="font-size: 1.2rem; color: #6c757d;">
+      Below is the data fetched from the cricket API:
+    </p>
+    <pre style="text-align: left; background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">
 
-    <!-- International Teams Section -->
-    <div class="row mt-5" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <!-- Team Cards -->
-        <div class="col-md-3 mb-5" *ngFor="let team of teams">
-            <div class="card shadow-sm h-100" style="border-radius: 10px;">
-                <img [src]="team.logo" class="card-img-top" style="width: 80px; height: 80px; margin: 10px auto; object-fit: contain;" alt="{{ team.name }} Logo">
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">{{ team.name }}</h5>
-                    <p class="card-text" style="font-size: 0.9rem; color: #6c757d;">
-                        <strong>Captain:</strong> {{ team.captain }}<br>
-                        <strong>Coach:</strong> {{ team.coach }}
-                    </p>
-                    <a [routerLink]="['/team-details', team.id]" class="btn btn-primary btn-sm">View Details</a>
-                </div>
+    </pre>
+
+    <!-- ...existing code... -->
+    <div class="row mt-4" *ngIf="teamsDetail?.length; else noData">
+      <div class="col-sm-6 col-md-4 mb-4" *ngFor="let m of teamsDetail">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ m.name }}</h5>
+            <p class="card-text mb-1"><strong>Dates:</strong> {{ m.startDate }} — {{ m.endDate }}</p>
+            <p class="card-text mb-1">
+              <strong>Matches:</strong> {{ m.matches }}
+            </p>
+            <div class="d-flex justify-content-between mt-3">
+              <span class="badge bg-primary">ODI: {{ m.odi }}</span>
+              <span class="badge bg-success">T20: {{ m.t20 }}</span>
+              <span class="badge bg-info text-dark">Test: {{ m.test }}</span>
             </div>
+          </div>
+          <div class="card-footer text-end">
+            <a [routerLink]="['/match-details', m.id]" class="btn btn-sm btn-outline-primary">Details</a>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- IPL Teams Section -->
-    <div class="text-center mt-5" style="background-color: #fbe9e7; padding: 20px; border-radius: 10px;">
-        <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #d84315;">
-            IPL Teams 2025
-        </h1>
-        <p style="font-size: 1.2rem; color: #6c757d;">
-            Explore your favorite IPL teams and their players for the 2025 season.
-        </p>
-    </div>
+    <ng-template #noData>
+      <p class="text-center text-muted">No matches found.</p>
+    </ng-template>
+    <!-- ...existing code... -->
+  </div>
 
-    <!-- IPL Team Cards -->
-    <div class="row mt-5" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div class="col-md-3 mb-5" *ngFor="let teamsipl of teamsipls">
-            <div class="card shadow-sm h-100" style="border-radius: 10px;">
-                <img [src]="teamsipl.logo" class="card-img-top" style="height: 150px; object-fit: contain; padding: 10px;" alt="{{ teamsipl.name }} Logo">
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #d84315;">{{ teamsipl.name }}</h5>
-                    <p class="card-text" style="font-size: 0.9rem; color: #6c757d;">
-                        <strong>Captain:</strong> {{ teamsipl.captain }}<br>
-                        <strong>Coach:</strong> {{ teamsipl.coach }}
-                    </p>
-                    <a [routerLink]="['/team-details', teamsipl.id]" class="btn btn-primary btn-sm">View Details</a>
-                </div>
-            </div>
+  <!-- Explore Teams Section -->
+  <div class="text-center mt-5" style="background-color: #e3f2fd; padding: 20px; border-radius: 10px;">
+    <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">
+      Teams
+    </h1>
+    <p style="font-size: 1.2rem; color: #6c757d;">
+      Explore your favorite cricket teams and their players.
+    </p>
+  </div>
+
+  <!-- International Teams Section -->
+  <div class="row mt-5"
+    style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <!-- Team Cards -->
+    <div class="col-md-3 mb-5" *ngFor="let team of teams">
+      <div class="card shadow-sm h-100" style="border-radius: 10px;">
+        <img [src]="team.logo" class="card-img-top"
+          style="width: 80px; height: 80px; margin: 10px auto; object-fit: contain;" alt="{{ team.name }} Logo">
+        <div class="card-body text-center">
+          <h5 class="card-title" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #007bff;">{{
+            team.name }}</h5>
+          <p class="card-text" style="font-size: 0.9rem; color: #6c757d;">
+            <strong>Captain:</strong> {{ team.captain }}<br>
+            <strong>Coach:</strong> {{ team.coach }}
+          </p>
+          <a [routerLink]="['/team-details', team.id]" class="btn btn-primary btn-sm">View Details</a>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- IPL Teams Section -->
+  <div class="text-center mt-5" style="background-color: #fbe9e7; padding: 20px; border-radius: 10px;">
+    <h1 style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #d84315;">
+      IPL Teams 2025
+    </h1>
+    <p style="font-size: 1.2rem; color: #6c757d;">
+      Explore your favorite IPL teams and their players for the 2025 season.
+    </p>
+  </div>
+
+  <!-- IPL Team Cards -->
+  <div class="row mt-5"
+    style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="col-md-3 mb-5" *ngFor="let teamsipl of teamsipls">
+      <div class="card shadow-sm h-100" style="border-radius: 10px;">
+        <img [src]="teamsipl.logo" class="card-img-top" style="height: 150px; object-fit: contain; padding: 10px;"
+          alt="{{ teamsipl.name }} Logo">
+        <div class="card-body text-center">
+          <h5 class="card-title" style="font-family: 'Lucida Sans', sans-serif; font-weight: bold; color: #d84315;">{{
+            teamsipl.name }}</h5>
+          <p class="card-text" style="font-size: 0.9rem; color: #6c757d;">
+            <strong>Captain:</strong> {{ teamsipl.captain }}<br>
+            <strong>Coach:</strong> {{ teamsipl.coach }}
+          </p>
+          <a [routerLink]="['/team-details', teamsipl.id]" class="btn btn-primary btn-sm">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

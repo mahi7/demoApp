@@ -9,8 +9,14 @@ import { API_BASE_URL } from './config';
 })
 export class RestService {
 
+
+  // const url = 'http://localhost:8081/api/auth/login';
+  url = 'https://api.cricapi.com/v1/series?apikey=b55146d0-d8d3-4acb-932b-72006cc493e7&offset=0';
+  // public ip = 'http://localhost:8081/api/auth/login';
+
   // public ip = "https://jsonplaceholder.typicode.com";
-  public ip = "http://localhost:3000";
+  // public ip = "http://localhost:3000";
+  public ip = "http://localhost:8081";
   // public ip = "http://localhost:9090/NaturalHomeoManager";
   // public ip = this.baseUrl;
 
@@ -138,6 +144,9 @@ export class RestService {
       case 'delete':
         url += '/user/' + userId;
         break;
+      case 'Login':
+        url += '/api/auth/login';
+        break;
       default:
         url += '/user'
         break;
@@ -146,5 +155,52 @@ export class RestService {
     return url;
 
   }
+
+  // public login(username: string, password: string): Observable<any> {
+  //   const url = 'http://localhost:8081/api/auth/login';
+  //   const body = { username, password };
+  //   return this.http.post(url, body, this.httpOptions);
+  // }
+
+  register(username: string, password: string): Observable<any> {
+    const url = 'http://localhost:8081/api/auth/register';
+    const body = { username, password };
+    return this.http.post(url, body, { ...this.httpOptions, responseType: 'text' as 'json' });
+  }
+
+  login(username: string, password: string): Observable<any> {
+    const url = 'http://localhost:8081/api/auth/login';
+    const body = { username, password };
+    return this.http.post(url, body, { ...this.httpOptions, responseType: 'text' as 'json' });
+  }
+
+  // ---------------- Contact Messages APIs-----------------//
+  // Contact Messages For Admins
+
+  // send contact message (public)
+  sendContactMessage(payload: { name: string; email: string; message: string }): Observable<any> {
+    const url = 'http://localhost:8081/api/contact';
+    return this.http.post(url, payload, this.httpOptions);
+  }
+
+  // admin: get all messages
+  getContacts(): Observable<any> {
+    const url = 'http://localhost:8081/api/admin/contacts';
+    return this.http.get(url, this.httpOptions);
+  }
+
+  // admin: mark message read
+  markContactRead(id: string): Observable<any> {
+    const url = `http://localhost:8081/api/admin/contacts/${id}/read`;
+    return this.http.put(url, null, this.httpOptions);
+  }
+
+  // admin: delete message
+  deleteContact(id: string): Observable<any> {
+    const url = `http://localhost:8081/api/admin/contacts/${id}`;
+    return this.http.delete(url, this.httpOptions);
+  }
+// ...existing code...
+// -------------------- End -----------------------//
 
 }

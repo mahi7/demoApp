@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RestService } from '../services/rest.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crickreguser',
@@ -7,19 +9,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./crickreguser.component.css']
 })
 export class CrickreguserComponent {
+
+  userRegister = {
+    "username": '',
+    "password": '',
+  }
+
   name: string = '';
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private restService: RestService,
+    private route: Router,
+    private routprms: ActivatedRoute
+  ) { }
 
   onRegister(): void {
-    // Add your registration logic here (e.g., API call to save user data)
-    console.log('Name:', this.name);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-
-    // Navigate to the login page after successful registration
-    this.router.navigate(['/login']);
+    const url = 'http://localhost:8081/api/auth/register';
+    this.restService.register(this.userRegister.username, this.userRegister.password).subscribe(
+      (response: any) => {
+        // alert('Registered Successfully');
+        Swal.fire({
+          title: "User added Successfully!",
+          icon: "success"
+        });
+        console.log('User added Successfully.', response);
+        // Navigate or store token if needed
+        this.route.navigate(['/login']);
+      },
+      error => {
+        alert('Invalid username or password');
+        console.log('Login error:', error);
+      }
+    );
   }
+
 }

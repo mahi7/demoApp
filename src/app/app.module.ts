@@ -57,6 +57,7 @@ import { ArticleDetailsComponent } from './article-details/article-details.compo
 import { CrickHomenewsarticleComponent } from './crick-homenewsarticle/crick-homenewsarticle.component';
 import { CrickloginComponent } from './cricklogin/cricklogin.component';
 import { CrickreguserComponent } from './crickreguser/crickreguser.component';
+import { CrickAdminComponent } from './crick-admin/crick-admin.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { CrickreguserComponent } from './crickreguser/crickreguser.component';
     CrickHomenewsarticleComponent,
     CrickloginComponent,
     CrickreguserComponent,
+    CrickAdminComponent,
   ],
   imports: [
     BrowserModule,

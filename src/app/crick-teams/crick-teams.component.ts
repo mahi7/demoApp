@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RestService } from '../services/rest.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-crick-teams',
   templateUrl: './crick-teams.component.html',
   styleUrls: ['./crick-teams.component.css']
 })
-export class CrickTeamsComponent {
+export class CrickTeamsComponent implements OnInit {
   teams = [
     {
       id: 1,
@@ -193,4 +196,44 @@ export class CrickTeamsComponent {
       coach: 'Ashish Nehra'
     }
   ];
+  teamsDetail: any[] = [];
+  // matches: any[] = []; // new property to hold the "data" array
+
+  constructor(
+    public routes: Router,
+    public restService: RestService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    // this.matches = [
+    //   { id: "a3f343a2-bd79-481e-99d7-1652be67d501", name: "Sri Lanka tour of England, 2026", startDate: "2026-09-15", endDate: "Sep 27", odi: 3, t20: 3, test: 0, matches: 6 },
+    //   { id: "9596e1ca-2915-4a34-84f1-aca96eda85fd", name: "Ireland Women tour of England 2026", startDate: "2026-09-01", endDate: "Sep 06", odi: 3, t20: 0, test: 0, matches: 3 },
+    //   // ... add remaining items from your JSON data ...
+    // ];
+
+    this.getTeamsData();
+  }
+
+  public getTeamsData() {
+
+
+    const url = 'https://api.cricapi.com/v1/series?apikey=b55146d0-d8d3-4acb-932b-72006cc493e7&offset=0';
+
+    this.restService.getJSONFromURL(url).subscribe(
+      (response: any) => {
+
+        this.teamsDetail = response;
+        this.teamsDetail = response?.data ?? [];
+        console.log('teamsDetail count:', this.teamsDetail.length);
+        console.log("TeamsDetail-" + JSON.stringify(this.teamsDetail));
+
+      },
+      error => {
+        console.log("Error message:" + error);
+        this.teamsDetail = [];
+      }
+    );
+
+  }
 }

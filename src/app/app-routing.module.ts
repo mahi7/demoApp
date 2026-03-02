@@ -22,6 +22,7 @@ import { ArticleDetailsComponent } from './article-details/article-details.compo
 import { CrickHomenewsarticleComponent } from './crick-homenewsarticle/crick-homenewsarticle.component';
 import { CrickloginComponent } from './cricklogin/cricklogin.component';
 import { CrickreguserComponent } from './crickreguser/crickreguser.component';
+import {CrickAdminComponent} from './crick-admin/crick-admin.component';
 
 const routes: Routes = [
   // { path: '', component: HomepageComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'aboutUs', component: AboutUsComponent },
 
   { path: 'angularMattable', component: AngularMatTableComponent },
+  { path: 'crickAdmin', component: CrickAdminComponent },
 
 ];
 

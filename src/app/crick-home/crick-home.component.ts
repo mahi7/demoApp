@@ -94,4 +94,12 @@ export class CrickHomeComponent {
       item.description.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
+
+  // replace with your phone (no + sign)
+  whatsappNumber = 7972997227;
+
+  buildWhatsAppLink(msg = 'Hi, I need assistance with Crick Updates') {
+    const text = encodeURIComponent(msg);
+    return `https://wa.me/${this.whatsappNumber}?text=${text}`;
+  }
 }
